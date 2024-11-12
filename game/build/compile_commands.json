@@ -1,8 +1,0 @@
-[
-{
-  "directory": "/Users/me/my/game_engine/game/build/gameEngineBuild",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -I/Users/me/my/game_engine/gameEngine/include -isystem /opt/homebrew/Cellar/sdl2/2.30.9/include/SDL2 -std=gnu++17 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.1.sdk -mmacosx-version-min=14.5 -o CMakeFiles/gameEngine.dir/src/start.cpp.o -c /Users/me/my/game_engine/gameEngine/src/start.cpp",
-  "file": "/Users/me/my/game_engine/gameEngine/src/start.cpp",
-  "output": "gameEngineBuild/CMakeFiles/gameEngine.dir/src/start.cpp.o"
-}
-]

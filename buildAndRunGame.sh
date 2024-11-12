@@ -1,5 +1,6 @@
 #!/bin/bash
 
+mkdir game/build
 cd game/build
 
 cmake ..

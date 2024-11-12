@@ -1,7 +1,6 @@
-#include "start.h"
+#include "init/start.h"
 
-int main(int argc, char* argv[]) {
-    start();
-    return 0;
+int main(int argc, char *argv[]) {
+  start();
+  return 0;
 }
-

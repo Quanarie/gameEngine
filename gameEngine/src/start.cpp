@@ -2,87 +2,89 @@
 #include <SDL_timer.h>
 #include <iostream>
 
-#include "start.h"
+#include "init/start.h"
 
-using namespace std;
-
-
-bool initialize(SDL_Window** window, SDL_Renderer** renderer);
+bool initialize(SDL_Window **window, SDL_Renderer **renderer);
 void update_game();
 void display_game();
-void cleanup(SDL_Window* window, SDL_Renderer* renderer);
+void cleanup(SDL_Window *window, SDL_Renderer *renderer);
 
 int start() {
-    SDL_Window* window = nullptr;
-    SDL_Renderer* renderer = nullptr;
+  SDL_Window *window = nullptr;
+  SDL_Renderer *renderer = nullptr;
 
-    if (!initialize(&window, &renderer)) {
-        cerr << "Failed to initialize!" << endl;
-        return 1;
-    }
- 
-    const int TICKS_PER_SECOND = 50; 
-    const int SKIP_TICKS = 1000 / TICKS_PER_SECOND; 
-    const int MAX_FRAMESKIP = 10; 
- 
-    Uint32 next_game_tick = SDL_GetTicks();                        
-    int loops; 
- 
-    bool game_is_running = true; 
-    while(game_is_running) { 
-	loops = 0;
-	SDL_Event event;
-        while (SDL_PollEvent(&event)) {
-            if (event.type == SDL_QUIT) {
-                game_is_running = false;
-            }
-        }
+  if (!initialize(&window, &renderer)) {
+    std::cerr << "Failed to initialize!" << std::endl;
+    return 1;
+  }
 
-	while(SDL_GetTicks() > next_game_tick && loops < MAX_FRAMESKIP) {
-            update_game(); 
+  const int TICKS_PER_SECOND = 50;
+  const int SKIP_TICKS = 1000 / TICKS_PER_SECOND;
+  const int MAX_FRAMESKIP = 10;
 
-            next_game_tick += SKIP_TICKS;
-            loops++;
-        }
+  Uint32 next_game_tick = SDL_GetTicks();
+  int loops;
 
-        display_game();
+  bool game_is_running = true;
+  while (game_is_running) {
+    loops = 0;
+    SDL_Event event;
+    while (SDL_PollEvent(&event)) {
+      if (event.type == SDL_QUIT) {
+        game_is_running = false;
+      }
     }
 
-    cleanup(window, renderer);
-    return 0;
+    while (SDL_GetTicks() > next_game_tick && loops < MAX_FRAMESKIP) {
+      update_game();
+
+      next_game_tick += SKIP_TICKS;
+      loops++;
+    }
+
+    display_game();
+  }
+
+  cleanup(window, renderer);
+  return 0;
 }
 
-bool initialize(SDL_Window** window, SDL_Renderer** renderer) {
-    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-        cerr << "SDL could not initialize! SDL_Error: " << SDL_GetError() << endl;
-        return false;
-    }
+bool initialize(SDL_Window **window, SDL_Renderer **renderer) {
+  if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+    std::cerr << "SDL could not initialize! SDL_Error: " << SDL_GetError()
+              << std::endl;
+    return false;
+  }
 
-    *window = SDL_CreateWindow("Game Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
-    if (!*window) {
-        cerr << "Window could not be created! SDL_Error: " << SDL_GetError() << endl;
-        return false;
-    }
+  *window =
+      SDL_CreateWindow("Game Engine", SDL_WINDOWPOS_CENTERED,
+                       SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
+  if (!*window) {
+    std::cerr << "Window could not be created! SDL_Error: " << SDL_GetError()
+              << std::endl;
+    return false;
+  }
 
-    *renderer = SDL_CreateRenderer(*window, -1, SDL_RENDERER_ACCELERATED);
-    if (!*renderer) {
-        cerr << "Renderer could not be created! SDL_Error: " << SDL_GetError() << endl;
-        return false;
-    }
+  *renderer = SDL_CreateRenderer(*window, -1, SDL_RENDERER_ACCELERATED);
+  if (!*renderer) {
+    std::cerr << "Renderer could not be created! SDL_Error: " << SDL_GetError()
+              << std::endl;
+    return false;
+  }
 
-    return true;
+  return true;
 }
 
 void update_game() {
-//    cout << "U" << endl;
+  //    cout << "U" << std::endl;
 }
 
 void display_game() {
-//    cout << "D" << endl;
+  //    cout << "D" << std::endl;
 }
 
-void cleanup(SDL_Window* window, SDL_Renderer* renderer) {
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
+void cleanup(SDL_Window *window, SDL_Renderer *renderer) {
+  SDL_DestroyRenderer(renderer);
+  SDL_DestroyWindow(window);
+  SDL_Quit();
 }
