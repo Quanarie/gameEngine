@@ -1,19 +1,21 @@
-#include <iostream>
-
+#include "component/transform.h"
 #include "engine.h"
 
 class Player : public Entity {
 public:
   void initialize() override {
-    std::cout << "Player initialized!" << std::endl;
+    transform =
+        addComponent<TransformComponent>(100.0f, 200.0f, 45.0f, 1.0f, 1.0f);
   }
+  void update() override { transform->x += 0.01; }
 
-  void update() override { std::cout << "Updating player." << std::endl; }
+private:
+  TransformComponent *transform;
 };
 
 int main(int argc, char *argv[]) {
   Engine engine;
   Player player;
-  engine.RegisterEntity(&player);
-  return engine.Start();
+  engine.registerEntity(&player);
+  return engine.start();
 }

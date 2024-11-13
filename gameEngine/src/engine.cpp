@@ -2,6 +2,7 @@
 #include <SDL_timer.h>
 #include <iostream>
 
+#include "component/transform.h"
 #include "engine.h"
 #include "entity.h"
 
@@ -14,7 +15,7 @@ Engine::~Engine() {
   SDL_Quit();
 }
 
-int Engine::Start() {
+int Engine::start() {
   if (!initialize()) {
     std::cerr << "Failed to initialize!" << std::endl;
     return 1;
@@ -24,7 +25,7 @@ int Engine::Start() {
   return 0;
 }
 
-void Engine::RegisterEntity(Entity *entity) { entities.push_back(entity); }
+void Engine::registerEntity(Entity *entity) { entities.push_back(entity); }
 
 bool Engine::initialize() {
   if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -84,8 +85,6 @@ void Engine::update() {
   for (Entity *entity : entities) {
     entity->update();
   }
-
-  std::cout << "Current entities count" << entities.size() << std::endl;
 }
 
 void Engine::render() {}
