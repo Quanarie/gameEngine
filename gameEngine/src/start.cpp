@@ -4,7 +4,12 @@
 
 #include "init/start.h"
 
+#define TICKS_PER_SECOND 50
+#define SKIP_TICKS 1000 / TICKS_PER_SECOND
+#define MAX_FRAMESKIP 10
+
 bool initialize(SDL_Window **window, SDL_Renderer **renderer);
+void main_loop();
 void update_game();
 void display_game();
 void cleanup(SDL_Window *window, SDL_Renderer *renderer);
@@ -18,33 +23,7 @@ int start() {
     return 1;
   }
 
-  const int TICKS_PER_SECOND = 50;
-  const int SKIP_TICKS = 1000 / TICKS_PER_SECOND;
-  const int MAX_FRAMESKIP = 10;
-
-  Uint32 next_game_tick = SDL_GetTicks();
-  int loops;
-
-  bool game_is_running = true;
-  while (game_is_running) {
-    loops = 0;
-    SDL_Event event;
-    while (SDL_PollEvent(&event)) {
-      if (event.type == SDL_QUIT) {
-        game_is_running = false;
-      }
-    }
-
-    while (SDL_GetTicks() > next_game_tick && loops < MAX_FRAMESKIP) {
-      update_game();
-
-      next_game_tick += SKIP_TICKS;
-      loops++;
-    }
-
-    display_game();
-  }
-
+  main_loop();
   cleanup(window, renderer);
   return 0;
 }
@@ -73,6 +52,31 @@ bool initialize(SDL_Window **window, SDL_Renderer **renderer) {
   }
 
   return true;
+}
+
+void main_loop() {
+  Uint32 next_game_tick = SDL_GetTicks();
+  int loops;
+
+  bool game_is_running = true;
+  while (game_is_running) {
+    loops = 0;
+    SDL_Event event;
+    while (SDL_PollEvent(&event)) {
+      if (event.type == SDL_QUIT) {
+        game_is_running = false;
+      }
+    }
+
+    while (SDL_GetTicks() > next_game_tick && loops < MAX_FRAMESKIP) {
+      update_game();
+
+      next_game_tick += SKIP_TICKS;
+      loops++;
+    }
+
+    display_game();
+  }
 }
 
 void update_game() {
