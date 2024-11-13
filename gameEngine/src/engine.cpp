@@ -6,8 +6,9 @@
 #include "engine.h"
 #include "entity.h"
 
-Engine::Engine()
-    : window(nullptr), renderer(nullptr), game_is_running(false), entities() {}
+Engine::Engine(GameParams params)
+    : window(nullptr), renderer(nullptr), game_is_running(false), entities(),
+      params(params) {}
 
 Engine::~Engine() {
   SDL_DestroyRenderer(renderer);
@@ -34,8 +35,9 @@ bool Engine::initialize() {
     return false;
   }
 
-  window = SDL_CreateWindow("gameEngine", SDL_WINDOWPOS_CENTERED,
-                            SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
+  window = SDL_CreateWindow(params.window_title, SDL_WINDOWPOS_CENTERED,
+                            SDL_WINDOWPOS_CENTERED, params.resolution_x,
+                            params.resolution_y, SDL_WINDOW_SHOWN);
   if (!window) {
     std::cerr << "Window could not be created! SDL_Error: " << SDL_GetError()
               << std::endl;

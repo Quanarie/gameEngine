@@ -5,9 +5,15 @@
 #include <entity.h>
 #include <vector>
 
+typedef struct GameParams {
+  char *window_title;
+  int resolution_x;
+  int resolution_y;
+} GameParams;
+
 class Engine {
 public:
-  Engine();
+  Engine(GameParams params);
   ~Engine();
 
   int start();
@@ -23,9 +29,13 @@ private:
   static constexpr int SKIP_TICKS = 1000 / TICKS_PER_SECOND;
   static constexpr int MAX_FRAMESKIP = 10;
 
+  GameParams params;
+
   SDL_Window *window;
   SDL_Renderer *renderer;
+
   std::vector<Entity *> entities;
+
   bool game_is_running;
 };
 
