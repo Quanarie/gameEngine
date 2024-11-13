@@ -1,5 +1,6 @@
 #include <SDL.h>
 #include <SDL_timer.h>
+#include <functional>
 #include <iostream>
 
 #include "init/start.h"
@@ -9,12 +10,11 @@
 #define MAX_FRAMESKIP 10
 
 bool initialize(SDL_Window **window, SDL_Renderer **renderer);
-void main_loop();
-void update_game();
+void main_loop(std::function<void()> update_game);
 void display_game();
 void cleanup(SDL_Window *window, SDL_Renderer *renderer);
 
-int start() {
+int start(std::function<void()> update_game) {
   SDL_Window *window = nullptr;
   SDL_Renderer *renderer = nullptr;
 
@@ -23,7 +23,7 @@ int start() {
     return 1;
   }
 
-  main_loop();
+  main_loop(update_game);
   cleanup(window, renderer);
   return 0;
 }
@@ -54,7 +54,7 @@ bool initialize(SDL_Window **window, SDL_Renderer **renderer) {
   return true;
 }
 
-void main_loop() {
+void main_loop(std::function<void()> update_game) {
   Uint32 next_game_tick = SDL_GetTicks();
   int loops;
 
@@ -79,13 +79,7 @@ void main_loop() {
   }
 }
 
-void update_game() {
-  //    cout << "U" << std::endl;
-}
-
-void display_game() {
-  //    cout << "D" << std::endl;
-}
+void display_game() {}
 
 void cleanup(SDL_Window *window, SDL_Renderer *renderer) {
   SDL_DestroyRenderer(renderer);

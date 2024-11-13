@@ -1,6 +1,7 @@
+#include <iostream>
+
 #include "init/start.h"
 
-int main(int argc, char *argv[]) {
-  start();
-  return 0;
-}
+void update() { return; }
+
+int main(int argc, char *argv[]) { return start(update); }
