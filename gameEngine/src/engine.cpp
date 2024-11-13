@@ -1,6 +1,7 @@
 #include <SDL.h>
 #include <SDL_timer.h>
 #include <iostream>
+#include <memory>
 
 #include "component/transform.h"
 #include "engine.h"
@@ -26,8 +27,6 @@ int Engine::start() {
   return 0;
 }
 
-void Engine::registerEntity(Entity *entity) { entities.push_back(entity); }
-
 bool Engine::initialize() {
   if (SDL_Init(SDL_INIT_VIDEO) < 0) {
     std::cerr << "SDL could not initialize! SDL_Error: " << SDL_GetError()
@@ -51,7 +50,7 @@ bool Engine::initialize() {
     return false;
   }
 
-  for (Entity *entity : entities) {
+  for (const auto &entity : entities) {
     entity->initialize();
   }
 
@@ -84,7 +83,7 @@ void Engine::loop() {
 }
 
 void Engine::update() {
-  for (Entity *entity : entities) {
+  for (const auto &entity : entities) {
     entity->update();
   }
 }
@@ -96,8 +95,14 @@ void Engine::render() {
 
   SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
-  for (Entity *entity : entities) {
+  for (const auto &entity : entities) {
     TransformComponent *transform = entity->getComponent<TransformComponent>();
+    if (!transform) {
+      std::cout << "Not found TransformComponent on registered "
+                   "entity: "
+                << entity << ". It was not rendered" << std::endl;
+      continue;
+    }
     SDL_RenderDrawPoint(renderer, transform->x, transform->y);
   }
 

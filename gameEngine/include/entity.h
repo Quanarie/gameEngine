@@ -1,11 +1,12 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include "component/component.h"
 #include <memory>
 #include <typeindex>
 #include <unordered_map>
 #include <utility>
+
+#include "component/component.h"
 
 class Entity {
 public:
@@ -15,9 +16,10 @@ public:
   virtual void update() = 0;
 
   template <typename T, typename... Args> T *addComponent(Args &&...args) {
-    T *component = new T(std::forward<Args>(args)...);
-    components[typeid(T)] = std::unique_ptr<Component>(component);
-    return component;
+    auto component = std::make_unique<T>(std::forward<Args>(args)...);
+    T *componentPtr = component.get();
+    components[typeid(T)] = std::move(component);
+    return componentPtr;
   }
 
   template <typename T> T *getComponent() {

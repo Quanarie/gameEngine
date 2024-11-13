@@ -2,8 +2,9 @@
 #define ENGINE_H
 
 #include <SDL.h>
-#include <entity.h>
 #include <vector>
+
+class Entity;
 
 typedef struct GameParams {
   char *window_title;
@@ -17,7 +18,11 @@ public:
   ~Engine();
 
   int start();
-  void registerEntity(Entity *entity);
+
+  template <typename T, typename... Args> void createEntity(Args &&...args) {
+    auto entity = std::make_unique<T>(std::forward<Args>(args)...);
+    entities.push_back(std::move(entity));
+  }
 
 private:
   bool initialize();
@@ -34,7 +39,7 @@ private:
   SDL_Window *window;
   SDL_Renderer *renderer;
 
-  std::vector<Entity *> entities;
+  std::vector<std::unique_ptr<Entity>> entities;
 
   bool game_is_running;
 };
