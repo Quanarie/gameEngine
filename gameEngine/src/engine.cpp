@@ -87,4 +87,17 @@ void Engine::update() {
   }
 }
 
-void Engine::render() {}
+// For the time being just render objects as white points
+void Engine::render() {
+  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+  SDL_RenderClear(renderer);
+
+  SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+
+  for (Entity *entity : entities) {
+    TransformComponent *transform = entity->getComponent<TransformComponent>();
+    SDL_RenderDrawPoint(renderer, transform->x, transform->y);
+  }
+
+  SDL_RenderPresent(renderer);
+}
