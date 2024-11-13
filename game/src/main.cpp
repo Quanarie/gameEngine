@@ -1,7 +1,19 @@
 #include <iostream>
 
-#include "init/start.h"
+#include "engine.h"
 
-void update() { return; }
+class Player : public Entity {
+public:
+  void initialize() override {
+    std::cout << "Player initialized!" << std::endl;
+  }
 
-int main(int argc, char *argv[]) { return start(update); }
+  void update() override { std::cout << "Updating player." << std::endl; }
+};
+
+int main(int argc, char *argv[]) {
+  Engine engine;
+  Player player;
+  engine.RegisterEntity(&player);
+  return engine.Start();
+}
