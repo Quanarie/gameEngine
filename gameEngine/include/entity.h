@@ -23,9 +23,12 @@ public:
   }
 
   template <typename T> T *getComponent() {
-    auto it = components.find(typeid(T));
-    return (it != components.end()) ? dynamic_cast<T *>(it->second.get())
-                                    : nullptr;
+    for (const auto &pair : components) {
+      if (auto component = dynamic_cast<T *>(pair.second.get())) {
+        return component;
+      }
+    }
+    return nullptr;
   }
 
 protected:

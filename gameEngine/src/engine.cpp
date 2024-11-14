@@ -3,6 +3,7 @@
 #include <iostream>
 #include <memory>
 
+#include "component/render/render.h"
 #include "component/transform.h"
 #include "engine.h"
 #include "entity.h"
@@ -88,23 +89,16 @@ void Engine::update() {
   }
 }
 
-// For the time being just render objects as white points
 void Engine::render() {
-  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+  SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
   SDL_RenderClear(renderer);
-
-  SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-
   for (const auto &entity : entities) {
     TransformComponent *transform = entity->getComponent<TransformComponent>();
-    if (!transform) {
-      std::cout << "Not found TransformComponent on registered "
-                   "entity: "
-                << entity << ". It was not rendered" << std::endl;
+    RenderComponent *render = entity->getComponent<RenderComponent>();
+    if (!transform || !render) {
       continue;
     }
-    SDL_RenderDrawPoint(renderer, transform->x, transform->y);
+    render->render(renderer, transform);
   }
-
   SDL_RenderPresent(renderer);
 }
