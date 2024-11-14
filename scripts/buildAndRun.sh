@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mkdir game/build
+mkdir -p game/build
 cd game/build
 
 cmake ..
