@@ -28,9 +28,10 @@ private:
   bool initialize();
   void loop();
   void update();
+  void handleCollisions();
   void render();
 
-  static constexpr int TICKS_PER_SECOND = 50;
+  static constexpr int TICKS_PER_SECOND = 60;
   static constexpr int SKIP_TICKS = 1000 / TICKS_PER_SECOND;
   static constexpr int MAX_FRAMESKIP = 10;
 

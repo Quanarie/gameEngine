@@ -3,6 +3,7 @@
 #include <iostream>
 #include <memory>
 
+#include "component/collider/polygonCollider.h"
 #include "component/render/render.h"
 #include "component/transform.h"
 #include "engine.h"
@@ -87,18 +88,49 @@ void Engine::update() {
   for (const auto &entity : entities) {
     entity->update();
   }
+  handleCollisions();
+}
+
+void Engine::handleCollisions() {
+  for (size_t i = 0; i < entities.size(); ++i) {
+    auto colliderA = entities[i]->getComponent<PolygonColliderComponent>();
+    if (!colliderA)
+      continue;
+
+    colliderA->updateGlobalPoints();
+    for (size_t j = i + 1; j < entities.size(); ++j) {
+      auto colliderB = entities[j]->getComponent<PolygonColliderComponent>();
+      if (!colliderB)
+        continue;
+
+      CollisionResult collisionResult = colliderA->isColliding(colliderB);
+      if (collisionResult.collided) {
+        auto transformA = entities[i]->getComponent<TransformComponent>();
+        auto transformB = entities[j]->getComponent<TransformComponent>();
+
+        if (transformA && transformB) {
+          Point overlap{collisionResult.direction.x * collisionResult.overlap,
+                        collisionResult.direction.y * collisionResult.overlap};
+
+          transformA->point -= overlap;
+          transformB->point += overlap;
+        }
+      }
+    }
+  }
 }
 
 void Engine::render() {
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
   SDL_RenderClear(renderer);
   for (const auto &entity : entities) {
-    TransformComponent *transform = entity->getComponent<TransformComponent>();
-    RenderComponent *render = entity->getComponent<RenderComponent>();
+    auto transform = entity->getComponent<TransformComponent>();
+    auto render = entity->getComponent<RenderComponent>();
     if (!transform || !render) {
       continue;
     }
-    render->render(renderer, transform);
+    auto collider = entity->getComponent<PolygonColliderComponent>();
+    render->render(renderer, transform, collider);
   }
   SDL_RenderPresent(renderer);
 }

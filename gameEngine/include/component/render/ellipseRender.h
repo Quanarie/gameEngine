@@ -11,12 +11,14 @@
 class EllipseRenderComponent : public RenderComponent {
 public:
   EllipseRenderComponent(float width, float height,
-                         std::shared_ptr<SDL_Texture> tex = nullptr)
-      : RenderComponent(width, height, tex) {}
+                         std::shared_ptr<SDL_Texture> tex = nullptr,
+                         bool rc = false)
+      : RenderComponent(width, height, tex, rc) {}
 
-  void render(SDL_Renderer *renderer, TransformComponent *transform) override {
-    float centerX = transform->x;
-    float centerY = transform->y;
+  void doRender(SDL_Renderer *renderer,
+                TransformComponent *transform) override {
+    float centerX = transform->point.x;
+    float centerY = transform->point.y;
     float sMajorAxis = width / 2.0f;
     float sMinorAxis = height / 2.0f;
 
