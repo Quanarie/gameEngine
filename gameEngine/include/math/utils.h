@@ -2,7 +2,6 @@
 #define UTILS_H
 
 #include "math/point.h"
-#include <cmath>
 
 class Utils {
 public:

@@ -8,12 +8,14 @@
 #include "component/transform.h"
 #include "engine.h"
 #include "entity.h"
+#include "inputs.h"
 
 Engine::Engine(GameParams params)
     : window(nullptr), renderer(nullptr), game_is_running(false), entities(),
       params(params) {}
 
 Engine::~Engine() {
+  Inputs::Shutdown();
   SDL_DestroyRenderer(renderer);
   SDL_DestroyWindow(window);
   SDL_Quit();
@@ -29,6 +31,7 @@ int Engine::start() {
 }
 
 bool Engine::initialize() {
+  Inputs::Initialize();
   if (SDL_Init(SDL_INIT_VIDEO) < 0) {
     std::cerr << "SDL could not initialize! SDL_Error: " << SDL_GetError()
               << std::endl;
@@ -84,6 +87,7 @@ void Engine::loop() {
 }
 
 void Engine::update() {
+  Inputs::Update();
   for (const auto &entity : entities) {
     entity->update();
   }
