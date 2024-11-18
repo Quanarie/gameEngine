@@ -16,7 +16,8 @@ add_library(${PROJECT_NAME} STATIC)
 target_sources(${PROJECT_NAME} 
     PRIVATE 
 	src/engine.cpp 
-	src/component/collider/polygonCollider.cpp)
+	src/component/collider/polygonCollider.cpp
+	src/math/utils.cpp)
 target_include_directories(${PROJECT_NAME} PUBLIC include)
 
 target_link_libraries(${PROJECT_NAME} SDL2::SDL2 SDL2::SDL2main)

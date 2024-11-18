@@ -18,7 +18,6 @@ Engine::~Engine() {
   SDL_DestroyWindow(window);
   SDL_Quit();
 }
-
 int Engine::start() {
   if (!initialize()) {
     std::cerr << "Failed to initialize!" << std::endl;

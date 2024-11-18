@@ -33,7 +33,7 @@ protected:
                      PolygonColliderComponent *collider) {
     const std::vector<Point> globalPoints = collider->getGlobalPoints();
 
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
+    SDL_SetRenderDrawColor(renderer, 0, 255, 0, SDL_ALPHA_OPAQUE);
     for (size_t i = 0; i < globalPoints.size(); ++i) {
       const auto &p1 = globalPoints[i];
       const auto &p2 = globalPoints[(i + 1) % globalPoints.size()];

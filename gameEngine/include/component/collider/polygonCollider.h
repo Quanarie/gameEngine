@@ -24,18 +24,15 @@ public:
   }
 
   CollisionResult isColliding(PolygonColliderComponent *otherCollider);
-  const std::vector<Point> &getGlobalPoints() const { return globalPoints; }
   void updateGlobalPoints();
+  const std::vector<Point> &getGlobalPoints() const { return globalPoints; }
 
 private:
   TransformComponent *transform;
-
   std::vector<Point> localPoints;
   std::vector<Point> globalPoints;
-
   std::vector<Point> getAxes();
   void projectOntoAxis(Point &axis, float &min, float &max);
-  void normalize(Point &vector);
 };
 
 #endif // POLYGON_COLLIDER_H

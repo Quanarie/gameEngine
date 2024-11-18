@@ -8,6 +8,7 @@
 #include <vector>
 
 #include "component/collider/polygonCollider.h"
+#include "math/utils.h"
 
 CollisionResult
 PolygonColliderComponent::isColliding(PolygonColliderComponent *otherCollider) {
@@ -63,7 +64,7 @@ std::vector<Point> PolygonColliderComponent::getAxes() {
     Point p2 = globalPoints[(i + 1) % globalPoints.size()];
     Point edge = {p2.x - p1.x, p2.y - p1.y};
     Point normal = {edge.y, -edge.x};
-    normalize(normal);
+    Utils::normalize(normal);
     axes.push_back(normal);
   }
   return axes;
@@ -78,13 +79,5 @@ void PolygonColliderComponent::projectOntoAxis(Point &axis, float &min,
       min = projection;
     if (projection > max)
       max = projection;
-  }
-}
-
-void PolygonColliderComponent::normalize(Point &vector) {
-  float length = std::sqrt(vector.x * vector.x + vector.y * vector.y);
-  if (length > 0.0f) {
-    vector.x /= length;
-    vector.y /= length;
   }
 }

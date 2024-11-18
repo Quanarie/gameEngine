@@ -23,7 +23,7 @@ public:
     float sMinorAxis = height / 2.0f;
 
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
-    for (float angle = 0; angle < 360; angle += 0.1f) {
+    for (float angle = 0; angle < 360; angle += 1) {
       float rad = angle * M_PI / 180.0f;
       float x = centerX + sMajorAxis * cos(rad);
       float y = centerY + sMinorAxis * sin(rad);
