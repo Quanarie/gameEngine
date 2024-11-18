@@ -15,6 +15,8 @@ struct CollisionResult {
   Point direction;
 };
 
+// Sometime i will make it possible to make non convex colliders but idk who tf
+// needs it
 class PolygonColliderComponent : public Component {
 public:
   PolygonColliderComponent(std::initializer_list<Point> points,

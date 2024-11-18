@@ -4,16 +4,13 @@
 #include <SDL.h>
 #include <SDL_rect.h>
 #include <cmath>
-#include <memory>
 
 #include "component/render/render.h"
 
 class EllipseRenderComponent : public RenderComponent {
 public:
-  EllipseRenderComponent(float width, float height,
-                         std::shared_ptr<SDL_Texture> tex = nullptr,
-                         bool rc = false)
-      : RenderComponent(width, height, tex, rc) {}
+  EllipseRenderComponent(float width, float height)
+      : RenderComponent(width, height) {}
 
   void doRender(SDL_Renderer *renderer,
                 TransformComponent *transform) override {

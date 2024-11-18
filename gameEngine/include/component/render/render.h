@@ -2,25 +2,26 @@
 #define RENDER_H
 
 #include <SDL.h>
-#include <memory>
+#include <SDL_render.h>
 #include <vector>
 
 #include "component/collider/polygonCollider.h"
 #include "component/component.h"
 #include "component/transform.h"
+#include "options.h"
 
 class RenderComponent : public Component {
 public:
-  RenderComponent(float w, float h, std::shared_ptr<SDL_Texture> tex, bool rc)
-      : width(w), height(h), texture(tex), renderCollider(rc) {}
+  RenderComponent(float w, float h) : width(w), height(h) {}
 
   virtual ~RenderComponent() = default;
 
+  virtual void initialize(SDL_Renderer *renderer) {};
   virtual void render(SDL_Renderer *renderer, TransformComponent *transform,
                       PolygonColliderComponent *collider = nullptr) {
     doRender(renderer, transform);
 
-    if (renderCollider && collider) {
+    if (Options::renderColliders && collider) {
       renderPolygon(renderer, collider);
     }
   }
@@ -44,8 +45,6 @@ protected:
   }
 
   float width, height;
-  std::shared_ptr<SDL_Texture> texture;
-  bool renderCollider;
 };
 
 #endif // RENDER_H

@@ -6,20 +6,18 @@
 
 class Inputs {
 public:
-  static void Initialize();
-  static void Update();
-  static void Shutdown();
+  static void update();
 
-  static bool IsKeyPressed(SDL_Scancode key);
-  static bool IsKeyReleased(SDL_Scancode key);
-  static bool IsKeyHeld(SDL_Scancode key);
+  static bool isKeyPressed(SDL_Scancode key);
+  static bool isKeyReleased(SDL_Scancode key);
+  static bool isKeyHeld(SDL_Scancode key);
 
-  static bool IsMouseButtonPressed(Uint8 button);
-  static bool IsMouseButtonReleased(Uint8 button);
-  static bool IsMouseButtonHeld(Uint8 button);
+  static bool isMouseButtonPressed(Uint8 button);
+  static bool isMouseButtonReleased(Uint8 button);
+  static bool isMouseButtonHeld(Uint8 button);
 
-  static void GetMousePosition(int &x, int &y);
-  static void GetMouseDelta(int &dx, int &dy);
+  static void getMousePosition(int &x, int &y);
+  static void getMouseDelta(int &dx, int &dy);
 
 private:
   Inputs() = delete;

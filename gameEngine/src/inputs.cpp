@@ -14,12 +14,7 @@ int Inputs::mouseY = 0;
 int Inputs::mouseDeltaX = 0;
 int Inputs::mouseDeltaY = 0;
 
-void Inputs::Initialize() {
-  SDL_GetMouseState(&mouseX, &mouseY);
-  mouseDeltaX = mouseDeltaY = 0;
-}
-
-void Inputs::Update() {
+void Inputs::update() {
   previousKeyState = currentKeyState;
   previousMouseState = currentMouseState;
 
@@ -42,41 +37,34 @@ void Inputs::Update() {
       mouseState & SDL_BUTTON(SDL_BUTTON_MIDDLE);
 }
 
-void Inputs::Shutdown() {
-  currentKeyState.clear();
-  previousKeyState.clear();
-  currentMouseState.clear();
-  previousMouseState.clear();
-}
-
-bool Inputs::IsKeyPressed(SDL_Scancode key) {
+bool Inputs::isKeyPressed(SDL_Scancode key) {
   return currentKeyState[key] && !previousKeyState[key];
 }
 
-bool Inputs::IsKeyReleased(SDL_Scancode key) {
+bool Inputs::isKeyReleased(SDL_Scancode key) {
   return !currentKeyState[key] && previousKeyState[key];
 }
 
-bool Inputs::IsKeyHeld(SDL_Scancode key) { return currentKeyState[key]; }
+bool Inputs::isKeyHeld(SDL_Scancode key) { return currentKeyState[key]; }
 
-bool Inputs::IsMouseButtonPressed(Uint8 button) {
+bool Inputs::isMouseButtonPressed(Uint8 button) {
   return currentMouseState[button] && !previousMouseState[button];
 }
 
-bool Inputs::IsMouseButtonReleased(Uint8 button) {
+bool Inputs::isMouseButtonReleased(Uint8 button) {
   return !currentMouseState[button] && previousMouseState[button];
 }
 
-bool Inputs::IsMouseButtonHeld(Uint8 button) {
+bool Inputs::isMouseButtonHeld(Uint8 button) {
   return currentMouseState[button];
 }
 
-void Inputs::GetMousePosition(int &x, int &y) {
+void Inputs::getMousePosition(int &x, int &y) {
   x = mouseX;
   y = mouseY;
 }
 
-void Inputs::GetMouseDelta(int &dx, int &dy) {
+void Inputs::getMouseDelta(int &dx, int &dy) {
   dx = mouseDeltaX;
   dy = mouseDeltaY;
 }
