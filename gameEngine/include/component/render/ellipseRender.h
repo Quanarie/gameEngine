@@ -9,8 +9,8 @@
 
 class EllipseRenderComponent : public RenderComponent {
 public:
-  EllipseRenderComponent(float width, float height)
-      : RenderComponent(width, height) {}
+  EllipseRenderComponent(float width, float height, Point offset = {0, 0})
+      : RenderComponent(width, height, offset) {}
 
   void doRender(SDL_Renderer *renderer,
                 TransformComponent *transform) override {

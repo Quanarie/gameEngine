@@ -49,6 +49,9 @@ PolygonColliderComponent::isColliding(PolygonColliderComponent *otherCollider) {
   return result;
 }
 
+// TODO(me): collider doesnt have to know about the position of object i
+// guess. Maybe create collisionResolver which takes two colliders and two
+// transforms?
 void PolygonColliderComponent::updateGlobalPoints() {
   globalPoints.clear();
   for (Point &point : localPoints) {

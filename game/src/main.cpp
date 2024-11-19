@@ -8,6 +8,7 @@
 #include "engine.h"
 #include "entity.h"
 #include "inputs.h"
+#include "math/point.h"
 #include "options.h"
 
 class Player : public Entity {
@@ -15,8 +16,8 @@ public:
   void initialize() override {
     transform = addComponent<TransformComponent>(Point{400.0f, 300.0f}, 0.0f,
                                                  1.0f, 1.0f);
-    render = addComponent<SpriteRenderComponent>(50.0f, 50.0f,
-                                                 "../assets/Player.bmp");
+    render = addComponent<SpriteRenderComponent>(
+        50.0f, 50.0f, "../assets/player.bmp", Point{-20.0f, -20.0f});
     collider = addComponent<PolygonColliderComponent>(
         std::initializer_list<Point>{
             {25.0f, 25.0f}, {-25.0f, 25.0f}, {-25.0f, -25.0f}, {25.0f, -25.0f}},
@@ -48,6 +49,26 @@ private:
   PolygonColliderComponent *collider;
 };
 
+class Enemy : public Entity {
+public:
+  void initialize() override {
+    transform = addComponent<TransformComponent>(Point{400.0f, 300.0f}, 0.0f,
+                                                 1.0f, 1.0f);
+    render = addComponent<SpriteRenderComponent>(
+        50.0f, 50.0f, "../assets/enemy.bmp", Point{-20.0f, -20.0f});
+    collider = addComponent<PolygonColliderComponent>(
+        std::initializer_list<Point>{
+            {25.0f, 25.0f}, {-25.0f, 25.0f}, {-25.0f, -25.0f}, {25.0f, -25.0f}},
+        transform);
+  }
+  void update() override {}
+
+private:
+  TransformComponent *transform;
+  SpriteRenderComponent *render;
+  PolygonColliderComponent *collider;
+};
+
 int main(int argc, char *argv[]) {
   Options::renderColliders = true;
 
@@ -57,6 +78,8 @@ int main(int argc, char *argv[]) {
   for (int i = 0; i < 1; i++) {
     engine.createEntity<Player>();
   }
+
+  engine.createEntity<Enemy>();
 
   return engine.start();
 }

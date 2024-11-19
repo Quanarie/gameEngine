@@ -12,7 +12,8 @@
 
 class RenderComponent : public Component {
 public:
-  RenderComponent(float w, float h) : width(w), height(h) {}
+  RenderComponent(float w, float h, Point os)
+      : width(w), height(h), offset(os) {}
 
   virtual ~RenderComponent() = default;
 
@@ -45,6 +46,7 @@ protected:
   }
 
   float width, height;
+  Point offset;
 };
 
 #endif // RENDER_H

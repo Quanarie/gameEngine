@@ -104,7 +104,10 @@ void Engine::handleCollisions() {
     if (!colliderA)
       continue;
 
+    // this is so random dud
     colliderA->updateGlobalPoints();
+
+    // TODO(me): change checking every pair
     for (size_t j = i + 1; j < entities.size(); ++j) {
       auto colliderB = entities[j]->getComponent<PolygonColliderComponent>();
       if (!colliderB)
