@@ -2,7 +2,6 @@
 #define TEXTURE_MANAGER_H
 
 #include <SDL.h>
-#include <memory>
 #include <string>
 #include <unordered_map>
 

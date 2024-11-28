@@ -1,0 +1,32 @@
+[
+{
+  "directory": "/Users/me/my/game_engine/game/cmake-build-debug/gameEngineBuild",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/me/my/game_engine/gameEngine/include -isystem /opt/homebrew/Cellar/sdl2/2.30.9/include/SDL2 -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -mmacosx-version-min=14.5 -fcolor-diagnostics -o CMakeFiles/gameEngine.dir/src/engine.cpp.o -c /Users/me/my/game_engine/gameEngine/src/engine.cpp",
+  "file": "/Users/me/my/game_engine/gameEngine/src/engine.cpp",
+  "output": "gameEngineBuild/CMakeFiles/gameEngine.dir/src/engine.cpp.o"
+},
+{
+  "directory": "/Users/me/my/game_engine/game/cmake-build-debug/gameEngineBuild",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/me/my/game_engine/gameEngine/include -isystem /opt/homebrew/Cellar/sdl2/2.30.9/include/SDL2 -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -mmacosx-version-min=14.5 -fcolor-diagnostics -o CMakeFiles/gameEngine.dir/src/math/utils.cpp.o -c /Users/me/my/game_engine/gameEngine/src/math/utils.cpp",
+  "file": "/Users/me/my/game_engine/gameEngine/src/math/utils.cpp",
+  "output": "gameEngineBuild/CMakeFiles/gameEngine.dir/src/math/utils.cpp.o"
+},
+{
+  "directory": "/Users/me/my/game_engine/game/cmake-build-debug/gameEngineBuild",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/me/my/game_engine/gameEngine/include -isystem /opt/homebrew/Cellar/sdl2/2.30.9/include/SDL2 -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -mmacosx-version-min=14.5 -fcolor-diagnostics -o CMakeFiles/gameEngine.dir/src/inputs.cpp.o -c /Users/me/my/game_engine/gameEngine/src/inputs.cpp",
+  "file": "/Users/me/my/game_engine/gameEngine/src/inputs.cpp",
+  "output": "gameEngineBuild/CMakeFiles/gameEngine.dir/src/inputs.cpp.o"
+},
+{
+  "directory": "/Users/me/my/game_engine/game/cmake-build-debug/gameEngineBuild",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/me/my/game_engine/gameEngine/include -isystem /opt/homebrew/Cellar/sdl2/2.30.9/include/SDL2 -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -mmacosx-version-min=14.5 -fcolor-diagnostics -o CMakeFiles/gameEngine.dir/src/options.cpp.o -c /Users/me/my/game_engine/gameEngine/src/options.cpp",
+  "file": "/Users/me/my/game_engine/gameEngine/src/options.cpp",
+  "output": "gameEngineBuild/CMakeFiles/gameEngine.dir/src/options.cpp.o"
+},
+{
+  "directory": "/Users/me/my/game_engine/game/cmake-build-debug/gameEngineBuild",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/me/my/game_engine/gameEngine/include -isystem /opt/homebrew/Cellar/sdl2/2.30.9/include/SDL2 -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -mmacosx-version-min=14.5 -fcolor-diagnostics -o CMakeFiles/gameEngine.dir/src/texture_manager.cpp.o -c /Users/me/my/game_engine/gameEngine/src/texture_manager.cpp",
+  "file": "/Users/me/my/game_engine/gameEngine/src/texture_manager.cpp",
+  "output": "gameEngineBuild/CMakeFiles/gameEngine.dir/src/texture_manager.cpp.o"
+}
+]

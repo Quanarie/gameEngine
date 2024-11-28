@@ -11,16 +11,15 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_PREFIX_PATH "/opt/homebrew")
 find_package(SDL2 REQUIRED)
 
-add_library(${PROJECT_NAME} STATIC)
+add_library(${PROJECT_NAME} STATIC include)
 
 target_sources(${PROJECT_NAME} 
     PRIVATE 
-	src/engine.cpp 
-	src/component/collider/polygonCollider.cpp
+	src/engine.cpp
 	src/math/utils.cpp
 	src/inputs.cpp
 	src/options.cpp
-	src/textureManager.cpp)
+	src/texture_manager.cpp)
 target_include_directories(${PROJECT_NAME} PUBLIC include)
 
 target_link_libraries(${PROJECT_NAME} SDL2::SDL2 SDL2::SDL2main)

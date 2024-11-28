@@ -1,19 +1,18 @@
 #include <SDL_render.h>
 #include <SDL_surface.h>
 #include <iostream>
-#include <memory>
 #include <stdexcept>
 #include <string>
 #include <unordered_map>
 
-#include "component/render/textureManager.h"
+#include "component/render/texture_manager.h"
 
 std::unordered_map<std::string,
                    std::unique_ptr<SDL_Texture, SDL_Texture_Deleter>>
     TextureManager::textures{};
 
 bool TextureManager::has(const std::string &path) {
-  return textures.find(path) != textures.end();
+  return textures.contains(path);
 }
 
 void TextureManager::create(const std::string &path, SDL_Renderer *renderer) {

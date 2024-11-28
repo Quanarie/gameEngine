@@ -28,7 +28,7 @@ private:
   bool initialize();
   void loop();
   void update();
-  void handleCollisions();
+  void detectCollisions();
   void render();
 
   static constexpr int TICKS_PER_SECOND = 60;
