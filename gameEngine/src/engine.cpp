@@ -8,7 +8,7 @@
 #include "engine.h"
 #include "entity.h"
 #include "inputs.h"
-#include "component/collider/collider_detector.h"
+#include "component/collider/collision_detector.h"
 
 Engine::Engine(GameParams params)
   : window(nullptr), renderer(nullptr), game_is_running(false), entities(),
@@ -110,7 +110,7 @@ void Engine::detectCollisions() {
       if (!colliderB || !transformB)
         continue;
 
-      if (ColliderDetector::detect(*colliderA, *transformA, *colliderB,
+      if (CollisionDetector::detect(*colliderA, *transformA, *colliderB,
                                    *transformB)) {
         std::cout << colliderA << " is colliding with " << colliderB << " " <<
           rand() << std::endl;

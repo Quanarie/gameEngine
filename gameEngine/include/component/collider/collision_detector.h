@@ -4,7 +4,7 @@
 #include "ellipse_colider_component.h"
 #include "rectangle_colider_component.h"
 
-class ColliderDetector {
+class CollisionDetector {
 public:
   // That shit needs to be rethought
   static bool detect(const ColliderComponent& collider1,

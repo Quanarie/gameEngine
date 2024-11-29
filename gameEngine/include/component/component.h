@@ -3,6 +3,7 @@
 
 class Component {
 public:
+  // Virtual destructor so that children can eventually delete any allocated resources properly
   virtual ~Component() = default;
 };
 

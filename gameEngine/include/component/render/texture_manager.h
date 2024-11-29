@@ -14,9 +14,9 @@ public:
   static bool has(const std::string &path);
   static void create(const std::string &path, SDL_Renderer *renderer);
   static SDL_Texture *get(const std::string &path);
-  static void clear();
 
 private:
+  // Disable instantiation because it is a utility class for static usage
   TextureManager() = delete;
 
   static std::unordered_map<std::string,
