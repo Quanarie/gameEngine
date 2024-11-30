@@ -1,9 +1,6 @@
 #ifndef ELLIPSE_H
 #define ELLIPSE_H
 
-#include <SDL.h>
-#include <cmath>
-
 #include "component/transform_component.h"
 #include "component/render/render_component.h"
 

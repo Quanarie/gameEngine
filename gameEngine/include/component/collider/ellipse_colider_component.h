@@ -2,6 +2,7 @@
 #define ELLIPSE_COLLIDER_COMPONENT_H
 
 #include "collider_component.h"
+#include "component/render/ellipse_render_component.h"
 #include "math/point.h"
 
 class EllipseColliderComponent : public ColliderComponent {
@@ -10,7 +11,13 @@ public:
   Point radiuses;
 
   EllipseColliderComponent(Point c, Point r)
-    : center(c), radiuses(r) {}
+    : center(c), radiuses(r) {
+    renderComponent = new EllipseRenderComponent(c, r);
+  }
+
+  ~EllipseColliderComponent() override {
+    delete renderComponent;
+  }
 
   bool detect(const ColliderComponent& other,
               const TransformComponent& transformThis,

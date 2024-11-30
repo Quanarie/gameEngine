@@ -4,19 +4,22 @@
 
 #include "component/collider/collider_component.h"
 #include "component/render/render_component.h"
+#include "component/render/texture_manager.h"
 #include "component/transform_component.h"
 #include "engine.h"
 #include "entity.h"
 #include "inputs.h"
-#include "component/collider/collision_detector.h"
+#include "options.h"
 
 Engine::Engine(GameParams params)
-  : window(nullptr), renderer(nullptr), game_is_running(false), params(params) {}
+  : params(params), window(nullptr), renderer(nullptr), game_is_running(false) {}
 
 Engine::~Engine() {
   for (Entity* entity : entities) {
     delete entity;
   }
+
+  TextureManager::clear();
 
   if (renderer) SDL_DestroyRenderer(renderer);
   if (window) SDL_DestroyWindow(window);
@@ -59,11 +62,11 @@ bool Engine::initialize() {
   for (const auto& entity : entities) {
     entity->initialize();
 
-    // auto render = entity->getComponent<RenderComponent>();
-    // if (!render)
-    //   continue;
-    //
-    // render->initialize(renderer);
+    auto render = entity->getComponent<RenderComponent>();
+    if (!render)
+      continue;
+
+    render->initialize(renderer);
   }
 
   return true;
@@ -112,7 +115,6 @@ void Engine::detectCollisions() {
       auto transformB = entities[j]->getComponent<TransformComponent>();
       if (!colliderB || !transformB)
         continue;
-
       if (colliderA->detect(*colliderB, *transformA, *transformB)) {
         std::cout << colliderA << " is colliding with " << colliderB << " " <<
           rand() << std::endl;
@@ -127,8 +129,14 @@ void Engine::render() {
   for (const auto& entity : entities) {
     auto transform = entity->getComponent<TransformComponent>();
     auto render = entity->getComponent<RenderComponent>();
-    if (!transform || !render) { continue; }
+    if (!transform || !render)
+      continue;
     render->render(renderer, transform);
+
+    auto collider = entity->getComponent<ColliderComponent>();
+    if (!collider || !Options::renderColliders)
+      continue;
+    collider->render(renderer, transform);
   }
   SDL_RenderPresent(renderer);
 }

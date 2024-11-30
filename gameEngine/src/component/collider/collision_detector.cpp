@@ -36,9 +36,9 @@ bool CollisionDetector::detect(const RectangleColliderComponent& rect1,
 }
 
 bool CollisionDetector::detect(const EllipseColliderComponent& ellipse,
-            const TransformComponent& transformEllipse,
-            const RectangleColliderComponent& rectangle,
-            const TransformComponent& transformRectangle) {
+                               const TransformComponent& transformEllipse,
+                               const RectangleColliderComponent& rectangle,
+                               const TransformComponent& transformRectangle) {
   float ellipseCenterX = ellipse.center.x + transformEllipse.point.x;
   float ellipseCenterY = ellipse.center.y + transformEllipse.point.y;
 
@@ -58,11 +58,18 @@ bool CollisionDetector::detect(const EllipseColliderComponent& ellipse,
 }
 
 bool CollisionDetector::detect(const EllipseColliderComponent& ellipse1,
-            const TransformComponent& transform1,
-            const EllipseColliderComponent& ellipse2,
-            const TransformComponent& transform2) {
-  float dx = ellipse1.center.x - ellipse2.center.x;
-  float dy = ellipse1.center.y - ellipse2.center.y;
+                               const TransformComponent& transform1,
+                               const EllipseColliderComponent& ellipse2,
+                               const TransformComponent& transform2) {
+  float ellipse1CenterX = ellipse1.center.x + transform1.point.x;
+  float ellipse1CenterY = ellipse1.center.y + transform1.point.y;
+
+  float ellipse2CenterX = ellipse2.center.x + transform2.point.x;
+  float ellipse2CenterY = ellipse2.center.y + transform2.point.y;
+
+  float dx = ellipse1CenterX - ellipse2CenterX;
+  float dy = ellipse1CenterY - ellipse2CenterY;
+
   float rxSum = ellipse1.radiuses.x + ellipse2.radiuses.x;
   float rySum = ellipse1.radiuses.y + ellipse2.radiuses.y;
 

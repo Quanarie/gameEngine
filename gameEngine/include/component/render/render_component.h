@@ -3,12 +3,13 @@
 
 #include <SDL_render.h>
 
-#include "component/collider/collider_component.h"
 #include "component/component.h"
-#include "component/transform_component.h"
+
+class TransformComponent;
 
 class RenderComponent : public Component {
 public:
+  virtual void initialize(SDL_Renderer* renderer) {}
   virtual void render(SDL_Renderer* renderer, TransformComponent* transform) {}
 };
 
