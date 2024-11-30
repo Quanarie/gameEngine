@@ -1,30 +1,34 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include <memory>
 #include <typeindex>
 #include <unordered_map>
-#include <utility>
 
 #include "component/component.h"
 
 class Entity {
 public:
-  virtual ~Entity() = default;
+  virtual ~Entity() {
+    for (auto& pair : components) {
+      delete pair.second;
+    }
+  }
 
   virtual void initialize() = 0;
   virtual void update() = 0;
 
-  template <typename T, typename... Args> T *addComponent(Args &&...args) {
-    auto component = std::make_unique<T>(std::forward<Args>(args)...);
-    T *componentPtr = component.get();
-    components[typeid(T)] = std::move(component);
-    return componentPtr;
+  template <typename T, typename... Args>
+  T* addComponent(Args&&... args) {
+    T* component = new T(std::forward<Args>(args)...);
+    components[typeid(T)] = static_cast<Component*>(component);
+    return component;
   }
 
-  template <typename T> T *getComponent() {
-    for (const auto &pair : components) {
-      if (auto component = dynamic_cast<T *>(pair.second.get())) {
+  // TODO: For now only one component of a type
+  template <typename T>
+  T* getComponent() {
+    for (const auto& pair : components) {
+      if (auto component = dynamic_cast<T*>(pair.second)) {
         return component;
       }
     }
@@ -32,7 +36,7 @@ public:
   }
 
 protected:
-  std::unordered_map<std::type_index, std::unique_ptr<Component>> components;
+  std::unordered_map<std::type_index, Component*> components;
 };
 
 #endif // ENTITY_H

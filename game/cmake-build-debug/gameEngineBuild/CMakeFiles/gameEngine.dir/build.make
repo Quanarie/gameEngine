@@ -139,13 +139,28 @@ gameEngineBuild/CMakeFiles/gameEngine.dir/src/texture_manager.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/gameEngine.dir/src/texture_manager.cpp.s"
 	cd /Users/me/my/game_engine/game/cmake-build-debug/gameEngineBuild && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/me/my/game_engine/gameEngine/src/texture_manager.cpp -o CMakeFiles/gameEngine.dir/src/texture_manager.cpp.s
 
+gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.o: gameEngineBuild/CMakeFiles/gameEngine.dir/flags.make
+gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.o: /Users/me/my/game_engine/gameEngine/src/component/collider/rectangle_colider_component.cpp
+gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.o: gameEngineBuild/CMakeFiles/gameEngine.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/me/my/game_engine/game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.o"
+	cd /Users/me/my/game_engine/game/cmake-build-debug/gameEngineBuild && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.o -MF CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.o.d -o CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.o -c /Users/me/my/game_engine/gameEngine/src/component/collider/rectangle_colider_component.cpp
+
+gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.i"
+	cd /Users/me/my/game_engine/game/cmake-build-debug/gameEngineBuild && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/me/my/game_engine/gameEngine/src/component/collider/rectangle_colider_component.cpp > CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.i
+
+gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.s"
+	cd /Users/me/my/game_engine/game/cmake-build-debug/gameEngineBuild && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/me/my/game_engine/gameEngine/src/component/collider/rectangle_colider_component.cpp -o CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.s
+
 # Object files for target gameEngine
 gameEngine_OBJECTS = \
 "CMakeFiles/gameEngine.dir/src/engine.cpp.o" \
 "CMakeFiles/gameEngine.dir/src/math/utils.cpp.o" \
 "CMakeFiles/gameEngine.dir/src/inputs.cpp.o" \
 "CMakeFiles/gameEngine.dir/src/options.cpp.o" \
-"CMakeFiles/gameEngine.dir/src/texture_manager.cpp.o"
+"CMakeFiles/gameEngine.dir/src/texture_manager.cpp.o" \
+"CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.o"
 
 # External object files for target gameEngine
 gameEngine_EXTERNAL_OBJECTS =
@@ -155,9 +170,10 @@ gameEngineBuild/libgameEngine.a: gameEngineBuild/CMakeFiles/gameEngine.dir/src/m
 gameEngineBuild/libgameEngine.a: gameEngineBuild/CMakeFiles/gameEngine.dir/src/inputs.cpp.o
 gameEngineBuild/libgameEngine.a: gameEngineBuild/CMakeFiles/gameEngine.dir/src/options.cpp.o
 gameEngineBuild/libgameEngine.a: gameEngineBuild/CMakeFiles/gameEngine.dir/src/texture_manager.cpp.o
+gameEngineBuild/libgameEngine.a: gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.o
 gameEngineBuild/libgameEngine.a: gameEngineBuild/CMakeFiles/gameEngine.dir/build.make
 gameEngineBuild/libgameEngine.a: gameEngineBuild/CMakeFiles/gameEngine.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/me/my/game_engine/game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX static library libgameEngine.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/me/my/game_engine/game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX static library libgameEngine.a"
 	cd /Users/me/my/game_engine/game/cmake-build-debug/gameEngineBuild && $(CMAKE_COMMAND) -P CMakeFiles/gameEngine.dir/cmake_clean_target.cmake
 	cd /Users/me/my/game_engine/game/cmake-build-debug/gameEngineBuild && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/gameEngine.dir/link.txt --verbose=$(VERBOSE)
 

@@ -70,8 +70,7 @@ int main(int argc, char* argv[]) {
   GameParams params = {(char*const)"game", 800, 600};
   Engine engine(params);
 
-  for (int i = 0; i < 1; i++) { engine.createEntity<Player>(); }
-
+  engine.createEntity<Player>();
   engine.createEntity<Enemy>();
 
   return engine.start();

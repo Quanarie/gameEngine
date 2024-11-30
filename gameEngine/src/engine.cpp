@@ -11,12 +11,15 @@
 #include "component/collider/collision_detector.h"
 
 Engine::Engine(GameParams params)
-  : window(nullptr), renderer(nullptr), game_is_running(false), entities(),
-    params(params) {}
+  : window(nullptr), renderer(nullptr), game_is_running(false), params(params) {}
 
 Engine::~Engine() {
-  SDL_DestroyRenderer(renderer);
-  SDL_DestroyWindow(window);
+  for (Entity* entity : entities) {
+    delete entity;
+  }
+
+  if (renderer) SDL_DestroyRenderer(renderer);
+  if (window) SDL_DestroyWindow(window);
   SDL_Quit();
 }
 
@@ -110,8 +113,7 @@ void Engine::detectCollisions() {
       if (!colliderB || !transformB)
         continue;
 
-      if (CollisionDetector::detect(*colliderA, *transformA, *colliderB,
-                                   *transformB)) {
+      if (colliderA->detect(*colliderB, *transformA, *transformB)) {
         std::cout << colliderA << " is colliding with " << colliderB << " " <<
           rand() << std::endl;
       }

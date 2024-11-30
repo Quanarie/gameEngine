@@ -926,6 +926,8 @@ CMakeFiles/game.dir/src/main.cpp.o: /Users/me/my/game_engine/game/src/main.cpp \
   /Users/me/my/game_engine/gameEngine/include/component/collider/collider_component.h \
   /Users/me/my/game_engine/gameEngine/include/component/collider/rectangle_colider_component.h \
   /Users/me/my/game_engine/gameEngine/include/component/component.h \
+  /Users/me/my/game_engine/gameEngine/include/component/render/rectangle_render_component.h \
+  /Users/me/my/game_engine/gameEngine/include/component/render/render_component.h \
   /Users/me/my/game_engine/gameEngine/include/component/render/sprite_render_component.h \
   /Users/me/my/game_engine/gameEngine/include/component/transform_component.h \
   /Users/me/my/game_engine/gameEngine/include/engine.h \
@@ -1038,6 +1040,10 @@ CMakeFiles/game.dir/src/main.cpp.o: /Users/me/my/game_engine/game/src/main.cpp \
 /Users/me/my/game_engine/gameEngine/include/options.h:
 
 /Users/me/my/game_engine/gameEngine/include/inputs.h:
+
+/Users/me/my/game_engine/gameEngine/include/component/render/render_component.h:
+
+/Users/me/my/game_engine/gameEngine/include/component/render/rectangle_render_component.h:
 
 /Users/me/my/game_engine/gameEngine/include/component/component.h:
 
