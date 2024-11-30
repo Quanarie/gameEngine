@@ -130,6 +130,30 @@ gameEngine/fast:
 	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/build
 .PHONY : gameEngine/fast
 
+src/component/collider/rectangle_colider_component.o: src/component/collider/rectangle_colider_component.cpp.o
+.PHONY : src/component/collider/rectangle_colider_component.o
+
+# target to build an object file
+src/component/collider/rectangle_colider_component.cpp.o:
+	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.o
+.PHONY : src/component/collider/rectangle_colider_component.cpp.o
+
+src/component/collider/rectangle_colider_component.i: src/component/collider/rectangle_colider_component.cpp.i
+.PHONY : src/component/collider/rectangle_colider_component.i
+
+# target to preprocess a source file
+src/component/collider/rectangle_colider_component.cpp.i:
+	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.i
+.PHONY : src/component/collider/rectangle_colider_component.cpp.i
+
+src/component/collider/rectangle_colider_component.s: src/component/collider/rectangle_colider_component.cpp.s
+.PHONY : src/component/collider/rectangle_colider_component.s
+
+# target to generate assembly for a file
+src/component/collider/rectangle_colider_component.cpp.s:
+	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.s
+.PHONY : src/component/collider/rectangle_colider_component.cpp.s
+
 src/engine.o: src/engine.cpp.o
 .PHONY : src/engine.o
 
@@ -259,6 +283,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... gameEngine"
+	@echo "... src/component/collider/rectangle_colider_component.o"
+	@echo "... src/component/collider/rectangle_colider_component.i"
+	@echo "... src/component/collider/rectangle_colider_component.s"
 	@echo "... src/engine.o"
 	@echo "... src/engine.i"
 	@echo "... src/engine.s"

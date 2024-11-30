@@ -7,7 +7,7 @@
 class Entity;
 
 typedef struct GameParams {
-  char *window_title;
+  char* window_title;
   int resolution_x;
   int resolution_y;
 } GameParams;
@@ -19,9 +19,10 @@ public:
 
   int start();
 
-  template <typename T, typename... Args> void createEntity(Args &&...args) {
-    auto entity = std::make_unique<T>(std::forward<Args>(args)...);
-    entities.push_back(std::move(entity));
+  template <typename T, typename... Args>
+  void createEntity(Args&&... args) {
+    T* entity = new T(std::forward<Args>(args)...);
+    entities.push_back(entity);
   }
 
 private:
@@ -37,10 +38,10 @@ private:
 
   GameParams params;
 
-  SDL_Window *window;
-  SDL_Renderer *renderer;
+  SDL_Window* window;
+  SDL_Renderer* renderer;
 
-  std::vector<std::unique_ptr<Entity>> entities;
+  std::vector<Entity*> entities;
 
   bool game_is_running;
 };

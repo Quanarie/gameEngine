@@ -1,2 +1,2 @@
-/Library/Developer/CommandLineTools/usr/bin/ar qc libgameEngine.a CMakeFiles/gameEngine.dir/src/engine.cpp.o CMakeFiles/gameEngine.dir/src/math/utils.cpp.o CMakeFiles/gameEngine.dir/src/inputs.cpp.o CMakeFiles/gameEngine.dir/src/options.cpp.o CMakeFiles/gameEngine.dir/src/texture_manager.cpp.o
+/Library/Developer/CommandLineTools/usr/bin/ar qc libgameEngine.a CMakeFiles/gameEngine.dir/src/engine.cpp.o CMakeFiles/gameEngine.dir/src/math/utils.cpp.o CMakeFiles/gameEngine.dir/src/inputs.cpp.o CMakeFiles/gameEngine.dir/src/options.cpp.o CMakeFiles/gameEngine.dir/src/texture_manager.cpp.o CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.o
 /Library/Developer/CommandLineTools/usr/bin/ranlib libgameEngine.a
