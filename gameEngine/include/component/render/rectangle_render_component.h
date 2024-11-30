@@ -1,12 +1,8 @@
 #ifndef RECTANGLE_RENDER_COMPONENT_H
 #define RECTANGLE_RENDER_COMPONENT_H
 
-#include <SDL.h>
-#include <cmath>
-
 #include "render_component.h"
 #include "component/transform_component.h"
-#include "component/render/render_component.h"
 
 class RectangleRenderComponent : public RenderComponent {
 public:

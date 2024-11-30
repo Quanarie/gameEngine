@@ -1,4 +1,8 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/gameEngine.dir/src/component/collider/collision_detector.cpp.o"
+  "CMakeFiles/gameEngine.dir/src/component/collider/collision_detector.cpp.o.d"
+  "CMakeFiles/gameEngine.dir/src/component/collider/ellipse_collider_component.cpp.o"
+  "CMakeFiles/gameEngine.dir/src/component/collider/ellipse_collider_component.cpp.o.d"
   "CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.o"
   "CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.o.d"
   "CMakeFiles/gameEngine.dir/src/engine.cpp.o"

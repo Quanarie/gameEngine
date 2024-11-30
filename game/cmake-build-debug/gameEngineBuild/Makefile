@@ -57,10 +57,10 @@ RM = /Users/me/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake -
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/me/my/game_engine/game
+CMAKE_SOURCE_DIR = /Users/me/my/gameEngine/game
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/me/my/game_engine/game/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/me/my/gameEngine/game/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,14 +87,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /Users/me/my/game_engine/game/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_progress_start /Users/me/my/game_engine/game/cmake-build-debug/CMakeFiles /Users/me/my/game_engine/game/cmake-build-debug/gameEngineBuild//CMakeFiles/progress.marks
-	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gameEngineBuild/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/me/my/game_engine/game/cmake-build-debug/CMakeFiles 0
+	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_progress_start /Users/me/my/gameEngine/game/cmake-build-debug/CMakeFiles /Users/me/my/gameEngine/game/cmake-build-debug/gameEngineBuild//CMakeFiles/progress.marks
+	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gameEngineBuild/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/me/my/gameEngine/game/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gameEngineBuild/clean
+	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gameEngineBuild/clean
 .PHONY : clean
 
 # The main clean target
@@ -103,22 +103,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gameEngineBuild/preinstall
+	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gameEngineBuild/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gameEngineBuild/preinstall
+	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gameEngineBuild/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /Users/me/my/game_engine/game/cmake-build-debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 gameEngineBuild/CMakeFiles/gameEngine.dir/rule:
-	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gameEngineBuild/CMakeFiles/gameEngine.dir/rule
+	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gameEngineBuild/CMakeFiles/gameEngine.dir/rule
 .PHONY : gameEngineBuild/CMakeFiles/gameEngine.dir/rule
 
 # Convenience name for target.
@@ -127,15 +127,63 @@ gameEngine: gameEngineBuild/CMakeFiles/gameEngine.dir/rule
 
 # fast build rule for target.
 gameEngine/fast:
-	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/build
+	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/build
 .PHONY : gameEngine/fast
+
+src/component/collider/collision_detector.o: src/component/collider/collision_detector.cpp.o
+.PHONY : src/component/collider/collision_detector.o
+
+# target to build an object file
+src/component/collider/collision_detector.cpp.o:
+	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/collision_detector.cpp.o
+.PHONY : src/component/collider/collision_detector.cpp.o
+
+src/component/collider/collision_detector.i: src/component/collider/collision_detector.cpp.i
+.PHONY : src/component/collider/collision_detector.i
+
+# target to preprocess a source file
+src/component/collider/collision_detector.cpp.i:
+	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/collision_detector.cpp.i
+.PHONY : src/component/collider/collision_detector.cpp.i
+
+src/component/collider/collision_detector.s: src/component/collider/collision_detector.cpp.s
+.PHONY : src/component/collider/collision_detector.s
+
+# target to generate assembly for a file
+src/component/collider/collision_detector.cpp.s:
+	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/collision_detector.cpp.s
+.PHONY : src/component/collider/collision_detector.cpp.s
+
+src/component/collider/ellipse_collider_component.o: src/component/collider/ellipse_collider_component.cpp.o
+.PHONY : src/component/collider/ellipse_collider_component.o
+
+# target to build an object file
+src/component/collider/ellipse_collider_component.cpp.o:
+	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/ellipse_collider_component.cpp.o
+.PHONY : src/component/collider/ellipse_collider_component.cpp.o
+
+src/component/collider/ellipse_collider_component.i: src/component/collider/ellipse_collider_component.cpp.i
+.PHONY : src/component/collider/ellipse_collider_component.i
+
+# target to preprocess a source file
+src/component/collider/ellipse_collider_component.cpp.i:
+	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/ellipse_collider_component.cpp.i
+.PHONY : src/component/collider/ellipse_collider_component.cpp.i
+
+src/component/collider/ellipse_collider_component.s: src/component/collider/ellipse_collider_component.cpp.s
+.PHONY : src/component/collider/ellipse_collider_component.s
+
+# target to generate assembly for a file
+src/component/collider/ellipse_collider_component.cpp.s:
+	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/ellipse_collider_component.cpp.s
+.PHONY : src/component/collider/ellipse_collider_component.cpp.s
 
 src/component/collider/rectangle_colider_component.o: src/component/collider/rectangle_colider_component.cpp.o
 .PHONY : src/component/collider/rectangle_colider_component.o
 
 # target to build an object file
 src/component/collider/rectangle_colider_component.cpp.o:
-	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.o
+	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.o
 .PHONY : src/component/collider/rectangle_colider_component.cpp.o
 
 src/component/collider/rectangle_colider_component.i: src/component/collider/rectangle_colider_component.cpp.i
@@ -143,7 +191,7 @@ src/component/collider/rectangle_colider_component.i: src/component/collider/rec
 
 # target to preprocess a source file
 src/component/collider/rectangle_colider_component.cpp.i:
-	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.i
+	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.i
 .PHONY : src/component/collider/rectangle_colider_component.cpp.i
 
 src/component/collider/rectangle_colider_component.s: src/component/collider/rectangle_colider_component.cpp.s
@@ -151,7 +199,7 @@ src/component/collider/rectangle_colider_component.s: src/component/collider/rec
 
 # target to generate assembly for a file
 src/component/collider/rectangle_colider_component.cpp.s:
-	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.s
+	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.s
 .PHONY : src/component/collider/rectangle_colider_component.cpp.s
 
 src/engine.o: src/engine.cpp.o
@@ -159,7 +207,7 @@ src/engine.o: src/engine.cpp.o
 
 # target to build an object file
 src/engine.cpp.o:
-	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/engine.cpp.o
+	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/engine.cpp.o
 .PHONY : src/engine.cpp.o
 
 src/engine.i: src/engine.cpp.i
@@ -167,7 +215,7 @@ src/engine.i: src/engine.cpp.i
 
 # target to preprocess a source file
 src/engine.cpp.i:
-	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/engine.cpp.i
+	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/engine.cpp.i
 .PHONY : src/engine.cpp.i
 
 src/engine.s: src/engine.cpp.s
@@ -175,7 +223,7 @@ src/engine.s: src/engine.cpp.s
 
 # target to generate assembly for a file
 src/engine.cpp.s:
-	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/engine.cpp.s
+	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/engine.cpp.s
 .PHONY : src/engine.cpp.s
 
 src/inputs.o: src/inputs.cpp.o
@@ -183,7 +231,7 @@ src/inputs.o: src/inputs.cpp.o
 
 # target to build an object file
 src/inputs.cpp.o:
-	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/inputs.cpp.o
+	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/inputs.cpp.o
 .PHONY : src/inputs.cpp.o
 
 src/inputs.i: src/inputs.cpp.i
@@ -191,7 +239,7 @@ src/inputs.i: src/inputs.cpp.i
 
 # target to preprocess a source file
 src/inputs.cpp.i:
-	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/inputs.cpp.i
+	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/inputs.cpp.i
 .PHONY : src/inputs.cpp.i
 
 src/inputs.s: src/inputs.cpp.s
@@ -199,7 +247,7 @@ src/inputs.s: src/inputs.cpp.s
 
 # target to generate assembly for a file
 src/inputs.cpp.s:
-	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/inputs.cpp.s
+	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/inputs.cpp.s
 .PHONY : src/inputs.cpp.s
 
 src/math/utils.o: src/math/utils.cpp.o
@@ -207,7 +255,7 @@ src/math/utils.o: src/math/utils.cpp.o
 
 # target to build an object file
 src/math/utils.cpp.o:
-	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/math/utils.cpp.o
+	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/math/utils.cpp.o
 .PHONY : src/math/utils.cpp.o
 
 src/math/utils.i: src/math/utils.cpp.i
@@ -215,7 +263,7 @@ src/math/utils.i: src/math/utils.cpp.i
 
 # target to preprocess a source file
 src/math/utils.cpp.i:
-	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/math/utils.cpp.i
+	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/math/utils.cpp.i
 .PHONY : src/math/utils.cpp.i
 
 src/math/utils.s: src/math/utils.cpp.s
@@ -223,7 +271,7 @@ src/math/utils.s: src/math/utils.cpp.s
 
 # target to generate assembly for a file
 src/math/utils.cpp.s:
-	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/math/utils.cpp.s
+	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/math/utils.cpp.s
 .PHONY : src/math/utils.cpp.s
 
 src/options.o: src/options.cpp.o
@@ -231,7 +279,7 @@ src/options.o: src/options.cpp.o
 
 # target to build an object file
 src/options.cpp.o:
-	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/options.cpp.o
+	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/options.cpp.o
 .PHONY : src/options.cpp.o
 
 src/options.i: src/options.cpp.i
@@ -239,7 +287,7 @@ src/options.i: src/options.cpp.i
 
 # target to preprocess a source file
 src/options.cpp.i:
-	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/options.cpp.i
+	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/options.cpp.i
 .PHONY : src/options.cpp.i
 
 src/options.s: src/options.cpp.s
@@ -247,7 +295,7 @@ src/options.s: src/options.cpp.s
 
 # target to generate assembly for a file
 src/options.cpp.s:
-	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/options.cpp.s
+	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/options.cpp.s
 .PHONY : src/options.cpp.s
 
 src/texture_manager.o: src/texture_manager.cpp.o
@@ -255,7 +303,7 @@ src/texture_manager.o: src/texture_manager.cpp.o
 
 # target to build an object file
 src/texture_manager.cpp.o:
-	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/texture_manager.cpp.o
+	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/texture_manager.cpp.o
 .PHONY : src/texture_manager.cpp.o
 
 src/texture_manager.i: src/texture_manager.cpp.i
@@ -263,7 +311,7 @@ src/texture_manager.i: src/texture_manager.cpp.i
 
 # target to preprocess a source file
 src/texture_manager.cpp.i:
-	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/texture_manager.cpp.i
+	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/texture_manager.cpp.i
 .PHONY : src/texture_manager.cpp.i
 
 src/texture_manager.s: src/texture_manager.cpp.s
@@ -271,7 +319,7 @@ src/texture_manager.s: src/texture_manager.cpp.s
 
 # target to generate assembly for a file
 src/texture_manager.cpp.s:
-	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/texture_manager.cpp.s
+	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/texture_manager.cpp.s
 .PHONY : src/texture_manager.cpp.s
 
 # Help Target
@@ -283,6 +331,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... gameEngine"
+	@echo "... src/component/collider/collision_detector.o"
+	@echo "... src/component/collider/collision_detector.i"
+	@echo "... src/component/collider/collision_detector.s"
+	@echo "... src/component/collider/ellipse_collider_component.o"
+	@echo "... src/component/collider/ellipse_collider_component.i"
+	@echo "... src/component/collider/ellipse_collider_component.s"
 	@echo "... src/component/collider/rectangle_colider_component.o"
 	@echo "... src/component/collider/rectangle_colider_component.i"
 	@echo "... src/component/collider/rectangle_colider_component.s"
@@ -312,6 +366,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /Users/me/my/game_engine/game/cmake-build-debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 
