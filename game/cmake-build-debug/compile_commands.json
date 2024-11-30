@@ -34,5 +34,17 @@
   "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/me/my/game_engine/gameEngine/include -isystem /opt/homebrew/Cellar/sdl2/2.30.9/include/SDL2 -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -mmacosx-version-min=14.5 -fcolor-diagnostics -o CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.o -c /Users/me/my/game_engine/gameEngine/src/component/collider/rectangle_colider_component.cpp",
   "file": "/Users/me/my/game_engine/gameEngine/src/component/collider/rectangle_colider_component.cpp",
   "output": "gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.o"
+},
+{
+  "directory": "/Users/me/my/game_engine/game/cmake-build-debug/gameEngineBuild",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/me/my/game_engine/gameEngine/include -isystem /opt/homebrew/Cellar/sdl2/2.30.9/include/SDL2 -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -mmacosx-version-min=14.5 -fcolor-diagnostics -o CMakeFiles/gameEngine.dir/src/component/collider/collision_detector.cpp.o -c /Users/me/my/game_engine/gameEngine/src/component/collider/collision_detector.cpp",
+  "file": "/Users/me/my/game_engine/gameEngine/src/component/collider/collision_detector.cpp",
+  "output": "gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/collision_detector.cpp.o"
+},
+{
+  "directory": "/Users/me/my/game_engine/game/cmake-build-debug/gameEngineBuild",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/me/my/game_engine/gameEngine/include -isystem /opt/homebrew/Cellar/sdl2/2.30.9/include/SDL2 -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -mmacosx-version-min=14.5 -fcolor-diagnostics -o CMakeFiles/gameEngine.dir/src/component/collider/ellipse_collider_component.cpp.o -c /Users/me/my/game_engine/gameEngine/src/component/collider/ellipse_collider_component.cpp",
+  "file": "/Users/me/my/game_engine/gameEngine/src/component/collider/ellipse_collider_component.cpp",
+  "output": "gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/ellipse_collider_component.cpp.o"
 }
 ]

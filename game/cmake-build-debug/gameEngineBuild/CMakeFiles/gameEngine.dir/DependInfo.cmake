@@ -8,6 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/Users/me/my/game_engine/gameEngine/src/component/collider/collision_detector.cpp" "gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/collision_detector.cpp.o" "gcc" "gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/collision_detector.cpp.o.d"
+  "/Users/me/my/game_engine/gameEngine/src/component/collider/ellipse_collider_component.cpp" "gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/ellipse_collider_component.cpp.o" "gcc" "gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/ellipse_collider_component.cpp.o.d"
   "/Users/me/my/game_engine/gameEngine/src/component/collider/rectangle_colider_component.cpp" "gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.o" "gcc" "gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.o.d"
   "/Users/me/my/game_engine/gameEngine/src/engine.cpp" "gameEngineBuild/CMakeFiles/gameEngine.dir/src/engine.cpp.o" "gcc" "gameEngineBuild/CMakeFiles/gameEngine.dir/src/engine.cpp.o.d"
   "/Users/me/my/game_engine/gameEngine/src/inputs.cpp" "gameEngineBuild/CMakeFiles/gameEngine.dir/src/inputs.cpp.o" "gcc" "gameEngineBuild/CMakeFiles/gameEngine.dir/src/inputs.cpp.o.d"

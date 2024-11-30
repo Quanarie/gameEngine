@@ -130,6 +130,54 @@ gameEngine/fast:
 	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/build
 .PHONY : gameEngine/fast
 
+src/component/collider/collision_detector.o: src/component/collider/collision_detector.cpp.o
+.PHONY : src/component/collider/collision_detector.o
+
+# target to build an object file
+src/component/collider/collision_detector.cpp.o:
+	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/collision_detector.cpp.o
+.PHONY : src/component/collider/collision_detector.cpp.o
+
+src/component/collider/collision_detector.i: src/component/collider/collision_detector.cpp.i
+.PHONY : src/component/collider/collision_detector.i
+
+# target to preprocess a source file
+src/component/collider/collision_detector.cpp.i:
+	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/collision_detector.cpp.i
+.PHONY : src/component/collider/collision_detector.cpp.i
+
+src/component/collider/collision_detector.s: src/component/collider/collision_detector.cpp.s
+.PHONY : src/component/collider/collision_detector.s
+
+# target to generate assembly for a file
+src/component/collider/collision_detector.cpp.s:
+	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/collision_detector.cpp.s
+.PHONY : src/component/collider/collision_detector.cpp.s
+
+src/component/collider/ellipse_collider_component.o: src/component/collider/ellipse_collider_component.cpp.o
+.PHONY : src/component/collider/ellipse_collider_component.o
+
+# target to build an object file
+src/component/collider/ellipse_collider_component.cpp.o:
+	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/ellipse_collider_component.cpp.o
+.PHONY : src/component/collider/ellipse_collider_component.cpp.o
+
+src/component/collider/ellipse_collider_component.i: src/component/collider/ellipse_collider_component.cpp.i
+.PHONY : src/component/collider/ellipse_collider_component.i
+
+# target to preprocess a source file
+src/component/collider/ellipse_collider_component.cpp.i:
+	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/ellipse_collider_component.cpp.i
+.PHONY : src/component/collider/ellipse_collider_component.cpp.i
+
+src/component/collider/ellipse_collider_component.s: src/component/collider/ellipse_collider_component.cpp.s
+.PHONY : src/component/collider/ellipse_collider_component.s
+
+# target to generate assembly for a file
+src/component/collider/ellipse_collider_component.cpp.s:
+	cd /Users/me/my/game_engine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/ellipse_collider_component.cpp.s
+.PHONY : src/component/collider/ellipse_collider_component.cpp.s
+
 src/component/collider/rectangle_colider_component.o: src/component/collider/rectangle_colider_component.cpp.o
 .PHONY : src/component/collider/rectangle_colider_component.o
 
@@ -283,6 +331,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... gameEngine"
+	@echo "... src/component/collider/collision_detector.o"
+	@echo "... src/component/collider/collision_detector.i"
+	@echo "... src/component/collider/collision_detector.s"
+	@echo "... src/component/collider/ellipse_collider_component.o"
+	@echo "... src/component/collider/ellipse_collider_component.i"
+	@echo "... src/component/collider/ellipse_collider_component.s"
 	@echo "... src/component/collider/rectangle_colider_component.o"
 	@echo "... src/component/collider/rectangle_colider_component.i"
 	@echo "... src/component/collider/rectangle_colider_component.s"

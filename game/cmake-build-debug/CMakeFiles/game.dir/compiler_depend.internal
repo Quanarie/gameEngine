@@ -925,8 +925,10 @@ CMakeFiles/game.dir/src/main.cpp.o
  /Library/Developer/CommandLineTools/usr/lib/clang/16/include/stddef.h
  /Library/Developer/CommandLineTools/usr/lib/clang/16/include/stdint.h
  /Users/me/my/game_engine/gameEngine/include/component/collider/collider_component.h
+ /Users/me/my/game_engine/gameEngine/include/component/collider/ellipse_colider_component.h
  /Users/me/my/game_engine/gameEngine/include/component/collider/rectangle_colider_component.h
  /Users/me/my/game_engine/gameEngine/include/component/component.h
+ /Users/me/my/game_engine/gameEngine/include/component/render/ellipse_render_component.h
  /Users/me/my/game_engine/gameEngine/include/component/render/rectangle_render_component.h
  /Users/me/my/game_engine/gameEngine/include/component/render/render_component.h
  /Users/me/my/game_engine/gameEngine/include/component/render/sprite_render_component.h

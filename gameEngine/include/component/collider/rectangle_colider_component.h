@@ -20,6 +20,10 @@ public:
   bool detectWith(const RectangleColliderComponent& rect,
                   const TransformComponent& transformThis,
                   const TransformComponent& transformOther) const override;
+
+  bool detectWith(const EllipseColliderComponent& ellipse,
+                  const TransformComponent& transformThis,
+                  const TransformComponent& transformOther) const override;
 };
 
 #endif // RECTANGLE_COLLIDER_COMPONENT_H

@@ -1,15 +1,16 @@
 #include <SDL_render.h>
 #include <SDL_scancode.h>
 
-#include "component/collider/collider_component.h"
-#include "component/render/sprite_render_component.h"
-#include "component/transform_component.h"
 #include "engine.h"
 #include "entity.h"
 #include "inputs.h"
 #include "math/point.h"
 #include "options.h"
+#include "component/render/sprite_render_component.h"
+#include "component/transform_component.h"
 #include "component/collider/rectangle_colider_component.h"
+#include "component/collider/ellipse_colider_component.h"
+#include "component/render/ellipse_render_component.h"
 #include "component/render/rectangle_render_component.h"
 
 class Player : public Entity {
@@ -40,7 +41,7 @@ public:
 private:
   TransformComponent* transform;
   RectangleRenderComponent* render;
-  ColliderComponent* collider;
+  RectangleColliderComponent* collider;
 };
 
 class Enemy : public Entity {
@@ -50,18 +51,18 @@ public:
                                                  1.0f, 1.0f);
     // render = addComponent<SpriteRenderComponent>(
     //   50.0f, 50.0f, "../assets/enemy.bmp", Point{-20.0f, -20.0f});
-    render = addComponent<RectangleRenderComponent>(
-      Point{-25.0f, -25.0f}, Point{25.0f, 25.0f});
-    collider = addComponent<RectangleColliderComponent>(
-      Point{-25.0f, -25.0f}, Point{25.0f, 25.0f});
+    render = addComponent<EllipseRenderComponent>(
+      Point{0.0f, 0.0f}, Point{25.0f, 50.0f});
+    collider = addComponent<EllipseColliderComponent>(
+      Point{0.0f, 0.0f}, Point{25.0f, 50.0f});
   }
 
   void update() override {}
 
 private:
   TransformComponent* transform = nullptr;
-  RectangleRenderComponent* render = nullptr;
-  ColliderComponent* collider = nullptr;
+  EllipseRenderComponent* render = nullptr;
+  EllipseColliderComponent* collider = nullptr;
 };
 
 int main(int argc, char* argv[]) {

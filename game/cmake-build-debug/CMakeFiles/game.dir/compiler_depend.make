@@ -924,8 +924,10 @@ CMakeFiles/game.dir/src/main.cpp.o: /Users/me/my/game_engine/game/src/main.cpp \
   /Library/Developer/CommandLineTools/usr/lib/clang/16/include/stddef.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/16/include/stdint.h \
   /Users/me/my/game_engine/gameEngine/include/component/collider/collider_component.h \
+  /Users/me/my/game_engine/gameEngine/include/component/collider/ellipse_colider_component.h \
   /Users/me/my/game_engine/gameEngine/include/component/collider/rectangle_colider_component.h \
   /Users/me/my/game_engine/gameEngine/include/component/component.h \
+  /Users/me/my/game_engine/gameEngine/include/component/render/ellipse_render_component.h \
   /Users/me/my/game_engine/gameEngine/include/component/render/rectangle_render_component.h \
   /Users/me/my/game_engine/gameEngine/include/component/render/render_component.h \
   /Users/me/my/game_engine/gameEngine/include/component/render/sprite_render_component.h \
@@ -1044,6 +1046,8 @@ CMakeFiles/game.dir/src/main.cpp.o: /Users/me/my/game_engine/game/src/main.cpp \
 /Users/me/my/game_engine/gameEngine/include/component/render/render_component.h:
 
 /Users/me/my/game_engine/gameEngine/include/component/render/rectangle_render_component.h:
+
+/Users/me/my/game_engine/gameEngine/include/component/render/ellipse_render_component.h:
 
 /Users/me/my/game_engine/gameEngine/include/component/component.h:
 
@@ -2764,6 +2768,8 @@ CMakeFiles/game.dir/src/main.cpp.o: /Users/me/my/game_engine/game/src/main.cpp \
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__type_traits/is_polymorphic.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__algorithm/for_each.h:
+
+/Users/me/my/game_engine/gameEngine/include/component/collider/ellipse_colider_component.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include/c++/v1/__ranges/data.h:
 

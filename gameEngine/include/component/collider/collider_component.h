@@ -2,8 +2,9 @@
 #define COLLIDER_COMPONENT_H
 #include "component/component.h"
 
-class RectangleColliderComponent;
 class TransformComponent;
+class RectangleColliderComponent;
+class EllipseColliderComponent;
 
 class ColliderComponent : public Component {
 public:
@@ -17,9 +18,9 @@ public:
                           const TransformComponent& transformThis,
                           const TransformComponent& transformOther) const = 0;
 
-  // virtual bool detectWith(const EllipseColliderComponent& ellipse,
-  //                         const TransformComponent& transformThis,
-  //                         const TransformComponent& transformOther) const = 0;
+  virtual bool detectWith(const EllipseColliderComponent& ellipse,
+                          const TransformComponent& transformThis,
+                          const TransformComponent& transformOther) const = 0;
 };
 
 
