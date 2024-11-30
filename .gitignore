@@ -34,3 +34,4 @@
 game/build/
 gameEngine/build/
 gameEngine/.cache
+game/cmake-build-debug/
