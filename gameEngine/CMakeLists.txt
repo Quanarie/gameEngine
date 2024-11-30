@@ -16,7 +16,6 @@ add_library(${PROJECT_NAME} STATIC include)
 target_sources(${PROJECT_NAME} 
     PRIVATE 
 	src/engine.cpp
-	src/math/utils.cpp
 	src/inputs.cpp
 	src/options.cpp
 	src/texture_manager.cpp

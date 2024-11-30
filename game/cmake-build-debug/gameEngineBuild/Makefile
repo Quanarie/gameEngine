@@ -250,30 +250,6 @@ src/inputs.cpp.s:
 	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/inputs.cpp.s
 .PHONY : src/inputs.cpp.s
 
-src/math/utils.o: src/math/utils.cpp.o
-.PHONY : src/math/utils.o
-
-# target to build an object file
-src/math/utils.cpp.o:
-	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/math/utils.cpp.o
-.PHONY : src/math/utils.cpp.o
-
-src/math/utils.i: src/math/utils.cpp.i
-.PHONY : src/math/utils.i
-
-# target to preprocess a source file
-src/math/utils.cpp.i:
-	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/math/utils.cpp.i
-.PHONY : src/math/utils.cpp.i
-
-src/math/utils.s: src/math/utils.cpp.s
-.PHONY : src/math/utils.s
-
-# target to generate assembly for a file
-src/math/utils.cpp.s:
-	cd /Users/me/my/gameEngine/game/cmake-build-debug && $(MAKE) $(MAKESILENT) -f gameEngineBuild/CMakeFiles/gameEngine.dir/build.make gameEngineBuild/CMakeFiles/gameEngine.dir/src/math/utils.cpp.s
-.PHONY : src/math/utils.cpp.s
-
 src/options.o: src/options.cpp.o
 .PHONY : src/options.o
 
@@ -346,9 +322,6 @@ help:
 	@echo "... src/inputs.o"
 	@echo "... src/inputs.i"
 	@echo "... src/inputs.s"
-	@echo "... src/math/utils.o"
-	@echo "... src/math/utils.i"
-	@echo "... src/math/utils.s"
 	@echo "... src/options.o"
 	@echo "... src/options.i"
 	@echo "... src/options.s"

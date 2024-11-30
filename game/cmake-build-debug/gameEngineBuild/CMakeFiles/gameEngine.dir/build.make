@@ -83,24 +83,10 @@ gameEngineBuild/CMakeFiles/gameEngine.dir/src/engine.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/gameEngine.dir/src/engine.cpp.s"
 	cd /Users/me/my/gameEngine/game/cmake-build-debug/gameEngineBuild && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/me/my/gameEngine/gameEngine/src/engine.cpp -o CMakeFiles/gameEngine.dir/src/engine.cpp.s
 
-gameEngineBuild/CMakeFiles/gameEngine.dir/src/math/utils.cpp.o: gameEngineBuild/CMakeFiles/gameEngine.dir/flags.make
-gameEngineBuild/CMakeFiles/gameEngine.dir/src/math/utils.cpp.o: /Users/me/my/gameEngine/gameEngine/src/math/utils.cpp
-gameEngineBuild/CMakeFiles/gameEngine.dir/src/math/utils.cpp.o: gameEngineBuild/CMakeFiles/gameEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/me/my/gameEngine/game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object gameEngineBuild/CMakeFiles/gameEngine.dir/src/math/utils.cpp.o"
-	cd /Users/me/my/gameEngine/game/cmake-build-debug/gameEngineBuild && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT gameEngineBuild/CMakeFiles/gameEngine.dir/src/math/utils.cpp.o -MF CMakeFiles/gameEngine.dir/src/math/utils.cpp.o.d -o CMakeFiles/gameEngine.dir/src/math/utils.cpp.o -c /Users/me/my/gameEngine/gameEngine/src/math/utils.cpp
-
-gameEngineBuild/CMakeFiles/gameEngine.dir/src/math/utils.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/gameEngine.dir/src/math/utils.cpp.i"
-	cd /Users/me/my/gameEngine/game/cmake-build-debug/gameEngineBuild && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/me/my/gameEngine/gameEngine/src/math/utils.cpp > CMakeFiles/gameEngine.dir/src/math/utils.cpp.i
-
-gameEngineBuild/CMakeFiles/gameEngine.dir/src/math/utils.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/gameEngine.dir/src/math/utils.cpp.s"
-	cd /Users/me/my/gameEngine/game/cmake-build-debug/gameEngineBuild && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/me/my/gameEngine/gameEngine/src/math/utils.cpp -o CMakeFiles/gameEngine.dir/src/math/utils.cpp.s
-
 gameEngineBuild/CMakeFiles/gameEngine.dir/src/inputs.cpp.o: gameEngineBuild/CMakeFiles/gameEngine.dir/flags.make
 gameEngineBuild/CMakeFiles/gameEngine.dir/src/inputs.cpp.o: /Users/me/my/gameEngine/gameEngine/src/inputs.cpp
 gameEngineBuild/CMakeFiles/gameEngine.dir/src/inputs.cpp.o: gameEngineBuild/CMakeFiles/gameEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/me/my/gameEngine/game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object gameEngineBuild/CMakeFiles/gameEngine.dir/src/inputs.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/me/my/gameEngine/game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object gameEngineBuild/CMakeFiles/gameEngine.dir/src/inputs.cpp.o"
 	cd /Users/me/my/gameEngine/game/cmake-build-debug/gameEngineBuild && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT gameEngineBuild/CMakeFiles/gameEngine.dir/src/inputs.cpp.o -MF CMakeFiles/gameEngine.dir/src/inputs.cpp.o.d -o CMakeFiles/gameEngine.dir/src/inputs.cpp.o -c /Users/me/my/gameEngine/gameEngine/src/inputs.cpp
 
 gameEngineBuild/CMakeFiles/gameEngine.dir/src/inputs.cpp.i: cmake_force
@@ -114,7 +100,7 @@ gameEngineBuild/CMakeFiles/gameEngine.dir/src/inputs.cpp.s: cmake_force
 gameEngineBuild/CMakeFiles/gameEngine.dir/src/options.cpp.o: gameEngineBuild/CMakeFiles/gameEngine.dir/flags.make
 gameEngineBuild/CMakeFiles/gameEngine.dir/src/options.cpp.o: /Users/me/my/gameEngine/gameEngine/src/options.cpp
 gameEngineBuild/CMakeFiles/gameEngine.dir/src/options.cpp.o: gameEngineBuild/CMakeFiles/gameEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/me/my/gameEngine/game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object gameEngineBuild/CMakeFiles/gameEngine.dir/src/options.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/me/my/gameEngine/game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object gameEngineBuild/CMakeFiles/gameEngine.dir/src/options.cpp.o"
 	cd /Users/me/my/gameEngine/game/cmake-build-debug/gameEngineBuild && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT gameEngineBuild/CMakeFiles/gameEngine.dir/src/options.cpp.o -MF CMakeFiles/gameEngine.dir/src/options.cpp.o.d -o CMakeFiles/gameEngine.dir/src/options.cpp.o -c /Users/me/my/gameEngine/gameEngine/src/options.cpp
 
 gameEngineBuild/CMakeFiles/gameEngine.dir/src/options.cpp.i: cmake_force
@@ -128,7 +114,7 @@ gameEngineBuild/CMakeFiles/gameEngine.dir/src/options.cpp.s: cmake_force
 gameEngineBuild/CMakeFiles/gameEngine.dir/src/texture_manager.cpp.o: gameEngineBuild/CMakeFiles/gameEngine.dir/flags.make
 gameEngineBuild/CMakeFiles/gameEngine.dir/src/texture_manager.cpp.o: /Users/me/my/gameEngine/gameEngine/src/texture_manager.cpp
 gameEngineBuild/CMakeFiles/gameEngine.dir/src/texture_manager.cpp.o: gameEngineBuild/CMakeFiles/gameEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/me/my/gameEngine/game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object gameEngineBuild/CMakeFiles/gameEngine.dir/src/texture_manager.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/me/my/gameEngine/game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object gameEngineBuild/CMakeFiles/gameEngine.dir/src/texture_manager.cpp.o"
 	cd /Users/me/my/gameEngine/game/cmake-build-debug/gameEngineBuild && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT gameEngineBuild/CMakeFiles/gameEngine.dir/src/texture_manager.cpp.o -MF CMakeFiles/gameEngine.dir/src/texture_manager.cpp.o.d -o CMakeFiles/gameEngine.dir/src/texture_manager.cpp.o -c /Users/me/my/gameEngine/gameEngine/src/texture_manager.cpp
 
 gameEngineBuild/CMakeFiles/gameEngine.dir/src/texture_manager.cpp.i: cmake_force
@@ -142,7 +128,7 @@ gameEngineBuild/CMakeFiles/gameEngine.dir/src/texture_manager.cpp.s: cmake_force
 gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.o: gameEngineBuild/CMakeFiles/gameEngine.dir/flags.make
 gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.o: /Users/me/my/gameEngine/gameEngine/src/component/collider/rectangle_colider_component.cpp
 gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.o: gameEngineBuild/CMakeFiles/gameEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/me/my/gameEngine/game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/me/my/gameEngine/game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.o"
 	cd /Users/me/my/gameEngine/game/cmake-build-debug/gameEngineBuild && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.o -MF CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.o.d -o CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.o -c /Users/me/my/gameEngine/gameEngine/src/component/collider/rectangle_colider_component.cpp
 
 gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colider_component.cpp.i: cmake_force
@@ -156,7 +142,7 @@ gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/rectangle_colid
 gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/collision_detector.cpp.o: gameEngineBuild/CMakeFiles/gameEngine.dir/flags.make
 gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/collision_detector.cpp.o: /Users/me/my/gameEngine/gameEngine/src/component/collider/collision_detector.cpp
 gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/collision_detector.cpp.o: gameEngineBuild/CMakeFiles/gameEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/me/my/gameEngine/game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/collision_detector.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/me/my/gameEngine/game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/collision_detector.cpp.o"
 	cd /Users/me/my/gameEngine/game/cmake-build-debug/gameEngineBuild && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/collision_detector.cpp.o -MF CMakeFiles/gameEngine.dir/src/component/collider/collision_detector.cpp.o.d -o CMakeFiles/gameEngine.dir/src/component/collider/collision_detector.cpp.o -c /Users/me/my/gameEngine/gameEngine/src/component/collider/collision_detector.cpp
 
 gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/collision_detector.cpp.i: cmake_force
@@ -170,7 +156,7 @@ gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/collision_detec
 gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/ellipse_collider_component.cpp.o: gameEngineBuild/CMakeFiles/gameEngine.dir/flags.make
 gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/ellipse_collider_component.cpp.o: /Users/me/my/gameEngine/gameEngine/src/component/collider/ellipse_collider_component.cpp
 gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/ellipse_collider_component.cpp.o: gameEngineBuild/CMakeFiles/gameEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/me/my/gameEngine/game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/ellipse_collider_component.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/me/my/gameEngine/game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/ellipse_collider_component.cpp.o"
 	cd /Users/me/my/gameEngine/game/cmake-build-debug/gameEngineBuild && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/ellipse_collider_component.cpp.o -MF CMakeFiles/gameEngine.dir/src/component/collider/ellipse_collider_component.cpp.o.d -o CMakeFiles/gameEngine.dir/src/component/collider/ellipse_collider_component.cpp.o -c /Users/me/my/gameEngine/gameEngine/src/component/collider/ellipse_collider_component.cpp
 
 gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/ellipse_collider_component.cpp.i: cmake_force
@@ -184,7 +170,6 @@ gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/ellipse_collide
 # Object files for target gameEngine
 gameEngine_OBJECTS = \
 "CMakeFiles/gameEngine.dir/src/engine.cpp.o" \
-"CMakeFiles/gameEngine.dir/src/math/utils.cpp.o" \
 "CMakeFiles/gameEngine.dir/src/inputs.cpp.o" \
 "CMakeFiles/gameEngine.dir/src/options.cpp.o" \
 "CMakeFiles/gameEngine.dir/src/texture_manager.cpp.o" \
@@ -196,7 +181,6 @@ gameEngine_OBJECTS = \
 gameEngine_EXTERNAL_OBJECTS =
 
 gameEngineBuild/libgameEngine.a: gameEngineBuild/CMakeFiles/gameEngine.dir/src/engine.cpp.o
-gameEngineBuild/libgameEngine.a: gameEngineBuild/CMakeFiles/gameEngine.dir/src/math/utils.cpp.o
 gameEngineBuild/libgameEngine.a: gameEngineBuild/CMakeFiles/gameEngine.dir/src/inputs.cpp.o
 gameEngineBuild/libgameEngine.a: gameEngineBuild/CMakeFiles/gameEngine.dir/src/options.cpp.o
 gameEngineBuild/libgameEngine.a: gameEngineBuild/CMakeFiles/gameEngine.dir/src/texture_manager.cpp.o
@@ -205,7 +189,7 @@ gameEngineBuild/libgameEngine.a: gameEngineBuild/CMakeFiles/gameEngine.dir/src/c
 gameEngineBuild/libgameEngine.a: gameEngineBuild/CMakeFiles/gameEngine.dir/src/component/collider/ellipse_collider_component.cpp.o
 gameEngineBuild/libgameEngine.a: gameEngineBuild/CMakeFiles/gameEngine.dir/build.make
 gameEngineBuild/libgameEngine.a: gameEngineBuild/CMakeFiles/gameEngine.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/me/my/gameEngine/game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX static library libgameEngine.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/me/my/gameEngine/game/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX static library libgameEngine.a"
 	cd /Users/me/my/gameEngine/game/cmake-build-debug/gameEngineBuild && $(CMAKE_COMMAND) -P CMakeFiles/gameEngine.dir/cmake_clean_target.cmake
 	cd /Users/me/my/gameEngine/game/cmake-build-debug/gameEngineBuild && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/gameEngine.dir/link.txt --verbose=$(VERBOSE)
 

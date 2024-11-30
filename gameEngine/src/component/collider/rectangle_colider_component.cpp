@@ -1,4 +1,5 @@
 #include "component/collider/rectangle_colider_component.h"
+
 #include "component/collider/collision_detector.h"
 
 bool RectangleColliderComponent::detect(const ColliderComponent& other,
