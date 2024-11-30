@@ -1,8 +1,10 @@
-#ifndef ELLIPSE_H
-#define ELLIPSE_H
+#ifndef ELLIPSE_RENDER_COMPONENT_H
+#define ELLIPSE_RENDER_COMPONENT_H
 
-#include "component/transform_component.h"
 #include "component/render/render_component.h"
+#include "math/point.h"
+
+class TransformComponent;
 
 class EllipseRenderComponent : public RenderComponent {
 public:
@@ -13,20 +15,7 @@ public:
     : center(c), radiuses(r) {}
 
   void render(SDL_Renderer *renderer,
-                TransformComponent *transform) override {
-    float centerX = transform->point.x;
-    float centerY = transform->point.y;
-    float sMajorAxis = radiuses.x;
-    float sMinorAxis = radiuses.y;
-
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
-    for (float angle = 0; angle < 360; angle += 1) {
-      float rad = angle * M_PI / 180.0f;
-      float x = centerX + sMajorAxis * cos(rad);
-      float y = centerY + sMinorAxis * sin(rad);
-      SDL_RenderDrawPoint(renderer, static_cast<int>(x), static_cast<int>(y));
-    }
-  }
+                TransformComponent *transform) override;
 };
 
-#endif // ELLIPSE_H
+#endif // ELLIPSE_RENDER_COMPONENT_H

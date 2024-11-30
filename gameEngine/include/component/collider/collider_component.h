@@ -2,6 +2,7 @@
 #define COLLIDER_COMPONENT_H
 
 #include <SDL_render.h>
+
 #include "component/component.h"
 #include "component/render/render_component.h"
 
@@ -26,13 +27,13 @@ public:
                           const TransformComponent& transformOther) const = 0;
 
   void render(SDL_Renderer* renderer, TransformComponent* transform) const {
-    if (renderComponent != nullptr) {
-      renderComponent->render(renderer, transform);
+    if (colliderBoundsRenderComponent != nullptr) {
+      colliderBoundsRenderComponent->render(renderer, transform);
     }
   }
 
 protected:
-  RenderComponent* renderComponent = nullptr;
+  RenderComponent* colliderBoundsRenderComponent = nullptr;
 };
 
 

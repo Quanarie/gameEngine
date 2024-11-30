@@ -1,10 +1,7 @@
 #ifndef RECTANGLE_COLLIDER_COMPONENT_H
 #define RECTANGLE_COLLIDER_COMPONENT_H
 
-#include <SDL_render.h>
-
 #include "collider_component.h"
-#include "options.h"
 #include "component/render/rectangle_render_component.h"
 #include "math/point.h"
 
@@ -16,11 +13,11 @@ public:
 
   RectangleColliderComponent(Point ld, Point ru)
     : leftDown(ld), rightUp(ru) {
-    renderComponent = new RectangleRenderComponent(ld, ru);
+    colliderBoundsRenderComponent = new RectangleRenderComponent(ld, ru);
   }
 
   ~RectangleColliderComponent() override {
-    delete renderComponent;
+    delete colliderBoundsRenderComponent;
   }
 
   bool detect(const ColliderComponent& other,

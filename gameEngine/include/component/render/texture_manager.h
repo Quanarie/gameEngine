@@ -8,11 +8,8 @@
 class TextureManager {
 public:
   static bool has(const std::string& path);
-
   static void create(const std::string& path, SDL_Renderer* renderer);
-
   static SDL_Texture* get(const std::string& path);
-
   static void clear();
 
 private:

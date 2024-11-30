@@ -12,11 +12,11 @@ public:
 
   EllipseColliderComponent(Point c, Point r)
     : center(c), radiuses(r) {
-    renderComponent = new EllipseRenderComponent(c, r);
+    colliderBoundsRenderComponent = new EllipseRenderComponent(c, r);
   }
 
   ~EllipseColliderComponent() override {
-    delete renderComponent;
+    delete colliderBoundsRenderComponent;
   }
 
   bool detect(const ColliderComponent& other,
