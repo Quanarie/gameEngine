@@ -14,6 +14,7 @@ class ColliderComponent : public Component {
 public:
   virtual ~ColliderComponent() = default;
 
+  // Double dispatch. Beautiful !!!
   virtual bool detect(const ColliderComponent& other,
                       const TransformComponent& transformThis,
                       const TransformComponent& transformOther) const = 0;

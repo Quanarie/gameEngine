@@ -14,8 +14,7 @@ public:
   EllipseRenderComponent(Point c, Point r)
     : center(c), radiuses(r) {}
 
-  void render(SDL_Renderer *renderer,
-                TransformComponent *transform) override;
+  void render(SDL_Renderer* renderer, TransformComponent* transform) override;
 };
 
 #endif // ELLIPSE_RENDER_COMPONENT_H

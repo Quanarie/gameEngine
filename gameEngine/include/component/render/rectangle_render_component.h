@@ -12,8 +12,7 @@ public:
   // For now public
   Point leftDown, rightUp;
 
-  void render(SDL_Renderer* renderer,
-              TransformComponent* transform) override;
+  void render(SDL_Renderer* renderer, TransformComponent* transform) override;
 };
 
 #endif // RECTANGLE_RENDER_COMPONENT_H

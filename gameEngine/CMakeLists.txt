@@ -23,7 +23,8 @@ target_sources(${PROJECT_NAME}
 	src/component/collider/collision_detector.cpp
 	src/component/collider/ellipse_collider_component.cpp
 	src/component/render/ellipse_render_component.cpp
-	src/component/render/rectangle_render_component.cpp)
+	src/component/render/rectangle_render_component.cpp
+	src/component/render/sprite_render_component.cpp)
 target_include_directories(${PROJECT_NAME} PUBLIC include)
 
 target_link_libraries(${PROJECT_NAME} SDL2::SDL2 SDL2::SDL2main)
