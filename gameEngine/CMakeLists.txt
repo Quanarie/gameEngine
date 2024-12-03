@@ -13,8 +13,8 @@ find_package(SDL2 REQUIRED)
 
 add_library(${PROJECT_NAME} STATIC include)
 
-target_sources(${PROJECT_NAME} 
-    PRIVATE 
+target_sources(${PROJECT_NAME}
+    PRIVATE
 	src/engine.cpp
 	src/inputs.cpp
 	src/options.cpp
@@ -24,7 +24,9 @@ target_sources(${PROJECT_NAME}
 	src/component/collider/ellipse_collider_component.cpp
 	src/component/render/ellipse_render_component.cpp
 	src/component/render/rectangle_render_component.cpp
-	src/component/render/sprite_render_component.cpp)
+	src/component/render/sprite_render_component.cpp
+	src/component/collider/collider.cpp
+	src/math/point.cpp)
 target_include_directories(${PROJECT_NAME} PUBLIC include)
 
 target_link_libraries(${PROJECT_NAME} SDL2::SDL2 SDL2::SDL2main)

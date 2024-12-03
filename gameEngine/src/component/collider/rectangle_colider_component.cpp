@@ -19,3 +19,7 @@ bool RectangleColliderComponent::detectWith(const EllipseColliderComponent& elli
                                             const TransformComponent& transformOther) const {
   return CollisionDetector::detect(ellipse, transformOther, *this, transformThis);
 }
+
+std::pair<Point, Point> RectangleColliderComponent::getTransformedDefiningCorners(Point relativeTo) const {
+  return {this->leftDown + relativeTo, this->rightUp + relativeTo};
+}

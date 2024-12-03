@@ -18,3 +18,7 @@ bool EllipseColliderComponent::detectWith(const EllipseColliderComponent& ellips
                                           const TransformComponent& transformOther) const {
   return CollisionDetector::detect(ellipse, transformOther, *this, transformThis);
 }
+
+Point EllipseColliderComponent::getTransformedCenter(Point relativeTo) const {
+  return this->center + relativeTo;
+}

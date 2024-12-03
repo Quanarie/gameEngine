@@ -5,10 +5,10 @@
 
 void RectangleRenderComponent::render(SDL_Renderer* renderer,
                                       TransformComponent* transform) {
-  float transformedLeft = leftDown.x + transform->point.x;
-  float transformedTop = leftDown.y + transform->point.y;
-  float transformedRight = rightUp.x + transform->point.x;
-  float transformedBottom = rightUp.y + transform->point.y;
+  float transformedLeft = leftDown.x + transform->position.x;
+  float transformedTop = leftDown.y + transform->position.y;
+  float transformedRight = rightUp.x + transform->position.x;
+  float transformedBottom = rightUp.y + transform->position.y;
 
   int left = static_cast<int>(transformedLeft);
   int top = static_cast<int>(transformedTop);

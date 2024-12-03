@@ -3,8 +3,8 @@
 
 void EllipseRenderComponent::render(SDL_Renderer* renderer,
                                     TransformComponent* transform) {
-  float centerX = transform->point.x;
-  float centerY = transform->point.y;
+  float centerX = transform->position.x;
+  float centerY = transform->position.y;
   float sMajorAxis = radiuses.x;
   float sMinorAxis = radiuses.y;
 

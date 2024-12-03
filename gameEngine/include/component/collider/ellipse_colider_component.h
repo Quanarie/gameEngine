@@ -30,6 +30,8 @@ public:
   bool detectWith(const RectangleColliderComponent& rect,
                   const TransformComponent& transformThis,
                   const TransformComponent& transformOther) const override;
+
+  Point getTransformedCenter(Point relativeTo) const;
 };
 
 #endif // ELLIPSE_COLLIDER_COMPONENT_H

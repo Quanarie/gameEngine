@@ -7,9 +7,9 @@
 class TransformComponent : public Component {
 public:
   TransformComponent(Point p, float rot = 0.0f, Point s = {1.0f, 1.0f})
-    : point(p), rotation(rot), scale(s) {}
+    : position(p), rotation(rot), scale(s) {}
 
-  Point point;
+  Point position;
   float rotation;
   Point scale;
 };

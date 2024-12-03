@@ -14,7 +14,7 @@ class ColliderComponent : public Component {
 public:
   virtual ~ColliderComponent() = default;
 
-  // Double dispatch. Beautiful !!!
+  // Double dispatch. Nice !!
   virtual bool detect(const ColliderComponent& other,
                       const TransformComponent& transformThis,
                       const TransformComponent& transformOther) const = 0;
@@ -27,11 +27,7 @@ public:
                           const TransformComponent& transformThis,
                           const TransformComponent& transformOther) const = 0;
 
-  void render(SDL_Renderer* renderer, TransformComponent* transform) const {
-    if (colliderBoundsRenderComponent != nullptr) {
-      colliderBoundsRenderComponent->render(renderer, transform);
-    }
-  }
+  void render(SDL_Renderer* renderer, TransformComponent* transform) const;
 
 protected:
   RenderComponent* colliderBoundsRenderComponent = nullptr;
