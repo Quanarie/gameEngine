@@ -16,16 +16,16 @@ public:
 
   // Double dispatch. Nice !!
   virtual bool detect(const ColliderComponent& other,
-                      const TransformComponent& transformThis,
-                      const TransformComponent& transformOther) const = 0;
+                       TransformComponent& transformThis,
+                       TransformComponent& transformOther) const = 0;
 
   virtual bool detectWith(const RectangleColliderComponent& rect,
-                          const TransformComponent& transformThis,
-                          const TransformComponent& transformOther) const = 0;
+                           TransformComponent& transformThis,
+                           TransformComponent& transformOther) const = 0;
 
   virtual bool detectWith(const EllipseColliderComponent& ellipse,
-                          const TransformComponent& transformThis,
-                          const TransformComponent& transformOther) const = 0;
+                           TransformComponent& transformThis,
+                           TransformComponent& transformOther) const = 0;
 
   void render(SDL_Renderer* renderer, TransformComponent* transform) const;
 

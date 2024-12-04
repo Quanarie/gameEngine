@@ -20,16 +20,16 @@ public:
   }
 
   bool detect(const ColliderComponent& other,
-              const TransformComponent& transformThis,
-              const TransformComponent& transformOther) const override;
+              TransformComponent& transformThis,
+              TransformComponent& transformOther) const override;
 
   bool detectWith(const EllipseColliderComponent& ellipse,
-                  const TransformComponent& transformThis,
-                  const TransformComponent& transformOther) const override;
+                  TransformComponent& transformThis,
+                  TransformComponent& transformOther) const override;
 
   bool detectWith(const RectangleColliderComponent& rect,
-                  const TransformComponent& transformThis,
-                  const TransformComponent& transformOther) const override;
+                  TransformComponent& transformThis,
+                  TransformComponent& transformOther) const override;
 
   Point getTransformedCenter(Point relativeTo) const;
 };

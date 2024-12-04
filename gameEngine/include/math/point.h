@@ -4,7 +4,15 @@
 struct Point {
   float x, y;
 
+  Point projectPointOntoLine(Point a, Point b);
+  float length();
+
   Point operator+(const Point& point) const;
+  Point operator/(int number) const;
+  Point operator-(const Point& point) const;
+  Point operator*(float number) const;
+  bool operator==(const Point& point) const;
+  bool isInsideSegment(Point segmentStart, Point segmentEnd);
 };
 
 #endif // POINT_H

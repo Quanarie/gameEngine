@@ -129,14 +129,12 @@ void Engine::render() {
   for (const auto& entity : entities) {
     auto transform = entity->getComponent<TransformComponent>();
     auto render = entity->getComponent<RenderComponent>();
-    if (!transform || !render)
-      continue;
-    render->render(renderer, transform);
+    if (transform && render)
+      render->render(renderer, transform);
 
     auto collider = entity->getComponent<ColliderComponent>();
-    if (!collider || !Options::renderColliders)
-      continue;
-    collider->render(renderer, transform);
+    if (collider && Options::renderColliders)
+      collider->render(renderer, transform);
   }
   SDL_RenderPresent(renderer);
 }
