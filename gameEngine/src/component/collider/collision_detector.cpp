@@ -16,6 +16,77 @@ struct OverlapResult {
   float overlapValue;
 };
 
+std::optional<Point> findLineIntersectionPoint(Point a1, Point b1, Point a2, Point b2) {
+  float s1_x, s1_y, s2_x, s2_y;
+  s1_x = b1.x - a1.x;
+  s1_y = b1.y - a1.y;
+  s2_x = b2.x - a2.x;
+  s2_y = b2.y - a2.y;
+
+  float s, t;
+  s = (-s1_y * (a1.x - a2.x) + s1_x * (a1.y - a2.y)) / (-s2_x * s1_y + s1_x * s2_y);
+  t = (s2_x * (a1.y - a2.y) - s2_y * (a1.x - a2.x)) / (-s2_x * s1_y + s1_x * s2_y);
+
+  if (s >= 0 && s <= 1 && t >= 0 && t <= 1) {
+    return Point{a1.x + (t * s1_x), a1.y + (t * s1_y)};
+  }
+
+  return std::nullopt;
+}
+
+bool doSegmentsIntersect(Point a1, Point b1, Point a2, Point b2) {
+  // Find point where lines intersect and check if its in bounds of each segment
+  std::optional<Point> lineIntersect = findLineIntersectionPoint(a1, b1, a2, b2);
+  if (!lineIntersect.has_value())
+    return false;
+
+  return lineIntersect->isInsideSegment(a1, a2);
+}
+
+bool doesSegmentIntersectRectangle(Point a, Point b, std::array<Point, 4> rect) {
+  for (int i = 0; i < rect.size(); i++) {
+    Point segmentStart = rect[i];
+    Point segmentEnd = rect[(i + 1) % 4];
+
+    if (doSegmentsIntersect(a, b, segmentStart, segmentEnd))
+      return true;
+  }
+
+  return false;
+}
+
+// TODO: implement for rotated rectangles
+// bool doRectanglesIntersect(std::array<Point, 4> rect1, std::array<Point, 4> rect2) {
+//   for (int i = 0; i < rect1.size(); i++) {
+//     Point segmentStart = rect1[i];
+//     Point segmentEnd = rect1[(i + 1) % 4];
+//
+//     if (doesSegmentIntersectRectangle(segmentStart, segmentEnd, rect2))
+//       return true;
+//   }
+//
+//   return false;
+// }
+//
+
+// Axis alligned rectangles
+bool doRectanglesIntersect(std::array<Point, 4> rect1, std::array<Point, 4> rect2) {
+  float rect1MinX = rect1[0].x;
+  float rect1MaxX = rect1[3].x;
+  float rect1MinY = rect1[2].y;
+  float rect1MaxY = rect1[0].y;
+
+  float rect2MinX = rect2[0].x;
+  float rect2MaxX = rect2[3].x;
+  float rect2MinY = rect2[2].y;
+  float rect2MaxY = rect2[0].y;
+
+  bool xOverlap = rect1MaxX > rect2MinX && rect2MaxX > rect1MinX;
+  bool yOverlap = rect1MaxY > rect2MinY && rect2MaxY > rect1MinY;
+
+  return xOverlap && yOverlap;
+}
+
 OverlapResult doesPointOverlapRect(std::array<Point, 4> rect1Corners, int cornerIndex,
                                    std::array<Point, 4> rect2Corners) {
   Point corner = rect1Corners[cornerIndex];
@@ -46,11 +117,12 @@ OverlapResult doesPointOverlapRect(std::array<Point, 4> rect1Corners, int corner
       rect1CornersResolved[j] = rect1Corners[j] + resolutionVector / 2;
       rect2CornersResolved[j] = rect2Corners[j] - resolutionVector / 2;
     }
-    if (я ебу нахуй сук за шо) {
-      if (distance < minDistance) {
-        minDistance = distance;
-        shortestResolutionVector = resolutionVector;
-      }
+
+    if (distance < minDistance) {
+      if (doRectanglesIntersect(rect1CornersResolved, rect2CornersResolved))
+        continue;
+      minDistance = distance;
+      shortestResolutionVector = resolutionVector;
     }
   }
 
