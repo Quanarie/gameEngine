@@ -1,6 +1,7 @@
 #ifndef ELLIPSE_RENDER_COMPONENT_H
 #define ELLIPSE_RENDER_COMPONENT_H
 
+#include "component/collider/ellipse/ellipse_axes.h"
 #include "component/render/render_component.h"
 #include "math/point.h"
 
@@ -9,10 +10,10 @@ class TransformComponent;
 class EllipseRenderComponent : public RenderComponent {
 public:
   Point center;
-  Point radiuses;
+  EllipseAxes axes;
 
-  EllipseRenderComponent(Point c, Point r)
-    : center(c), radiuses(r) {}
+  EllipseRenderComponent(Point c, EllipseAxes r)
+    : center(c), axes(r) {}
 
   void render(SDL_Renderer* renderer, TransformComponent* transform) override;
 };

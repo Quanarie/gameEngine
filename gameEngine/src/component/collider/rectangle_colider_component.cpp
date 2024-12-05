@@ -1,7 +1,7 @@
 #include <array>
 
 #include "component/collider/rectangle_colider_component.h"
-#include "component/collider/collision_detector.h"
+#include "component/collider/collision_resolver.h"
 
 bool RectangleColliderComponent::detect(const ColliderComponent& other,
                                         TransformComponent& transformThis,

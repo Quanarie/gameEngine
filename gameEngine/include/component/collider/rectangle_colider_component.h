@@ -1,8 +1,6 @@
 #ifndef RECTANGLE_COLLIDER_COMPONENT_H
 #define RECTANGLE_COLLIDER_COMPONENT_H
 
-#include <tuple>
-
 #include "collider_component.h"
 #include "component/render/rectangle_render_component.h"
 #include "math/point.h"

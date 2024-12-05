@@ -1,5 +1,6 @@
 #ifndef COLLISION_RESOLVER_H
 #define COLLISION_RESOLVER_H
+#include "math/point.h"
 
 class TransformComponent;
 class RectangleColliderComponent;
@@ -11,7 +12,6 @@ public:
                       TransformComponent& trans1,
                       const RectangleColliderComponent& rect2,
                       TransformComponent& trans2);
-
   static bool resolve(const EllipseColliderComponent& ellip,
                       TransformComponent& transEllip,
                       const RectangleColliderComponent& rect,

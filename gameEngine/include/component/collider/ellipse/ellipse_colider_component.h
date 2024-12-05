@@ -1,17 +1,18 @@
 #ifndef ELLIPSE_COLLIDER_COMPONENT_H
 #define ELLIPSE_COLLIDER_COMPONENT_H
 
-#include "collider_component.h"
+#include "ellipse_axes.h"
+#include "component/collider/collider_component.h"
 #include "component/render/ellipse_render_component.h"
 #include "math/point.h"
 
 class EllipseColliderComponent : public ColliderComponent {
 public:
   Point center;
-  Point radiuses;
+  EllipseAxes axes;
 
-  EllipseColliderComponent(Point c, Point r)
-    : center(c), radiuses(r) {
+  EllipseColliderComponent(Point c, EllipseAxes r)
+    : center(c), axes(r) {
     colliderBoundsRenderComponent = new EllipseRenderComponent(c, r);
   }
 

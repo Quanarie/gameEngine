@@ -6,20 +6,19 @@
 #include "inputs.h"
 #include "math/point.h"
 #include "options.h"
-#include "component/render/sprite_render_component.h"
 #include "component/transform_component.h"
-#include "component/collider/ellipse_colider_component.h"
 #include "component/collider/rectangle_colider_component.h"
+#include "component/collider/ellipse/ellipse_axes.h"
+#include "component/collider/ellipse/ellipse_colider_component.h"
 
 class Player : public Entity {
 public:
-  // TODO: make coordinates go in same direction everywhere !! probable make my code do it like in sdl
   void initialize() override {
-    transform = addComponent<TransformComponent>(Point{400.0f, 300.0f});
+    transform = addComponent<TransformComponent>(Point{500.0f, 300.0f});
     // render = addComponent<SpriteRenderComponent>(
     //   50.0f, 50.0f, "../assets/player.bmp", Point{-20.0f, -20.0f});
-    collider = addComponent<RectangleColliderComponent>(
-      Point{0.0f, 0.0f}, Point{10.0f, -35.0f});
+    collider = addComponent<EllipseColliderComponent>(
+      Point{0.0f, 0.0f}, EllipseAxes{50.0f, 25.0f});
   }
 
   void update() override {

@@ -11,7 +11,8 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_PREFIX_PATH "/opt/homebrew")
 find_package(SDL2 REQUIRED)
 
-add_library(${PROJECT_NAME} STATIC include)
+add_library(${PROJECT_NAME} STATIC include
+		include/component/collider/ellipse/ellipse_axes.h)
 
 target_sources(${PROJECT_NAME}
     PRIVATE
@@ -20,7 +21,7 @@ target_sources(${PROJECT_NAME}
 	src/options.cpp
 	src/texture_manager.cpp
 	src/component/collider/rectangle_colider_component.cpp
-	src/component/collider/collision_detector.cpp
+		src/component/collider/collision_resolver.cpp
 	src/component/collider/ellipse_collider_component.cpp
 	src/component/render/ellipse_render_component.cpp
 	src/component/render/rectangle_render_component.cpp

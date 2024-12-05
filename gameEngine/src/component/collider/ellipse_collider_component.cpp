@@ -1,5 +1,5 @@
-#include "component/collider/collision_detector.h"
-#include "component/collider/ellipse_colider_component.h"
+#include "component/collider/collision_resolver.h"
+#include "component/collider/ellipse/ellipse_colider_component.h"
 
 bool EllipseColliderComponent::detect(const ColliderComponent& other,
                                       TransformComponent& transformThis,
