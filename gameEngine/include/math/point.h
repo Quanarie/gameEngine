@@ -12,7 +12,7 @@ struct Point {
   Point operator-(const Point& point) const;
   Point operator*(float number) const;
   bool operator==(const Point& point) const;
-  bool isInsideSegment(Point segmentStart, Point segmentEnd);
+  bool isOnSegment(Point segmentStart, Point segmentEnd);
 };
 
 #endif // POINT_H

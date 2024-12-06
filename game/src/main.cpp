@@ -17,8 +17,10 @@ public:
     transform = addComponent<TransformComponent>(Point{500.0f, 300.0f});
     // render = addComponent<SpriteRenderComponent>(
     //   50.0f, 50.0f, "../assets/player.bmp", Point{-20.0f, -20.0f});
-    collider = addComponent<EllipseColliderComponent>(
-      Point{0.0f, 0.0f}, EllipseAxes{50.0f, 25.0f});
+    // collider = addComponent<EllipseColliderComponent>(
+    //   Point{0.0f, 0.0f}, EllipseAxes{50.0f, 25.0f});
+    collider = addComponent<RectangleColliderComponent>(
+      Point{0.0f, 0.0f}, Point{30.0f, -30.0f});
   }
 
   void update() override {
@@ -27,10 +29,22 @@ public:
     if (Inputs::isKeyHeld(SDL_SCANCODE_A)) { transform->position.x -= 1; }
     if (Inputs::isKeyHeld(SDL_SCANCODE_D)) { transform->position.x += 1; }
 
+    Point toCenter = Point{400.0f, 300.0f} - transform->position;
+
     if (Inputs::isMouseButtonHeld(SDL_BUTTON_LEFT)) {
-      transform->position.x += rand() % 10 / 5.0 * (rand() % 2 == 0 ? 1 : -1);
-      transform->position.y += rand() % 10 / 5.0 * (rand() % 2 == 0 ? 1 : -1);
+      transform->position = transform->position + Point{
+        (float)(rand() % 10 / 5.0 * (rand() % 2 == 0 ? 1 : -1)),
+        (float)(rand() % 10 / 5.0 * (rand() % 2 == 0 ? 1 : -1))
+      } + toCenter / 1000;
     }
+
+    if (Inputs::isMouseButtonHeld(SDL_BUTTON_RIGHT)) {
+      transform->position = transform->position + Point{
+        // (float)(rand() % 10 / 5.0 * (rand() % 2 == 0 ? 1 : -1)),
+        0.0f,
+        (float)(rand() % 10 / 5.0 * (rand() % 2 == 0 ? 1 : -1))
+      };
+    };
   }
 
 private:
@@ -46,7 +60,7 @@ public:
     // render = addComponent<SpriteRenderComponent>(
     //   50.0f, 50.0f, "../assets/enemy.bmp", Point{-25.0f, -25.0f});
     collider = addComponent<RectangleColliderComponent>(
-      Point{0.0f, 0.0f}, Point{30.0f, -30.0f});
+      Point{0.0f, 0.0f}, Point{35.0f, -30.0f});
   }
 
   void update() override {
@@ -67,6 +81,8 @@ int main(int argc, char* argv[]) {
 
   engine.createEntity<Player>();
   engine.createEntity<Enemy>();
+  // for (int i = 0; i < 100; i++) {
+  // }
 
   return engine.start();
 }

@@ -39,8 +39,6 @@ bool Point::operator==(const Point& point) const {
   return this->x == point.x && this->y == point.y;
 }
 
-bool Point::isInsideSegment(Point segmentStart, Point segmentEnd) {
-  return segmentStart != *this &&
-    segmentEnd != *this &&
-    (segmentStart - *this).length() + (segmentEnd - *this).length() == (segmentStart - segmentEnd).length();
+bool Point::isOnSegment(Point segmentStart, Point segmentEnd) {
+  return (segmentStart - *this).length() + (segmentEnd - *this).length() == (segmentStart - segmentEnd).length();
 }

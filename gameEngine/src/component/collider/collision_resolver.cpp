@@ -97,7 +97,7 @@ OverlapResult doesPointOverlapRect(std::array<Point, 4> rect1Corners, int corner
     Point segmentEnd = rect2Corners[(i + 1) % 4];
 
     Point projectedPoint = corner.projectPointOntoLine(segmentStart, segmentEnd);
-    if (!projectedPoint.isInsideSegment(segmentStart, segmentEnd))
+    if (!projectedPoint.isOnSegment(segmentStart, segmentEnd))
       return {
         false,
         Point{std::numeric_limits<float>::max(), std::numeric_limits<float>::max()},
@@ -229,6 +229,7 @@ Point getEllipAndPointCenterDefinedLineClosestIntersectionPoint(Point ellipCente
 }
 
 
+// Axis aligned rect and not rotated ellipse :(
 bool CollisionResolver::resolve(const EllipseColliderComponent& ellip,
                                 TransformComponent& transEllip,
                                 const RectangleColliderComponent& rect,
@@ -283,6 +284,11 @@ bool CollisionResolver::resolve(const EllipseColliderComponent& ell1,
     ell1.axes.sMinor + ell2.axes.sMinor
   };
 
-  return center2RelatTo1.x * center2RelatTo1.x / (combinedRads.x * combinedRads.x) +
-    center2RelatTo1.y * center2RelatTo1.y / (combinedRads.y * combinedRads.y) <= 1;
+  if (center2RelatTo1.x * center2RelatTo1.x / (combinedRads.x * combinedRads.x) +
+    center2RelatTo1.y * center2RelatTo1.y / (combinedRads.y * combinedRads.y) <= 1)
+    return false;
+
+  Point intersectionPoint = Point{
+
+  };
 }
