@@ -203,10 +203,15 @@ Point getEllipAndPointCenterDefinedLineClosestIntersectionPoint(Point ellipCente
     }
 
     float x1 = (-b + sqrt(delta)) / (2 * a);
-    intersect1 = Point{x1, sl * x1 + yI} + ellipCenter;
+
+    intersect1 = Point{
+      x1,
+      // minus because different coordinate systems. Fucking math works in regular coordinates
+      -sl * x1 + yI
+    } + ellipCenter;
 
     float x2 = (-b - sqrt(delta)) / (2 * a);
-    intersect2 = Point{x2, sl * x2 + yI} + ellipCenter;
+    intersect2 = Point{x2, -sl * x2 + yI} + ellipCenter;
   }
   else {
     intersect1 = Point{0, axes.sMinor} + ellipCenter;
