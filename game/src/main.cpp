@@ -14,13 +14,13 @@
 class Player : public Entity {
 public:
   void initialize() override {
-    transform = addComponent<TransformComponent>(Point{500.0f, 300.0f});
+    transform = addComponent<TransformComponent>(Point{500.0f, 400.0f});
     // render = addComponent<SpriteRenderComponent>(
     //   50.0f, 50.0f, "../assets/player.bmp", Point{-20.0f, -20.0f});
-    // collider = addComponent<EllipseColliderComponent>(
-    //   Point{0.0f, 0.0f}, EllipseAxes{50.0f, 25.0f});
-    collider = addComponent<RectangleColliderComponent>(
-      Point{0.0f, 0.0f}, Point{30.0f, -30.0f});
+    collider = addComponent<EllipseColliderComponent>(
+      Point{0.0f, 0.0f}, EllipseAxes{200.0f, 1.0f});
+    // collider = addComponent<RectangleColliderComponent>(
+    //   Point{0.0f, 0.0f}, Point{30.0f, -30.0f});
   }
 
   void update() override {
@@ -60,7 +60,7 @@ public:
     // render = addComponent<SpriteRenderComponent>(
     //   50.0f, 50.0f, "../assets/enemy.bmp", Point{-25.0f, -25.0f});
     collider = addComponent<RectangleColliderComponent>(
-      Point{0.0f, 0.0f}, Point{35.0f, -30.0f});
+      Point{0.0f, 0.0f}, Point{30.0f, -30.0f});
   }
 
   void update() override {
