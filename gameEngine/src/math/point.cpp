@@ -15,6 +15,10 @@ Point Point::projectPointOntoLine(Point a, Point b) {
   return projectedPoint;
 }
 
+Point Point::normalized() {
+  return *this / this->length();
+}
+
 float Point::length() {
   return std::sqrt(this->x * this->x + this->y * this->y);
 }

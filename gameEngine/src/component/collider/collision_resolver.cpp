@@ -4,10 +4,15 @@
 #include <vector>
 #include <__algorithm/clamp.h>
 
+#include "inputs.h"
 #include "component/transform_component.h"
 #include "component/collider/ellipse/ellipse_colider_component.h"
-#include "component/collider/rectangle_colider_component.h"
+#include "component/collider/rectangle/rectangle_colider_component.h"
+#include "component/collider/rectangle/rectangle_corners.h"
 #include "math/point.h"
+
+#define RECTANGLE_CORNERS_COUNT 4
+#define MAX_SIDES_CONTAINING_SAME_POINT 2
 
 struct OverlapResult {
   bool doesOverlap;
@@ -68,7 +73,7 @@ struct OverlapResult {
 // }
 
 // Only axis aligned rectangles
-bool doRectanglesIntersect(std::array<Point, 4> rect1, std::array<Point, 4> rect2) {
+bool doRectanglesIntersect(RectangleCorners rect1, RectangleCorners rect2) {
   float rect1MinX = rect1[0].x;
   float rect1MaxX = rect1[3].x;
   float rect1MinY = rect1[2].y;
@@ -85,14 +90,14 @@ bool doRectanglesIntersect(std::array<Point, 4> rect1, std::array<Point, 4> rect
   return xOverlap && yOverlap;
 }
 
-OverlapResult doesPointOverlapRect(std::array<Point, 4> rect1Corners, int cornerIndex,
-                                   std::array<Point, 4> rect2Corners) {
+OverlapResult doesRectCornerOverlapOtherRect(RectangleCorners rect1Corners, int cornerIndex,
+                                             RectangleCorners rect2Corners) {
   Point corner = rect1Corners[cornerIndex];
 
   float minDistance = std::numeric_limits<float>::max();
   Point shortestResolutionVector = {0, 0};
 
-  for (int i = 0; i < rect2Corners.size(); i++) {
+  for (int i = 0; i < RECTANGLE_CORNERS_COUNT; i++) {
     Point segmentStart = rect2Corners[i];
     Point segmentEnd = rect2Corners[(i + 1) % 4];
 
@@ -108,9 +113,9 @@ OverlapResult doesPointOverlapRect(std::array<Point, 4> rect1Corners, int corner
     float distance = resolutionVector.length();
 
     // This prevents jiggling bugs where one side of rect is close another, and they go inside each other
-    std::array<Point, 4> rect1CornersResolved = {};
-    std::array<Point, 4> rect2CornersResolved = {};
-    for (int j = 0; j < rect1Corners.size(); j++) {
+    RectangleCorners rect1CornersResolved = {};
+    RectangleCorners rect2CornersResolved = {};
+    for (int j = 0; j < RECTANGLE_CORNERS_COUNT; j++) {
       rect1CornersResolved[j] = rect1Corners[j] + resolutionVector / 2;
       rect2CornersResolved[j] = rect2Corners[j] - resolutionVector / 2;
     }
@@ -133,9 +138,9 @@ bool checkAnyCornerOfRect1InsideRect2AndResolve(const RectangleColliderComponent
   auto rect1Corners = rect1.getTransformedCorners(trans1.position);
   auto rect2Corners = rect2.getTransformedCorners(trans2.position);
 
-  OverlapResult minOverlapResult = doesPointOverlapRect(rect1Corners, 0, rect2Corners);
-  for (int i = 1; i < rect1Corners.size(); i++) {
-    OverlapResult overlapResult = doesPointOverlapRect(rect1Corners, i, rect2Corners);
+  OverlapResult minOverlapResult = doesRectCornerOverlapOtherRect(rect1Corners, 0, rect2Corners);
+  for (int i = 1; i < RECTANGLE_CORNERS_COUNT; i++) {
+    OverlapResult overlapResult = doesRectCornerOverlapOtherRect(rect1Corners, i, rect2Corners);
     if (overlapResult.doesOverlap && overlapResult.overlapValue < minOverlapResult.overlapValue) {
       minOverlapResult = overlapResult;
     }
@@ -181,19 +186,36 @@ std::optional<Line> getLineDefinedByTwoPoints(Point p, Point q) {
   };
 }
 
+struct CornerInfo {
+  bool isCorner = false;
+  Point prevPoint;
+  Point point;
+  Point nextPoint;
+};
 
-Point getEllipAndPointCenterDefinedLineClosestIntersectionPoint(Point ellipCenter,
-                                                                EllipseAxes axes,
-                                                                Point point) {
-  std::optional<Line> line = getLineDefinedByTwoPoints(Point{0.0f, 0.0f}, point - ellipCenter);
+std::vector<std::optional<Line>> getLinesDefinedBySidesThatContainsPoint(CornerInfo cornerInfo) {
+  std::vector<std::optional<Line>> res{};
 
+  if (cornerInfo.isCorner) {
+    res.push_back(getLineDefinedByTwoPoints(cornerInfo.prevPoint, cornerInfo.point));
+  }
+  res.push_back(getLineDefinedByTwoPoints(cornerInfo.point, cornerInfo.nextPoint));
+
+  return res;
+}
+
+std::array<Point, 2> getIntersectionsOfLineAndEllipse(Line line, Point ellipCenter, EllipseAxes axes) {
   Point intersect1, intersect2;
-  if (line.has_value()) {
-    float sl = line.value().slope;
-    float yI = line.value().yIntercept;
-    float j = axes.sMajor;
-    float m = axes.sMinor;
+  float sl = line.slope;
+  float yI = line.yIntercept - ellipCenter.y;
+  float j = axes.sMajor;
+  float m = axes.sMinor;
 
+  float x1, x2;
+  if (sl == 0.0f) {
+    x1 = sqrt(j * j * (1 - pow(yI / m, 2)));
+  }
+  else {
     float a = m * m + sl * sl * j * j;
     float b = 2 * j * j * sl * yI;
     float c = j * j * b * b - j * j * m * m;
@@ -202,61 +224,113 @@ Point getEllipAndPointCenterDefinedLineClosestIntersectionPoint(Point ellipCente
       throw std::runtime_error("Expected a solution but none was found.");
     }
 
-    float x1 = (-b + sqrt(delta)) / (2 * a);
-
-    intersect1 = Point{
-      x1,
-      // minus because different coordinate systems. Fucking math works in regular coordinates
-      -sl * x1 + yI
-    } + ellipCenter;
-
-    float x2 = (-b - sqrt(delta)) / (2 * a);
-    intersect2 = Point{x2, -sl * x2 + yI} + ellipCenter;
-  }
-  else {
-    intersect1 = Point{0, axes.sMinor} + ellipCenter;
-    intersect2 = Point{0, -axes.sMinor} + ellipCenter;
+    x1 = (-b + sqrt(delta)) / (2 * a);
   }
 
-  float lengthToIntersect1 = (intersect1 - point).length();
-  float lengthToIntersect2 = (intersect2 - point).length();
+  intersect1 = Point{
+    x1,
+    // minus because different coordinate systems. Fucking math works in regular coordinates
+    -sl * x1 + yI
+  } + ellipCenter;
 
-  if (lengthToIntersect1 < lengthToIntersect2) {
-    return intersect1;
-  }
 
-  return intersect2;
+  // тут оказується більше не той який має бути для лівого верхнього кута вліво
+
+  x2 = -x1;
+  intersect2 = Point{x2, -sl * x2 + yI} + ellipCenter;
+
+  return std::array{intersect1, intersect2};
 }
 
+std::optional<Line> getPerpendicularLineToSegmentAtPoint(Point point, std::optional<Line> lineOpt) {
+  if (!lineOpt.has_value())
+    return Line{0.0f, point.y};
 
-// Axis aligned rect and not rotated ellipse :(
+  if (lineOpt->slope == 0.0f)
+    return std::nullopt;
+
+  Line line = lineOpt.value();
+  return Line{-line.slope, point.y + line.slope * point.x};
+}
+
+Point getClosestPointToPoint(std::array<Point, 2> intersections, Point point) {
+  if ((intersections[0] - point).length() < (intersections[1] - point).length())
+    return intersections[0];
+
+  return intersections[1];
+}
+
+CornerInfo isCorner(Point point, RectangleCorners rect) {
+  int howManySidesContainPoint = 0;
+  CornerInfo res{};
+  for (int i = 0; i < RECTANGLE_CORNERS_COUNT; i++) {
+    Point sideStart = rect[i];
+    Point sideEnd = rect[(i + 1) % 4];
+
+    if (point.isOnSegment(sideStart, sideEnd)) {
+      howManySidesContainPoint++;
+      res = CornerInfo{false, sideStart, sideStart, sideEnd};
+      if (howManySidesContainPoint == 2) {
+        res = CornerInfo{true, rect[(i - 1) % 4], sideStart, sideEnd};
+        return res;
+      }
+    }
+  }
+
+  return res;
+}
+
+bool isSideVertical(Point start, Point end) {
+  return start.x == end.x;
+}
+
 bool CollisionResolver::resolve(const EllipseColliderComponent& ellip,
                                 TransformComponent& transEllip,
                                 const RectangleColliderComponent& rect,
                                 TransformComponent& transRect) {
   Point ellipCenter = ellip.getTransformedCenter(transEllip.position);
-  auto [rectLD, rectRU] = rect.getTransformedDefiningCorners(transRect.position);
+  auto rectCorners = rect.getTransformedCorners(transRect.position);
 
   auto closestPointToEllipInRect = Point{
-    std::clamp(ellipCenter.x, rectLD.x, rectRU.x),
-    std::clamp(ellipCenter.y, rectRU.y, rectLD.y)
+    std::clamp(ellipCenter.x, rectCorners.ld.x, rectCorners.ru.x),
+    std::clamp(ellipCenter.y, rectCorners.ru.y, rectCorners.ld.y)
   };
 
-  auto relativeToEllip = Point{
-    ellipCenter.x - closestPointToEllipInRect.x,
-    ellipCenter.y - closestPointToEllipInRect.y
-  };
+  auto relativeToEllip = closestPointToEllipInRect - ellipCenter;
 
   if (relativeToEllip.x * relativeToEllip.x / (ellip.axes.sMajor * ellip.axes.sMajor) +
     relativeToEllip.y * relativeToEllip.y / (ellip.axes.sMinor * ellip.axes.sMinor) >= 1)
     return false;
 
-  // Find intersection of ellipCetner - closestPoint line. Then find length of segment that is between
-  // intersection and closestPoint. This is resolutionVector
+  std::vector<std::optional<Line>> linesContainingClosestPoint =
+    getLinesDefinedBySidesThatContainsPoint(isCorner(closestPointToEllipInRect, rectCorners));
 
-  Point intersectionPoint = getEllipAndPointCenterDefinedLineClosestIntersectionPoint(
-    ellipCenter, ellip.axes, closestPointToEllipInRect);
-  Point resolutionVector = closestPointToEllipInRect - intersectionPoint;
+  Point resolutionVector{0.0f, 0.0f};
+  for (auto line : linesContainingClosestPoint) {
+    std::optional<Line> perperndicularToLineContClosestPoint = getPerpendicularLineToSegmentAtPoint(
+      closestPointToEllipInRect, line);
+
+    std::array<Point, 2> intersections;
+    if (perperndicularToLineContClosestPoint.has_value()) {
+      intersections = getIntersectionsOfLineAndEllipse(
+        perperndicularToLineContClosestPoint.value(),
+        ellipCenter,
+        ellip.axes
+      );
+    }
+    else {
+      float x1 = ellip.axes.sMajor * sqrt(1 - pow(relativeToEllip.y / ellip.axes.sMinor, 2));
+      intersections[0] = Point{x1, relativeToEllip.y} + ellipCenter;
+      intersections[1] = Point{-x1, relativeToEllip.y} + ellipCenter;
+    }
+
+    Point closestIntersection = getClosestPointToPoint(intersections, closestPointToEllipInRect);
+    Point currentResolutionVector = closestPointToEllipInRect - closestIntersection;
+    Point newResolutionVector = currentResolutionVector + resolutionVector;
+    resolutionVector = newResolutionVector.normalized() * std::max(currentResolutionVector.length(),
+                                                                   resolutionVector.length());
+  }
+
 
   transEllip.position = transEllip.position + resolutionVector / 2;
   transRect.position = transRect.position - resolutionVector / 2;
@@ -287,8 +361,4 @@ bool CollisionResolver::resolve(const EllipseColliderComponent& ell1,
   if (center2RelatTo1.x * center2RelatTo1.x / (combinedRads.x * combinedRads.x) +
     center2RelatTo1.y * center2RelatTo1.y / (combinedRads.y * combinedRads.y) <= 1)
     return false;
-
-  Point intersectionPoint = Point{
-
-  };
 }

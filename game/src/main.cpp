@@ -7,7 +7,7 @@
 #include "math/point.h"
 #include "options.h"
 #include "component/transform_component.h"
-#include "component/collider/rectangle_colider_component.h"
+#include "component/collider/rectangle/rectangle_colider_component.h"
 #include "component/collider/ellipse/ellipse_axes.h"
 #include "component/collider/ellipse/ellipse_colider_component.h"
 
@@ -18,7 +18,7 @@ public:
     // render = addComponent<SpriteRenderComponent>(
     //   50.0f, 50.0f, "../assets/player.bmp", Point{-20.0f, -20.0f});
     collider = addComponent<EllipseColliderComponent>(
-      Point{0.0f, 0.0f}, EllipseAxes{200.0f, 1.0f});
+      Point{0.0f, 0.0f}, EllipseAxes{20.0f, 20.0f});
     // collider = addComponent<RectangleColliderComponent>(
     //   Point{0.0f, 0.0f}, Point{30.0f, -30.0f});
   }

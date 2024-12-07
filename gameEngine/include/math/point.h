@@ -6,6 +6,7 @@ struct Point {
 
   Point projectPointOntoLine(Point a, Point b);
   float length();
+  Point normalized();
 
   Point operator+(const Point& point) const;
   Point operator/(int number) const;

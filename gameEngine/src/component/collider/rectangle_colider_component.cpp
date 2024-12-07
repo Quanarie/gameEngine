@@ -1,7 +1,8 @@
 #include <array>
 
-#include "component/collider/rectangle_colider_component.h"
+#include "component/collider/rectangle/rectangle_colider_component.h"
 #include "component/collider/collision_resolver.h"
+#include "component/collider/rectangle/rectangle_corners.h"
 
 bool RectangleColliderComponent::detect(const ColliderComponent& other,
                                         TransformComponent& transformThis,
@@ -25,8 +26,8 @@ std::pair<Point, Point> RectangleColliderComponent::getTransformedDefiningCorner
   return {this->leftDown + relativeTo, this->rightUp + relativeTo};
 }
 
-std::array<Point, 4> RectangleColliderComponent::getTransformedCorners(Point relativeTo) const {
-  return {
+RectangleCorners RectangleColliderComponent::getTransformedCorners(Point relativeTo) const {
+  return RectangleCorners{
     this->leftDown + relativeTo,
     Point{this->leftDown.x, this->rightUp.y} + relativeTo,
     this->rightUp + relativeTo,
