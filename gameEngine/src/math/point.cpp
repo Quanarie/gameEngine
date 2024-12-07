@@ -19,6 +19,10 @@ Point Point::normalized() {
   return *this / this->length();
 }
 
+Point Point::inverted() {
+  return Point{this->y, this->x};
+}
+
 float Point::length() {
   return std::sqrt(this->x * this->x + this->y * this->y);
 }
@@ -27,7 +31,7 @@ Point Point::operator+(const Point& point) const {
   return Point(this->x + point.x, this->y + point.y);
 }
 
-Point Point::operator/(int number) const {
+Point Point::operator/(float number) const {
   return Point{this->x / number, this->y / number};
 }
 

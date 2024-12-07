@@ -7,9 +7,10 @@ struct Point {
   Point projectPointOntoLine(Point a, Point b);
   float length();
   Point normalized();
+  Point inverted();
 
   Point operator+(const Point& point) const;
-  Point operator/(int number) const;
+  Point operator/(float number) const;
   Point operator-(const Point& point) const;
   Point operator*(float number) const;
   bool operator==(const Point& point) const;
