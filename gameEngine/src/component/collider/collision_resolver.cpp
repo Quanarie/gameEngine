@@ -306,6 +306,10 @@ bool CollisionResolver::resolve(const EllipseColliderComponent& ellip,
     getLinesDefinedBySidesThatContainsPoint(isCorner(closestPointToEllipInRect, rectCorners));
 
   Point resolutionVector{0.0f, 0.0f};
+  float weightSum = 0.0f;
+
+  // TODO: Try to take two point of intersection, get perpen in middle of it as resolutionVector
+  // That would eliminate the need for this cycle
   for (auto line : linesContainingClosestPoint) {
     std::optional<Line> perperndicularToLineContClosestPoint = getPerpendicularLineToSegmentAtPoint(
       closestPointToEllipInRect, line);
@@ -319,18 +323,22 @@ bool CollisionResolver::resolve(const EllipseColliderComponent& ellip,
       );
     }
     else {
-      float x1 = ellip.axes.sMajor * sqrt(1 - pow(relativeToEllip.y / ellip.axes.sMinor, 2));
-      intersections[0] = Point{x1, relativeToEllip.y} + ellipCenter;
-      intersections[1] = Point{-x1, relativeToEllip.y} + ellipCenter;
+      float y0 = ellip.axes.sMinor * sqrt(1 - pow(relativeToEllip.x / ellip.axes.sMajor, 2));
+      intersections[0] = Point{relativeToEllip.x, y0} + ellipCenter;
+      intersections[1] = Point{relativeToEllip.x, -y0} + ellipCenter;
     }
 
     Point closestIntersection = getClosestPointToPoint(intersections, closestPointToEllipInRect);
     Point currentResolutionVector = closestPointToEllipInRect - closestIntersection;
-    Point newResolutionVector = currentResolutionVector + resolutionVector;
-    resolutionVector = newResolutionVector.normalized() * std::max(currentResolutionVector.length(),
-                                                                   resolutionVector.length());
+
+    float weight = 1.0f / (1.0f + std::abs(currentResolutionVector.length() - resolutionVector.length()));
+    resolutionVector = resolutionVector + (currentResolutionVector * weight);
+    weightSum += weight;
   }
 
+  if (weightSum > 0.0f) {
+    resolutionVector = resolutionVector * (1.0f / weightSum);
+  }
 
   transEllip.position = transEllip.position + resolutionVector / 2;
   transRect.position = transRect.position - resolutionVector / 2;
