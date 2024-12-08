@@ -13,6 +13,7 @@
 
 #define RECTANGLE_CORNERS_COUNT 4
 #define MAX_SIDES_CONTAINING_SAME_POINT 2
+#define TREAT_AS_GOING_THROUGH_ELLIPSE_CENTER 0.1f
 
 struct OverlapResult {
   bool doesOverlap;
@@ -58,7 +59,7 @@ struct OverlapResult {
 //
 //   return false;
 // }
-
+//
 // TODO: implement for rotated rectangles
 // bool doRectanglesIntersect(std::array<Point, 4> rect1, std::array<Point, 4> rect2) {
 //   for (int i = 0; i < rect1.size(); i++) {
@@ -212,7 +213,9 @@ getIntersectionsOfLineAndEllipse(std::optional<Line> lineOpt, Point pointOnLine,
 
     float sl = line.slope;
     // Dont even try to understand why the signs are as they are. Thats the consequence of different y direction in SDL
+    // And thats by itself is making line relative to ellipse
     float yI = -(sl * ellipCenter.x - line.yIntercept) - ellipCenter.y;
+    yI = std::abs(yI) < TREAT_AS_GOING_THROUGH_ELLIPSE_CENTER ? 0.0f : yI;
     float j = axes.sMajor;
     float m = axes.sMinor;
 
@@ -347,12 +350,6 @@ bool CollisionResolver::resolve(const EllipseColliderComponent& ellip,
   return true;
 }
 
-// This is too hard, didnt expect this
-// std::array<Point, 2> getIntersectionsOfEllipses(Point ell1Center, EllipseAxes ell1Axes, Point ell2Center,
-//                                                 EllipseAxes ell2Axes) {
-//
-// }
-
 bool CollisionResolver::resolve(const EllipseColliderComponent& ell1,
                                 TransformComponent& trans1,
                                 const EllipseColliderComponent& ell2,
@@ -377,6 +374,7 @@ bool CollisionResolver::resolve(const EllipseColliderComponent& ell1,
     center1RelatTo2.y * center1RelatTo2.y / (combinedAxes.sMinor * combinedAxes.sMinor) > 1)
     return false;
 
+  // Weird pseudo algorithm given to me by god
   std::array<Point, 2> intersections = getIntersectionsOfLineAndEllipse(
     getLineDefinedByTwoPoints(ell1Center, ell2Center),
     ell1Center,
@@ -386,26 +384,6 @@ bool CollisionResolver::resolve(const EllipseColliderComponent& ell1,
 
   Point closestIntersection = getClosestIntersectionToPoint(intersections, ell1Center);
   Point resolutionVector = closestIntersection - ell1Center;
-
-  // std::array<Point, 2> ellsIntersections = getIntersectionsOfEllipses(ell1Center, ell1.axes, ell2Center, ell2.axes);
-  //
-  // Point middleOfSegmentDefinedByEllsIntersections = (ellsIntersections[0] + ellsIntersections[1]) / 2;
-  // std::optional<Line> perpendicularInMiddle = getPerpendicularLineAtPoint(
-  //   middleOfSegmentDefinedByEllsIntersections,
-  //   getLineDefinedByTwoPoints(ellsIntersections[0], ellsIntersections[1])
-  // );
-  //
-  // std::array<Point, 2> perpenIntersectWithEll1 = getIntersectionsOfLineAndEllipse(
-  //   perpendicularInMiddle, middleOfSegmentDefinedByEllsIntersections, ell1Center, ell1.axes
-  // );
-  // std::array<Point, 2> perpenIntersectWithEll2 = getIntersectionsOfLineAndEllipse(
-  //   perpendicularInMiddle, middleOfSegmentDefinedByEllsIntersections, ell2Center, ell2.axes
-  // );
-  //
-  // Point resolutionVector = getClosestIntersectionToPoint(perpenIntersectWithEll1,
-  //                                                        middleOfSegmentDefinedByEllsIntersections)
-  //   - getClosestIntersectionToPoint(perpenIntersectWithEll2, middleOfSegmentDefinedByEllsIntersections);
-  //
   trans1.position = trans1.position + resolutionVector / 2;
   trans2.position = trans2.position - resolutionVector / 2;
 

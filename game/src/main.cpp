@@ -1,4 +1,4 @@
-#include <SDL_render.h>
+#include <SDL2/SDL_render.h>
 #include <SDL_scancode.h>
 
 #include "engine.h"
@@ -59,10 +59,10 @@ public:
     transform = addComponent<TransformComponent>(Point{400.0f, 300.0f});
     // render = addComponent<SpriteRenderComponent>(
     //   50.0f, 50.0f, "../assets/enemy.bmp", Point{-25.0f, -25.0f});
-    // collider = addComponent<RectangleColliderComponent>(
-    //   Point{0.0f, 0.0f}, Point{30.0f, -30.0f});
-    collider = addComponent<EllipseColliderComponent>(
-       Point{0.0f, 0.0f}, EllipseAxes{20.0f, 40.0f});
+    collider = addComponent<RectangleColliderComponent>(
+      Point{0.0f, 0.0f}, Point{30.0f, -30.0f});
+    // collider = addComponent<EllipseColliderComponent>(
+    //    Point{0.0f, 0.0f}, EllipseAxes{20.0f, 40.0f});
   }
 
   void update() override {
