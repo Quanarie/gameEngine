@@ -346,6 +346,12 @@ bool CollisionResolver::resolve(const EllipseColliderComponent& ellip,
   return true;
 }
 
+// This is too hard, didnt expect this
+// std::array<Point, 2> getIntersectionsOfEllipses(Point ell1Center, EllipseAxes ell1Axes, Point ell2Center,
+//                                                 EllipseAxes ell2Axes) {
+//
+// }
+
 bool CollisionResolver::resolve(const EllipseColliderComponent& ell1,
                                 TransformComponent& trans1,
                                 const EllipseColliderComponent& ell2,
@@ -353,22 +359,32 @@ bool CollisionResolver::resolve(const EllipseColliderComponent& ell1,
   Point ell1Center = ell1.center + trans1.position;
   Point ell2Center = ell2.center + trans2.position;
 
-  // Treating 2 center as a point we should check to lie within a "combined" ellipse
-  // Intuitively: we can shrink second ellipse and expand first as much till second becomes just a point
+  // Treating 1 center as a point we should check to lie within a "combined" ellipse
+  // Intuitively: we can shrink first ellipse and expand second as much till second becomes just a point
   // Curvature of ellipses are same so shrinking and expanding is equivalent
-  Point center2RelatTo1 = Point{
-    ell2Center.x - ell1Center.x,
-    ell2Center.y - ell1Center.y
+  Point center1RelatTo2 = Point{
+    ell1Center.x - ell2Center.x,
+    ell1Center.y - ell2Center.y
   };
 
-  Point combinedRads = Point{
+  EllipseAxes combinedAxes = EllipseAxes{
     ell1.axes.sMajor + ell2.axes.sMajor,
     ell1.axes.sMinor + ell2.axes.sMinor
   };
 
-  if (center2RelatTo1.x * center2RelatTo1.x / (combinedRads.x * combinedRads.x) +
-    center2RelatTo1.y * center2RelatTo1.y / (combinedRads.y * combinedRads.y) <= 1)
+  if (center1RelatTo2.x * center1RelatTo2.x / (combinedAxes.sMajor * combinedAxes.sMajor) +
+    center1RelatTo2.y * center1RelatTo2.y / (combinedAxes.sMinor * combinedAxes.sMinor) <= 1)
     return false;
+
+  std::array<Point, 2> intersections = getIntersectionsOfLineAndEllipse(
+    getLineDefinedByTwoPoints(ell1Center, ell2Center),
+    ell1Center,
+    ell2Center,
+    combinedAxes
+  );
+
+  Point closestIntersection = getClosestIntersectionToPoint(intersections, ell1Center);
+  Point resolutionVector = closestIntersection - ell1Center;
 
   // std::array<Point, 2> ellsIntersections = getIntersectionsOfEllipses(ell1Center, ell1.axes, ell2Center, ell2.axes);
   //
@@ -378,22 +394,19 @@ bool CollisionResolver::resolve(const EllipseColliderComponent& ell1,
   //   getLineDefinedByTwoPoints(ellsIntersections[0], ellsIntersections[1])
   // );
   //
-  // Point resolutionVector{};
-  // if (perpendicularInMiddle.has_value()) {
-  //   std::array<Point, 2> perpenIntersectWithEll1 = getIntersectionsOfLineAndEllipse(
-  //     perpendicularInMiddle.value(), ell1Center, ell1.axes
-  //   );
+  // std::array<Point, 2> perpenIntersectWithEll1 = getIntersectionsOfLineAndEllipse(
+  //   perpendicularInMiddle, middleOfSegmentDefinedByEllsIntersections, ell1Center, ell1.axes
+  // );
+  // std::array<Point, 2> perpenIntersectWithEll2 = getIntersectionsOfLineAndEllipse(
+  //   perpendicularInMiddle, middleOfSegmentDefinedByEllsIntersections, ell2Center, ell2.axes
+  // );
   //
-  //   std::array<Point, 2> perpenIntersectWithEll2 = getIntersectionsOfLineAndEllipse(
-  //     perpendicularInMiddle.value(), ell2Center, ell2.axes
-  //   );
+  // Point resolutionVector = getClosestIntersectionToPoint(perpenIntersectWithEll1,
+  //                                                        middleOfSegmentDefinedByEllsIntersections)
+  //   - getClosestIntersectionToPoint(perpenIntersectWithEll2, middleOfSegmentDefinedByEllsIntersections);
   //
-  //   resolutionVector = getClosestIntersectionToPoint(perpenIntersectWithEll1, middleOfSegmentDefinedByEllsIntersections)
-  //     - getClosestIntersectionToPoint(perpenIntersectWithEll2, middleOfSegmentDefinedByEllsIntersections);
-  // }
-  // // perpen is vertical
-  // else {}
-  //
-  // trans1.position = trans1.position + resolutionVector / 2;
-  // trans2.position = trans2.position - resolutionVector / 2;
+  trans1.position = trans1.position + resolutionVector / 2;
+  trans2.position = trans2.position - resolutionVector / 2;
+
+  return true;
 }
