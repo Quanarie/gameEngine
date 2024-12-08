@@ -204,45 +204,52 @@ std::vector<std::optional<Line>> getLinesDefinedBySidesThatContainsPoint(CornerI
   return res;
 }
 
-std::array<Point, 2> getIntersectionsOfLineAndEllipse(Line line, Point ellipCenter, EllipseAxes axes) {
+std::array<Point, 2>
+getIntersectionsOfLineAndEllipse(std::optional<Line> lineOpt, Point pointOnLine, Point ellipCenter, EllipseAxes axes) {
   Point intersect1, intersect2;
-  float sl = line.slope;
-  float yI = line.yIntercept - ellipCenter.y;
-  float j = axes.sMajor;
-  float m = axes.sMinor;
+  if (lineOpt.has_value()) {
+    Line line = lineOpt.value();
 
-  float x1, x2;
-  if (sl == 0.0f) {
-    x1 = sqrt(j * j * (1 - pow(yI / m, 2)));
-  }
-  else {
-    float a = m * m + sl * sl * j * j;
-    float b = 2 * j * j * sl * yI;
-    float c = j * j * b * b - j * j * m * m;
-    float delta = b * b - 4 * a * c;
-    if (delta <= 0) {
-      throw std::runtime_error("Expected a solution but none was found.");
+    float sl = line.slope;
+    float yI = line.yIntercept - ellipCenter.y;
+    float j = axes.sMajor;
+    float m = axes.sMinor;
+
+    float x1, x2;
+    if (sl == 0.0f) {
+      x1 = sqrt(j * j * (1 - pow(yI / m, 2)));
+    }
+    else {
+      float a = m * m + sl * sl * j * j;
+      float b = 2 * j * j * sl * yI;
+      float c = j * j * b * b - j * j * m * m;
+      float delta = b * b - 4 * a * c;
+      if (delta <= 0) {
+        throw std::runtime_error("Expected a solution but none was found.");
+      }
+
+      x1 = (-b + sqrt(delta)) / (2 * a);
     }
 
-    x1 = (-b + sqrt(delta)) / (2 * a);
+    intersect1 = Point{
+      x1,
+      // minus because different coordinate systems. Fucking math works in regular coordinates
+      -sl * x1 + yI
+    } + ellipCenter;
+
+    x2 = -x1;
+    intersect2 = Point{x2, -sl * x2 + yI} + ellipCenter;
   }
-
-  intersect1 = Point{
-    x1,
-    // minus because different coordinate systems. Fucking math works in regular coordinates
-    -sl * x1 + yI
-  } + ellipCenter;
-
-
-  // тут оказується більше не той який має бути для лівого верхнього кута вліво
-
-  x2 = -x1;
-  intersect2 = Point{x2, -sl * x2 + yI} + ellipCenter;
+  else {
+    float y0 = axes.sMinor * sqrt(1 - pow(pointOnLine.x / axes.sMajor, 2));
+    intersect1 = Point{pointOnLine.x, y0} + ellipCenter;
+    intersect2 = Point{pointOnLine.x, -y0} + ellipCenter;
+  }
 
   return std::array{intersect1, intersect2};
 }
 
-std::optional<Line> getPerpendicularLineToSegmentAtPoint(Point point, std::optional<Line> lineOpt) {
+std::optional<Line> getPerpendicularLineAtPoint(Point point, std::optional<Line> lineOpt) {
   if (!lineOpt.has_value())
     return Line{0.0f, point.y};
 
@@ -253,7 +260,7 @@ std::optional<Line> getPerpendicularLineToSegmentAtPoint(Point point, std::optio
   return Line{-line.slope, point.y + line.slope * point.x};
 }
 
-Point getClosestPointToPoint(std::array<Point, 2> intersections, Point point) {
+Point getClosestIntersectionToPoint(std::array<Point, 2> intersections, Point point) {
   if ((intersections[0] - point).length() < (intersections[1] - point).length())
     return intersections[0];
 
@@ -309,26 +316,19 @@ bool CollisionResolver::resolve(const EllipseColliderComponent& ellip,
   float weightSum = 0.0f;
 
   // TODO: Try to take two point of intersection, get perpen in middle of it as resolutionVector
-  // That would eliminate the need for this cycle
+  // That would eliminate the need for this cycle and weights
   for (auto line : linesContainingClosestPoint) {
-    std::optional<Line> perperndicularToLineContClosestPoint = getPerpendicularLineToSegmentAtPoint(
+    std::optional<Line> perperndicularToLineContClosestPoint = getPerpendicularLineAtPoint(
       closestPointToEllipInRect, line);
 
-    std::array<Point, 2> intersections;
-    if (perperndicularToLineContClosestPoint.has_value()) {
-      intersections = getIntersectionsOfLineAndEllipse(
-        perperndicularToLineContClosestPoint.value(),
-        ellipCenter,
-        ellip.axes
-      );
-    }
-    else {
-      float y0 = ellip.axes.sMinor * sqrt(1 - pow(relativeToEllip.x / ellip.axes.sMajor, 2));
-      intersections[0] = Point{relativeToEllip.x, y0} + ellipCenter;
-      intersections[1] = Point{relativeToEllip.x, -y0} + ellipCenter;
-    }
+    std::array<Point, 2> intersections = getIntersectionsOfLineAndEllipse(
+      perperndicularToLineContClosestPoint,
+      relativeToEllip,
+      ellipCenter,
+      ellip.axes
+    );
 
-    Point closestIntersection = getClosestPointToPoint(intersections, closestPointToEllipInRect);
+    Point closestIntersection = getClosestIntersectionToPoint(intersections, closestPointToEllipInRect);
     Point currentResolutionVector = closestPointToEllipInRect - closestIntersection;
 
     float weight = 1.0f / (1.0f + std::abs(currentResolutionVector.length() - resolutionVector.length()));
@@ -369,4 +369,31 @@ bool CollisionResolver::resolve(const EllipseColliderComponent& ell1,
   if (center2RelatTo1.x * center2RelatTo1.x / (combinedRads.x * combinedRads.x) +
     center2RelatTo1.y * center2RelatTo1.y / (combinedRads.y * combinedRads.y) <= 1)
     return false;
+
+  // std::array<Point, 2> ellsIntersections = getIntersectionsOfEllipses(ell1Center, ell1.axes, ell2Center, ell2.axes);
+  //
+  // Point middleOfSegmentDefinedByEllsIntersections = (ellsIntersections[0] + ellsIntersections[1]) / 2;
+  // std::optional<Line> perpendicularInMiddle = getPerpendicularLineAtPoint(
+  //   middleOfSegmentDefinedByEllsIntersections,
+  //   getLineDefinedByTwoPoints(ellsIntersections[0], ellsIntersections[1])
+  // );
+  //
+  // Point resolutionVector{};
+  // if (perpendicularInMiddle.has_value()) {
+  //   std::array<Point, 2> perpenIntersectWithEll1 = getIntersectionsOfLineAndEllipse(
+  //     perpendicularInMiddle.value(), ell1Center, ell1.axes
+  //   );
+  //
+  //   std::array<Point, 2> perpenIntersectWithEll2 = getIntersectionsOfLineAndEllipse(
+  //     perpendicularInMiddle.value(), ell2Center, ell2.axes
+  //   );
+  //
+  //   resolutionVector = getClosestIntersectionToPoint(perpenIntersectWithEll1, middleOfSegmentDefinedByEllsIntersections)
+  //     - getClosestIntersectionToPoint(perpenIntersectWithEll2, middleOfSegmentDefinedByEllsIntersections);
+  // }
+  // // perpen is vertical
+  // else {}
+  //
+  // trans1.position = trans1.position + resolutionVector / 2;
+  // trans2.position = trans2.position - resolutionVector / 2;
 }
