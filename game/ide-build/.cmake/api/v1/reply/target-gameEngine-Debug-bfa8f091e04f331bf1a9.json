@@ -1,0 +1,274 @@
+{
+	"archive" : {},
+	"artifacts" : 
+	[
+		{
+			"path" : "gameEngineBuild/libgameEngine.a"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"target_link_libraries",
+			"target_include_directories",
+			"target_sources"
+		],
+		"files" : 
+		[
+			"/Users/me/my/gameEngine/gameEngine/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 9,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 56,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 26,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 51,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 12,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.1.sdk -mmacosx-version-min=14.5 -fcolor-diagnostics"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 3,
+					"path" : "/Users/me/my/gameEngine/gameEngine/include"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "/Users/me/my/gameEngine/game/ide-build/_deps/sdl2-src/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/me/my/gameEngine/game/ide-build/_deps/sdl2-build/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/me/my/gameEngine/game/ide-build/_deps/sdl2-build/include/SDL2"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/me/my/gameEngine/game/ide-build/_deps/sdl2-build/include-config-debug/SDL2"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/me/my/gameEngine/game/ide-build/_deps/catch2-src/src/catch2/.."
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/Users/me/my/gameEngine/game/ide-build/_deps/catch2-build/generated-includes"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					2
+				],
+				"standard" : "20"
+			},
+			"sourceIndexes" : 
+			[
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 2,
+			"id" : "Catch2::@fa92aa50e9bf5e1a7206"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "Catch2WithMain::@fa92aa50e9bf5e1a7206"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "SDL2main::@45bd952f1071c035638d"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "SDL2::@45bd952f1071c035638d"
+		}
+	],
+	"id" : "gameEngine::@da5a0a2c60d3f135849d",
+	"name" : "gameEngine",
+	"nameOnDisk" : "libgameEngine.a",
+	"paths" : 
+	{
+		"build" : "gameEngineBuild",
+		"source" : "/Users/me/my/gameEngine/gameEngine"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		},
+		{
+			"name" : "Header Files",
+			"sourceIndexes" : 
+			[
+				1
+			]
+		},
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"path" : "/Users/me/my/gameEngine/gameEngine/include",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "/Users/me/my/gameEngine/gameEngine/include/component/collider/ellipse/ellipse_axes.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 5,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/me/my/gameEngine/gameEngine/src/c++/engine.cpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 5,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/me/my/gameEngine/gameEngine/src/c++/inputs.cpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 5,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/me/my/gameEngine/gameEngine/src/c++/options.cpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 5,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/me/my/gameEngine/gameEngine/src/c++/texture_manager.cpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 5,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/me/my/gameEngine/gameEngine/src/c++/component/collider/rectangle_colider_component.cpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 5,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/me/my/gameEngine/gameEngine/src/c++/component/collider/collision_resolver.cpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 5,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/me/my/gameEngine/gameEngine/src/c++/component/collider/ellipse_collider_component.cpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 5,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/me/my/gameEngine/gameEngine/src/c++/component/render/ellipse_render_component.cpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 5,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/me/my/gameEngine/gameEngine/src/c++/component/render/rectangle_render_component.cpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 5,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/me/my/gameEngine/gameEngine/src/c++/component/render/sprite_render_component.cpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 5,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/me/my/gameEngine/gameEngine/src/c++/component/collider/collider.cpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 5,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/me/my/gameEngine/gameEngine/src/c++/math/point.cpp",
+			"sourceGroupIndex" : 2
+		}
+	],
+	"type" : "STATIC_LIBRARY"
+}

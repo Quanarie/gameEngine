@@ -11,18 +11,18 @@ add_library(${PROJECT_NAME} STATIC include
 
 target_sources(${PROJECT_NAME}
         PRIVATE
-        src/engine.cpp
-        src/inputs.cpp
-        src/options.cpp
-        src/texture_manager.cpp
-        src/component/collider/rectangle_colider_component.cpp
-        src/component/collider/collision_resolver.cpp
-        src/component/collider/ellipse_collider_component.cpp
-        src/component/render/ellipse_render_component.cpp
-        src/component/render/rectangle_render_component.cpp
-        src/component/render/sprite_render_component.cpp
-        src/component/collider/collider.cpp
-        src/math/point.cpp)
+        src/c++/engine.cpp
+        src/c++/inputs.cpp
+        src/c++/options.cpp
+        src/c++/texture_manager.cpp
+        src/c++/component/collider/rectangle_colider_component.cpp
+        src/c++/component/collider/collision_resolver.cpp
+        src/c++/component/collider/ellipse_collider_component.cpp
+        src/c++/component/render/ellipse_render_component.cpp
+        src/c++/component/render/rectangle_render_component.cpp
+        src/c++/component/render/sprite_render_component.cpp
+        src/c++/component/collider/collider.cpp
+        src/c++/math/point.cpp)
 target_include_directories(${PROJECT_NAME} PUBLIC include)
 
 
@@ -42,7 +42,10 @@ FetchContent_Declare(
         GIT_TAG release-2.30.9
 )
 FetchContent_MakeAvailable(SDL2)
-find_package(SDL2 REQUIRED)
+
+add_executable(tests src/test/component/collider/collision_resolver.cpp)
+target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
+
 
 # Ensure the include directories for SDL2 are added
 target_include_directories(${PROJECT_NAME}
@@ -51,7 +54,6 @@ target_include_directories(${PROJECT_NAME}
 )
 
 target_link_libraries(${PROJECT_NAME}
-        PRIVATE
         SDL2::SDL2 SDL2::SDL2main
         Catch2::Catch2WithMain
 )

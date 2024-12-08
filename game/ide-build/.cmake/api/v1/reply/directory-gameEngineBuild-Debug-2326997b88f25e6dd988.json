@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "gameEngineBuild",
+		"source" : "/Users/me/my/gameEngine/gameEngine"
+	}
+}
