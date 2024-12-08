@@ -211,13 +211,14 @@ getIntersectionsOfLineAndEllipse(std::optional<Line> lineOpt, Point pointOnLine,
     Line line = lineOpt.value();
 
     float sl = line.slope;
-    float yI = line.yIntercept - ellipCenter.y;
+    // Dont even try to understand why the signs are as they are. Thats the consequence of different y direction in SDL
+    float yI = -(sl * ellipCenter.x - line.yIntercept) - ellipCenter.y;
     float j = axes.sMajor;
     float m = axes.sMinor;
 
     float x1, x2;
     if (sl == 0.0f) {
-      x1 = sqrt(j * j * (1 - pow(yI / m, 2)));
+      x1 = j / m * sqrt(m * m - yI * yI);
     }
     else {
       float a = m * m + sl * sl * j * j;
@@ -373,7 +374,7 @@ bool CollisionResolver::resolve(const EllipseColliderComponent& ell1,
   };
 
   if (center1RelatTo2.x * center1RelatTo2.x / (combinedAxes.sMajor * combinedAxes.sMajor) +
-    center1RelatTo2.y * center1RelatTo2.y / (combinedAxes.sMinor * combinedAxes.sMinor) <= 1)
+    center1RelatTo2.y * center1RelatTo2.y / (combinedAxes.sMinor * combinedAxes.sMinor) > 1)
     return false;
 
   std::array<Point, 2> intersections = getIntersectionsOfLineAndEllipse(
