@@ -10,8 +10,7 @@ struct RectangleCorners;
 
 struct OverlapResult {
   bool doesOverlap;
-  Vector shortestOverlapResolutionVector;
-  float overlapValue;
+  Vector resolutionVector;
 };
 
 struct Line {

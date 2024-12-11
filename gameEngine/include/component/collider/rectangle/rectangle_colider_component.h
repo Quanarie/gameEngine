@@ -34,7 +34,6 @@ public:
                   TransformComponent& transformThis,
                   TransformComponent& transformOther) const override;
 
-  std::pair<Vector, Vector> getTransformedDefiningCorners(Vector relativeTo) const;
   RectangleCorners getTransformedCorners(Vector relativeTo) const;
 };
 

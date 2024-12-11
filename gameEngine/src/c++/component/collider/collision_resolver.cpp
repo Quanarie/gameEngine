@@ -25,8 +25,8 @@ bool CollisionResolver::resolve(const RectangleColliderComponent& rect1,
   }
 
   if (res.doesOverlap) {
-    trans1.position = trans1.position + res.shortestOverlapResolutionVector / 2;
-    trans2.position = trans2.position - res.shortestOverlapResolutionVector / 2;
+    trans1.position = trans1.position + res.resolutionVector / 2;
+    trans2.position = trans2.position - res.resolutionVector / 2;
     return true;
   }
 

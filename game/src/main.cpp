@@ -17,10 +17,10 @@ public:
     transform = addComponent<TransformComponent>(Vector{500.0f, 400.0f});
     // render = addComponent<SpriteRenderComponent>(
     //   50.0f, 50.0f, "../assets/player.bmp", Point{-20.0f, -20.0f});
-    collider = addComponent<EllipseColliderComponent>(
-      Vector{0.0f, 0.0f}, EllipseAxes{20.0f, 40.0f});
-    // collider = addComponent<RectangleColliderComponent>(
-    //   Point{0.0f, 0.0f}, Point{30.0f, -30.0f});
+    // collider = addComponent<EllipseColliderComponent>(
+    //   Vector{0.0f, 0.0f}, EllipseAxes{20.0f, 40.0f});
+    collider = addComponent<RectangleColliderComponent>(
+      Vector{0.0f, 0.0f}, Vector{30.0f, -30.0f});
   }
 
   void update() override {

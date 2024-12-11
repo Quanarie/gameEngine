@@ -86,9 +86,7 @@ OverlapResult Geometry::doesRectCornerOverlapOtherRect(RectangleCorners rect1Cor
                                                        RectangleCorners rect2Corners) {
   Vector corner = rect1Corners[cornerIndex];
 
-  float minDistance = std::numeric_limits<float>::max();
   Vector shortestResolutionVector = {0, 0};
-
   for (int i = 0; i < RECTANGLE_CORNERS_COUNT; i++) {
     Vector segmentStart = rect2Corners[i];
     Vector segmentEnd = rect2Corners[(i + 1) % 4];
@@ -97,12 +95,10 @@ OverlapResult Geometry::doesRectCornerOverlapOtherRect(RectangleCorners rect1Cor
     if (!projectedPoint.isOnSegment(segmentStart, segmentEnd))
       return {
         false,
-        Vector{std::numeric_limits<float>::max(), std::numeric_limits<float>::max()},
-        std::numeric_limits<float>::max()
+        Vector{std::numeric_limits<float>::max(), std::numeric_limits<float>::max()}
       };
 
     Vector resolutionVector = projectedPoint - corner;
-    float distance = resolutionVector.length();
 
     // This prevents jiggling bugs where one side of rect is close another, and they go inside each other
     RectangleCorners rect1CornersResolved = {};
@@ -112,22 +108,22 @@ OverlapResult Geometry::doesRectCornerOverlapOtherRect(RectangleCorners rect1Cor
       rect2CornersResolved[j] = rect2Corners[j] - resolutionVector / 2;
     }
 
-    if (distance < minDistance) {
+    if (resolutionVector.length() < shortestResolutionVector.length()) {
       if (doRectanglesIntersect(rect1CornersResolved, rect2CornersResolved))
         continue;
-      minDistance = distance;
       shortestResolutionVector = resolutionVector;
     }
   }
 
-  return {true, shortestResolutionVector, minDistance};
+  return {true, shortestResolutionVector};
 }
 
 OverlapResult Geometry::anyCornerOfRect1InsideRect2(RectangleCorners rect1Corners, RectangleCorners rect2Corners) {
   OverlapResult minOverlapResult = doesRectCornerOverlapOtherRect(rect1Corners, 0, rect2Corners);
   for (int i = 1; i < RECTANGLE_CORNERS_COUNT; i++) {
     OverlapResult overlapResult = doesRectCornerOverlapOtherRect(rect1Corners, i, rect2Corners);
-    if (overlapResult.doesOverlap && overlapResult.overlapValue < minOverlapResult.overlapValue) {
+    if (overlapResult.doesOverlap &&
+      overlapResult.resolutionVector.length() < minOverlapResult.resolutionVector.length()) {
       minOverlapResult = overlapResult;
     }
   }

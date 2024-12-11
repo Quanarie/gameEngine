@@ -1,8 +1,8 @@
 #include <array>
 
-#include "component/collider/rectangle/rectangle_colider_component.h"
 #include "component/collider/collision_resolver.h"
 #include "component/collider/rectangle/rectangle_corners.h"
+#include "component/collider/rectangle/rectangle_colider_component.h"
 
 bool RectangleColliderComponent::detect(const ColliderComponent& other,
                                         TransformComponent& transformThis,
@@ -20,10 +20,6 @@ bool RectangleColliderComponent::detectWith(const EllipseColliderComponent& elli
                                             TransformComponent& transformThis,
                                             TransformComponent& transformOther) const {
   return CollisionResolver::resolve(ellipse, transformOther, *this, transformThis);
-}
-
-std::pair<Vector, Vector> RectangleColliderComponent::getTransformedDefiningCorners(Vector relativeTo) const {
-  return {this->leftDown + relativeTo, this->rightUp + relativeTo};
 }
 
 RectangleCorners RectangleColliderComponent::getTransformedCorners(Vector relativeTo) const {
