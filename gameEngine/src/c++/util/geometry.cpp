@@ -86,17 +86,14 @@ OverlapResult Geometry::doesRectCornerOverlapOtherRect(RectangleCorners rect1Cor
                                                        RectangleCorners rect2Corners) {
   Vector corner = rect1Corners[cornerIndex];
 
-  Vector shortestResolutionVector = {0, 0};
+  Vector shortestResolutionVector = {std::numeric_limits<float>::max(), 0};
   for (int i = 0; i < RECTANGLE_CORNERS_COUNT; i++) {
     Vector segmentStart = rect2Corners[i];
     Vector segmentEnd = rect2Corners[(i + 1) % 4];
 
     Vector projectedPoint = corner.projectPointOntoLine(segmentStart, segmentEnd);
     if (!projectedPoint.isOnSegment(segmentStart, segmentEnd))
-      return {
-        false,
-        Vector{std::numeric_limits<float>::max(), std::numeric_limits<float>::max()}
-      };
+      return {false, shortestResolutionVector};
 
     Vector resolutionVector = projectedPoint - corner;
 
@@ -122,8 +119,7 @@ OverlapResult Geometry::anyCornerOfRect1InsideRect2(RectangleCorners rect1Corner
   OverlapResult minOverlapResult = doesRectCornerOverlapOtherRect(rect1Corners, 0, rect2Corners);
   for (int i = 1; i < RECTANGLE_CORNERS_COUNT; i++) {
     OverlapResult overlapResult = doesRectCornerOverlapOtherRect(rect1Corners, i, rect2Corners);
-    if (overlapResult.doesOverlap &&
-      overlapResult.resolutionVector.length() < minOverlapResult.resolutionVector.length()) {
+    if (overlapResult.doesOverlap && overlapResult.resolutionVector.length() < minOverlapResult.resolutionVector.length()) {
       minOverlapResult = overlapResult;
     }
   }
