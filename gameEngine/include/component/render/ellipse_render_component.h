@@ -3,16 +3,16 @@
 
 #include "component/collider/ellipse/ellipse_axes.h"
 #include "component/render/render_component.h"
-#include "math/point.h"
+#include "util/vector.h"
 
 class TransformComponent;
 
 class EllipseRenderComponent : public RenderComponent {
 public:
-  Point center;
+  Vector center;
   EllipseAxes axes;
 
-  EllipseRenderComponent(Point c, EllipseAxes r)
+  EllipseRenderComponent(Vector c, EllipseAxes r)
     : center(c), axes(r) {}
 
   void render(SDL_Renderer* renderer, TransformComponent* transform) override;

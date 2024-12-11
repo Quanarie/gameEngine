@@ -22,7 +22,8 @@ target_sources(${PROJECT_NAME}
         src/c++/component/render/rectangle_render_component.cpp
         src/c++/component/render/sprite_render_component.cpp
         src/c++/component/collider/collider.cpp
-        src/c++/math/point.cpp)
+        src/c++/util/vector.cpp
+        src/c++/util/geometry.cpp)
 target_include_directories(${PROJECT_NAME} PUBLIC include)
 
 

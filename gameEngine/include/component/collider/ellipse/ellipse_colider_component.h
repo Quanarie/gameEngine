@@ -4,14 +4,14 @@
 #include "ellipse_axes.h"
 #include "component/collider/collider_component.h"
 #include "component/render/ellipse_render_component.h"
-#include "math/point.h"
+#include "util/vector.h"
 
 class EllipseColliderComponent : public ColliderComponent {
 public:
-  Point center;
+  Vector center;
   EllipseAxes axes;
 
-  EllipseColliderComponent(Point c, EllipseAxes r)
+  EllipseColliderComponent(Vector c, EllipseAxes r)
     : center(c), axes(r) {
     colliderBoundsRenderComponent = new EllipseRenderComponent(c, r);
   }
@@ -32,7 +32,7 @@ public:
                   TransformComponent& transformThis,
                   TransformComponent& transformOther) const override;
 
-  Point getTransformedCenter(Point relativeTo) const;
+  Vector getTransformedCenter(Vector relativeTo) const;
 };
 
 #endif // ELLIPSE_COLLIDER_COMPONENT_H

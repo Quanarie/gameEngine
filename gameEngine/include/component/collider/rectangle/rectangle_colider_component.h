@@ -3,7 +3,7 @@
 
 #include "component/collider/collider_component.h"
 #include "component/render/rectangle_render_component.h"
-#include "math/point.h"
+#include "util/vector.h"
 
 struct RectangleCorners;
 class CollisionResolver;
@@ -11,9 +11,9 @@ class CollisionResolver;
 // Possible take out shape related things and use them in both renderers and colliders with the same shape
 class RectangleColliderComponent : public ColliderComponent {
 public:
-  Point leftDown, rightUp;
+  Vector leftDown, rightUp;
 
-  RectangleColliderComponent(Point ld, Point ru)
+  RectangleColliderComponent(Vector ld, Vector ru)
     : leftDown(ld), rightUp(ru) {
     colliderBoundsRenderComponent = new RectangleRenderComponent(ld, ru);
   }
@@ -34,8 +34,8 @@ public:
                   TransformComponent& transformThis,
                   TransformComponent& transformOther) const override;
 
-  std::pair<Point, Point> getTransformedDefiningCorners(Point relativeTo) const;
-  RectangleCorners getTransformedCorners(Point relativeTo) const;
+  std::pair<Vector, Vector> getTransformedDefiningCorners(Vector relativeTo) const;
+  RectangleCorners getTransformedCorners(Vector relativeTo) const;
 };
 
 #endif // RECTANGLE_COLLIDER_COMPONENT_H

@@ -2,16 +2,16 @@
 #define TRANSFORM_COMPONENT_H
 
 #include "component/component.h"
-#include "math/point.h"
+#include "util/vector.h"
 
 class TransformComponent : public Component {
 public:
-  TransformComponent(Point p, float rot = 0.0f, Point s = {1.0f, 1.0f})
+  TransformComponent(Vector p, float rot = 0.0f, Vector s = {1.0f, 1.0f})
     : position(p), rotation(rot), scale(s) {}
 
-  Point position;
+  Vector position;
   float rotation;
-  Point scale;
+  Vector scale;
 };
 
 #endif // TRANSFORM_COMPONENT_H

@@ -1,12 +1,14 @@
 #ifndef RECTANGLE_CORNERS_H
 #define RECTANGLE_CORNERS_H
 
-#include "math/point.h"
+#include <stdexcept>
+
+#include "util/vector.h"
 
 struct RectangleCorners {
-  Point ld, lu, ru, rd;
+  Vector ld, lu, ru, rd;
 
-  Point& operator[](std::size_t index) {
+  Vector& operator[](std::size_t index) {
     switch (index) {
     case 0: return ld;
     case 1: return lu;

@@ -1,6 +1,6 @@
 #ifndef COLLISION_RESOLVER_H
 #define COLLISION_RESOLVER_H
-#include "math/point.h"
+#include "util/vector.h"
 
 class TransformComponent;
 class RectangleColliderComponent;

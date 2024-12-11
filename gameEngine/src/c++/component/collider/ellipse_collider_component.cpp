@@ -19,6 +19,6 @@ bool EllipseColliderComponent::detectWith(const EllipseColliderComponent& ellips
   return CollisionResolver::resolve(ellipse, transformOther, *this, transformThis);
 }
 
-Point EllipseColliderComponent::getTransformedCenter(Point relativeTo) const {
+Vector EllipseColliderComponent::getTransformedCenter(Vector relativeTo) const {
   return this->center + relativeTo;
 }

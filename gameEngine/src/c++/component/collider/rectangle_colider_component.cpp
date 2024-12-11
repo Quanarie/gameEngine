@@ -22,15 +22,15 @@ bool RectangleColliderComponent::detectWith(const EllipseColliderComponent& elli
   return CollisionResolver::resolve(ellipse, transformOther, *this, transformThis);
 }
 
-std::pair<Point, Point> RectangleColliderComponent::getTransformedDefiningCorners(Point relativeTo) const {
+std::pair<Vector, Vector> RectangleColliderComponent::getTransformedDefiningCorners(Vector relativeTo) const {
   return {this->leftDown + relativeTo, this->rightUp + relativeTo};
 }
 
-RectangleCorners RectangleColliderComponent::getTransformedCorners(Point relativeTo) const {
+RectangleCorners RectangleColliderComponent::getTransformedCorners(Vector relativeTo) const {
   return RectangleCorners{
     this->leftDown + relativeTo,
-    Point{this->leftDown.x, this->rightUp.y} + relativeTo,
+    Vector{this->leftDown.x, this->rightUp.y} + relativeTo,
     this->rightUp + relativeTo,
-    Point{this->rightUp.x, this->leftDown.y} + relativeTo
+    Vector{this->rightUp.x, this->leftDown.y} + relativeTo
   };
 }

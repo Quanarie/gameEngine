@@ -10,7 +10,7 @@
 
 class SpriteRenderComponent : public RenderComponent {
 public:
-  SpriteRenderComponent(float w, float h, std::string p, Point os = {0, 0})
+  SpriteRenderComponent(float w, float h, std::string p, Vector os = {0, 0})
     : width(w), height(h), path(std::move(p)), offset(os) {}
 
   void initialize(SDL_Renderer* renderer) override;
@@ -19,7 +19,7 @@ public:
 private:
   std::string path;
   float width, height;
-  Point offset;
+  Vector offset;
 };
 
 #endif // SPRITE_H

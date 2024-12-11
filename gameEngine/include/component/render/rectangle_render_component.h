@@ -6,11 +6,11 @@
 
 class RectangleRenderComponent : public RenderComponent {
 public:
-  RectangleRenderComponent(Point ld, Point ru)
+  RectangleRenderComponent(Vector ld, Vector ru)
     : RenderComponent(), leftDown(ld), rightUp(ru) {}
 
   // For now public
-  Point leftDown, rightUp;
+  Vector leftDown, rightUp;
 
   void render(SDL_Renderer* renderer, TransformComponent* transform) override;
 };
