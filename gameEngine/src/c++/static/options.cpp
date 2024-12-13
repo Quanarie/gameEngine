@@ -1,3 +1,3 @@
-#include "options.h"
+#include "static/options.h"
 
 bool Options::renderColliders = true;

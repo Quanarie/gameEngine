@@ -8,8 +8,8 @@ class Entity;
 
 typedef struct GameParams {
   char* window_title;
-  int resolution_x;
-  int resolution_y;
+  int resolutionX;
+  int resolutionY;
 } GameParams;
 
 class Engine {
@@ -19,6 +19,7 @@ public:
 
   int start();
 
+  // Arguments go to entities constructor
   template <typename T, typename... Args>
   void createEntity(Args&&... args) {
     T* entity = new T(std::forward<Args>(args)...);

@@ -1,5 +1,3 @@
-#include <array>
-
 #include "component/collider/collision_resolver.h"
 #include "component/collider/rectangle/rectangle_corners.h"
 #include "component/collider/rectangle/rectangle_colider_component.h"
@@ -22,11 +20,13 @@ bool RectangleColliderComponent::detectWith(const EllipseColliderComponent& elli
   return CollisionResolver::resolve(ellipse, transformOther, *this, transformThis);
 }
 
-RectangleCorners RectangleColliderComponent::getTransformedCorners(Vector relativeTo) const {
+RectangleCorners RectangleColliderComponent::getTransformedCorners(Vector relativeToSdlCoords) const {
+  Vector invertedLD = this->leftDown * Vector{1.0f, -1.0f};
+  Vector invertedRU = this->rightUp * Vector{1.0f, -1.0f};
   return RectangleCorners{
-    this->leftDown + relativeTo,
-    Vector{this->leftDown.x, this->rightUp.y} + relativeTo,
-    this->rightUp + relativeTo,
-    Vector{this->rightUp.x, this->leftDown.y} + relativeTo
+    invertedLD + relativeToSdlCoords,
+    Vector{invertedLD.x, invertedRU.y} + relativeToSdlCoords,
+    invertedRU + relativeToSdlCoords,
+    Vector{invertedRU.x, invertedLD.y} + relativeToSdlCoords
   };
 }

@@ -1,18 +1,21 @@
 #include <SDL.h>
-#include <SDL_timer.h>
 #include <iostream>
+#include <SDL_timer.h>
 
-#include "component/collider/collider_component.h"
-#include "component/render/render_component.h"
-#include "component/render/texture_manager.h"
-#include "component/transform_component.h"
 #include "engine.h"
 #include "entity.h"
-#include "inputs.h"
-#include "options.h"
+#include "static/inputs.h"
+#include "static/options.h"
+#include "static/coordinates_converter.h"
+#include "component/transform_component.h"
+#include "component/render/texture_manager.h"
+#include "component/render/render_component.h"
+#include "component/collider/collider_component.h"
 
 Engine::Engine(GameParams params)
-  : params(params), window(nullptr), renderer(nullptr), game_is_running(false) {}
+  : params(params), window(nullptr), renderer(nullptr), game_is_running(false) {
+  CoordinatesConverter::setResolution(params.resolutionX, params.resolutionY);
+}
 
 Engine::~Engine() {
   for (Entity* entity : entities) {
@@ -44,8 +47,8 @@ bool Engine::initialize() {
   }
 
   window = SDL_CreateWindow(params.window_title, SDL_WINDOWPOS_CENTERED,
-                            SDL_WINDOWPOS_CENTERED, params.resolution_x,
-                            params.resolution_y, SDL_WINDOW_SHOWN);
+                            SDL_WINDOWPOS_CENTERED, params.resolutionX,
+                            params.resolutionY, SDL_WINDOW_SHOWN);
   if (!window) {
     std::cerr << "Window could not be created! SDL_Error: " << SDL_GetError()
       << std::endl;

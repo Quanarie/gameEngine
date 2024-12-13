@@ -3,9 +3,7 @@
 #include "util/vector.h"
 #include "component/transform_component.h"
 #include "component/collider/collision_resolver.h"
-
-#include <component/collider/ellipse/ellipse_colider_component.h>
-
+#include "component/collider/ellipse/ellipse_colider_component.h"
 #include "component/collider/rectangle/rectangle_colider_component.h"
 
 TEST_CASE("Rectangles intersect") {
@@ -27,7 +25,7 @@ TEST_CASE("Rectangle and ellipse intersect") {
   auto rect = new RectangleColliderComponent(Vector{0.0f, 0.0f}, Vector{30.0f, -30.0f});
   auto transRect = new TransformComponent(Vector{5.0f, -5.0f});
 
-  REQUIRE(CollisionResolver::resolve(*ell, *transRect, *rect, *transEll) == true);
+  REQUIRE(CollisionResolver::resolve(*ell, *transEll, *rect, *transRect) == true);
   delete ell;
   delete transEll;
   delete rect;

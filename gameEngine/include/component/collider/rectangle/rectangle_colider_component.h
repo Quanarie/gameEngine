@@ -34,7 +34,7 @@ public:
                   TransformComponent& transformThis,
                   TransformComponent& transformOther) const override;
 
-  RectangleCorners getTransformedCorners(Vector relativeTo) const;
+  RectangleCorners getTransformedCorners(Vector relativeToSdlCoords) const;
 };
 
 #endif // RECTANGLE_COLLIDER_COMPONENT_H

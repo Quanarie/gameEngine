@@ -1,7 +1,7 @@
 #include <SDL_scancode.h>
 #include <unordered_map>
 
-#include "inputs.h"
+#include "static/inputs.h"
 
 std::unordered_map<SDL_Scancode, bool> Inputs::currentKeyState;
 std::unordered_map<SDL_Scancode, bool> Inputs::previousKeyState;

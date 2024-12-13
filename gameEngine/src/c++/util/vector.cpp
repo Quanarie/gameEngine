@@ -43,6 +43,10 @@ Vector Vector::operator*(float number) const {
   return Vector(this->x * number, this->y * number);
 }
 
+Vector Vector::operator*(const Vector& point) const {
+  return Vector{this->x * point.x, this->y * point.y};
+}
+
 bool Vector::operator==(const Vector& point) const {
   return this->x == point.x && this->y == point.y;
 }

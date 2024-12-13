@@ -11,10 +11,13 @@ struct Vector {
 
   // TODO: add += and change + occurrences
   Vector operator+(const Vector& point) const;
-  Vector operator/(float number) const;
   Vector operator-(const Vector& point) const;
-  Vector operator*(float number) const;
+  Vector operator*(const Vector& point) const;
   bool operator==(const Vector& point) const;
+
+  Vector operator/(float number) const;
+  Vector operator*(float number) const;
+
   bool isOnSegment(Vector segmentStart, Vector segmentEnd);
 };
 
