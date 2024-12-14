@@ -14,7 +14,7 @@
 class Player : public Entity {
 public:
   void initialize() override {
-    transform = addComponent<TransformComponent>(Vector{0.0f, 0.0f});
+    transform = addComponent<TransformComponent>(Vector{10.0f, 0.0f});
     collider = addComponent<RectangleColliderComponent>(
       Vector{5.0f, -5.0f}, Vector{30.0f, 30.0f});
   }
