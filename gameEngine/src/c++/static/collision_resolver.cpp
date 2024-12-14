@@ -2,13 +2,11 @@
 #include <vector>
 #include <__algorithm/clamp.h>
 
-#include "util/vector.h"
 #include "util/geometry.h"
+#include "static/collision_resolver.h"
+
+#include "static/coordinates_converter.h"
 #include "component/transform_component.h"
-#include "component/collider/collision_resolver.h"
-
-#include <static/coordinates_converter.h>
-
 #include "component/collider/rectangle/rectangle_corners.h"
 #include "component/collider/ellipse/ellipse_colider_component.h"
 #include "component/collider/rectangle/rectangle_colider_component.h"

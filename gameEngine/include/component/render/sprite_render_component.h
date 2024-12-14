@@ -14,7 +14,7 @@ public:
     : width(w), height(h), path(std::move(p)), offset(os) {}
 
   void initialize(SDL_Renderer* renderer) override;
-  void render(SDL_Renderer* renderer, TransformComponent* transform) override;
+  void render(SDL_Renderer* renderer) override;
 
 private:
   std::string path;

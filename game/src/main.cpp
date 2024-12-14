@@ -3,8 +3,8 @@
 
 #include "engine.h"
 #include "entity.h"
-#include "static/inputs.h"
 #include "util/vector.h"
+#include "static/inputs.h"
 #include "static/options.h"
 #include "component/transform_component.h"
 #include "component/collider/ellipse/ellipse_axes.h"
@@ -80,7 +80,6 @@ int main(int argc, char* argv[]) {
 
   engine.createEntity<Player>();
   engine.createEntity<Enemy>();
-
   engine.createEntity<Point>();
 
   return engine.start();

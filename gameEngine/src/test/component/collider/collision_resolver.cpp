@@ -2,7 +2,7 @@
 
 #include "util/vector.h"
 #include "component/transform_component.h"
-#include "component/collider/collision_resolver.h"
+#include "static/collision_resolver.h"
 #include "component/collider/ellipse/ellipse_colider_component.h"
 #include "component/collider/rectangle/rectangle_colider_component.h"
 

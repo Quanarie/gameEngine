@@ -2,8 +2,7 @@
 #include "component/transform_component.h"
 #include "component/render/ellipse_render_component.h"
 
-void EllipseRenderComponent::render(SDL_Renderer* renderer,
-                                    TransformComponent* transform) {
+void EllipseRenderComponent::render(SDL_Renderer* renderer) {
   Vector center = CoordinatesConverter::toSdlCoordinates(transform->position);
 
   SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);

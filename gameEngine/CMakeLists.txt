@@ -26,13 +26,15 @@ FetchContent_MakeAvailable(SDL2)
 add_library(${PROJECT_NAME} STATIC)
 target_sources(${PROJECT_NAME} PRIVATE
         src/c++/engine.cpp
+        src/c++/entity.cpp
         src/c++/static/inputs.cpp
         src/c++/static/options.cpp
         src/c++/static/coordinates_converter.cpp
         src/c++/texture_manager.cpp
         src/c++/component/collider/rectangle_colider_component.cpp
-        src/c++/component/collider/collision_resolver.cpp
+        src/c++/static/collision_resolver.cpp
         src/c++/component/collider/ellipse_collider_component.cpp
+        src/c++/component/render/render_component.cpp
         src/c++/component/render/ellipse_render_component.cpp
         src/c++/component/render/rectangle_render_component.cpp
         src/c++/component/render/sprite_render_component.cpp

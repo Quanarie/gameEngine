@@ -4,15 +4,11 @@
 #include <typeindex>
 #include <unordered_map>
 
-#include "component/component.h"
+class Component;
 
 class Entity {
 public:
-  virtual ~Entity() {
-    for (auto& pair : components) {
-      delete pair.second;
-    }
-  }
+  virtual ~Entity();
 
   virtual void initialize() = 0;
   virtual void update() = 0;
@@ -20,6 +16,7 @@ public:
   template <typename T, typename... Args>
   T* addComponent(Args&&... args) {
     T* component = new T(std::forward<Args>(args)...);
+    component->entity = this;
     components[typeid(T)] = static_cast<Component*>(component);
     return component;
   }

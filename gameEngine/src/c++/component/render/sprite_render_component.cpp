@@ -1,15 +1,15 @@
+#include "entity.h"
+#include "static/coordinates_converter.h"
 #include "component/render/sprite_render_component.h"
 
-#include <static/coordinates_converter.h>
-
 void SpriteRenderComponent::initialize(SDL_Renderer* renderer) {
+  RenderComponent::initialize(renderer);
   if (!TextureManager::has(path)) {
     TextureManager::create(path, renderer);
   }
 }
 
-void SpriteRenderComponent::render(SDL_Renderer* renderer,
-                                   TransformComponent* transform) {
+void SpriteRenderComponent::render(SDL_Renderer* renderer) {
   Vector positionInSdlCoords = CoordinatesConverter::toSdlCoordinates(transform->position);
 
   SDL_Rect dstRect{

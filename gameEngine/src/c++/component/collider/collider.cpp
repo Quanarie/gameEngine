@@ -1,7 +1,7 @@
 #include "component/collider/collider_component.h"
 
-void ColliderComponent::render(SDL_Renderer* renderer, TransformComponent* transform) const {
+void ColliderComponent::render(SDL_Renderer* renderer) const {
   if (colliderBoundsRenderComponent != nullptr) {
-    colliderBoundsRenderComponent->render(renderer, transform);
+    colliderBoundsRenderComponent->render(renderer);
   }
 }

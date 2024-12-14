@@ -15,7 +15,7 @@ public:
   EllipseRenderComponent(Vector c, EllipseAxes r)
     : center(c), axes(r) {}
 
-  void render(SDL_Renderer* renderer, TransformComponent* transform) override;
+  void render(SDL_Renderer* renderer) override;
 };
 
 #endif // ELLIPSE_RENDER_COMPONENT_H

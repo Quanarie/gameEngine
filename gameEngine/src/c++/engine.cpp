@@ -66,10 +66,16 @@ bool Engine::initialize() {
     entity->initialize();
 
     auto render = entity->getComponent<RenderComponent>();
-    if (!render)
-      continue;
+    if (render) {
+      render->initialize(renderer);
+    }
 
-    render->initialize(renderer);
+    auto collider = entity->getComponent<ColliderComponent>();
+    if (collider) {
+      // TODO: Quite confusing, this is duplicating logic in addComponent in Entity
+      collider->colliderBoundsRenderComponent->entity = entity;
+      collider->colliderBoundsRenderComponent->initialize(renderer);
+    }
   }
 
   return true;
@@ -133,11 +139,11 @@ void Engine::render() {
     auto transform = entity->getComponent<TransformComponent>();
     auto render = entity->getComponent<RenderComponent>();
     if (transform && render)
-      render->render(renderer, transform);
+      render->render(renderer);
 
     auto collider = entity->getComponent<ColliderComponent>();
     if (collider && Options::renderColliders)
-      collider->render(renderer, transform);
+      collider->render(renderer);
   }
   SDL_RenderPresent(renderer);
 }

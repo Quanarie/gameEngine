@@ -2,7 +2,6 @@
 #define RECTANGLE_RENDER_COMPONENT_H
 
 #include "render_component.h"
-#include "component/transform_component.h"
 
 class RectangleRenderComponent : public RenderComponent {
 public:
@@ -12,7 +11,7 @@ public:
   // For now public
   Vector leftDown, rightUp;
 
-  void render(SDL_Renderer* renderer, TransformComponent* transform) override;
+  void render(SDL_Renderer* renderer) override;
 };
 
 #endif // RECTANGLE_RENDER_COMPONENT_H
