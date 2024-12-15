@@ -11,13 +11,12 @@
 #include "component/collider/ellipse/ellipse_colider_component.h"
 #include "component/collider/rectangle/rectangle_colider_component.h"
 
-// Create tests for this pls
 bool CollisionResolver::resolve(const RectangleColliderComponent& rect1,
                                 TransformComponent& trans1,
                                 const RectangleColliderComponent& rect2,
                                 TransformComponent& trans2) {
-  auto rect1Corners = rect1.getTransformedCorners(CoordinatesConverter::toSdlCoordinates(trans1.position));
-  auto rect2Corners = rect2.getTransformedCorners(CoordinatesConverter::toSdlCoordinates(trans2.position));
+  auto rect1Corners = rect1.getTransformedCorners(trans1.position);
+  auto rect2Corners = rect2.getTransformedCorners(trans2.position);
 
   OverlapResult res = Geometry::anyCornerOfRect1InsideRect2(rect1Corners, rect2Corners);
   // We need to check if any corner of rect1 is in rect2 or vice versa, cuz rectangles can be rotated (in future)
@@ -25,25 +24,25 @@ bool CollisionResolver::resolve(const RectangleColliderComponent& rect1,
     res = Geometry::anyCornerOfRect1InsideRect2(rect2Corners, rect1Corners);
   }
 
-  if (res.doesOverlap) {
-    trans1.position = trans1.position + res.resolutionVector / 2 * Vector{1.0f, -1.0f};
-    trans2.position = trans2.position - res.resolutionVector / 2 * Vector{1.0f, -1.0f};
-    return true;
+  if (!res.doesOverlap || res.resolutionVector == Vector{0.0f, 0.0f}) {
+    return false;
   }
 
-  return false;
+  trans1.position = trans1.position + res.resolutionVector / 2;
+  trans2.position = trans2.position - res.resolutionVector / 2;
+  return true;
 }
 
 bool CollisionResolver::resolve(const EllipseColliderComponent& ellip,
                                 TransformComponent& transEllip,
                                 const RectangleColliderComponent& rect,
                                 TransformComponent& transRect) {
-  Vector ellipCenter = ellip.getTransformedCenter(CoordinatesConverter::toSdlCoordinates(transEllip.position));
-  auto rectCorners = rect.getTransformedCorners(CoordinatesConverter::toSdlCoordinates(transRect.position));
+  Vector ellipCenter = ellip.getTransformedCenter(transEllip.position);
+  auto rectCorners = rect.getTransformedCorners(transRect.position);
 
   auto closestPointToEllipInRect = Vector{
     std::clamp(ellipCenter.x, rectCorners.ld.x, rectCorners.ru.x),
-    std::clamp(ellipCenter.y, rectCorners.ru.y, rectCorners.ld.y)
+    std::clamp(ellipCenter.y, rectCorners.ld.y, rectCorners.ru.y)
   };
 
   auto relativeToEllip = closestPointToEllipInRect - ellipCenter;
@@ -83,8 +82,8 @@ bool CollisionResolver::resolve(const EllipseColliderComponent& ellip,
     resolutionVector = resolutionVector * (1.0f / weightSum);
   }
 
-  transEllip.position = transEllip.position + resolutionVector / 2 * Vector{1.0f, -1.0f};
-  transRect.position = transRect.position - resolutionVector / 2 * Vector{1.0f, -1.0f};
+  transEllip.position = transEllip.position + resolutionVector / 2;
+  transRect.position = transRect.position - resolutionVector / 2;
 
   return true;
 }
@@ -93,8 +92,8 @@ bool CollisionResolver::resolve(const EllipseColliderComponent& ell1,
                                 TransformComponent& trans1,
                                 const EllipseColliderComponent& ell2,
                                 TransformComponent& trans2) {
-  Vector ell1Center = ell1.center + CoordinatesConverter::toSdlCoordinates(trans1.position);
-  Vector ell2Center = ell2.center + CoordinatesConverter::toSdlCoordinates(trans2.position);
+  Vector ell1Center = ell1.center + trans1.position;
+  Vector ell2Center = ell2.center + trans2.position;
 
   // Treating 1 center as a point we should check to lie within a "combined" ellipse
   // Intuitively: we can shrink first ellipse and expand second as much till second becomes just a point
@@ -123,8 +122,8 @@ bool CollisionResolver::resolve(const EllipseColliderComponent& ell1,
 
   Vector closestIntersection = Geometry::getClosestIntersectionToPoint(intersections, ell1Center);
   Vector resolutionVector = closestIntersection - ell1Center;
-  trans1.position = trans1.position + resolutionVector / 2 * Vector{1.0f, -1.0f};
-  trans2.position = trans2.position - resolutionVector / 2 * Vector{1.0f, -1.0f};
+  trans1.position = trans1.position + resolutionVector / 2;
+  trans2.position = trans2.position - resolutionVector / 2;
 
   return true;
 }

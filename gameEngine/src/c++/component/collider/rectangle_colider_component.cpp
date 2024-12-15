@@ -21,12 +21,10 @@ bool RectangleColliderComponent::detectWith(const EllipseColliderComponent& elli
 }
 
 RectangleCorners RectangleColliderComponent::getTransformedCorners(Vector relativeToSdlCoords) const {
-  Vector invertedLD = this->leftDown * Vector{1.0f, -1.0f};
-  Vector invertedRU = this->rightUp * Vector{1.0f, -1.0f};
   return RectangleCorners{
-    invertedLD + relativeToSdlCoords,
-    Vector{invertedLD.x, invertedRU.y} + relativeToSdlCoords,
-    invertedRU + relativeToSdlCoords,
-    Vector{invertedRU.x, invertedLD.y} + relativeToSdlCoords
+    this->leftDown + relativeToSdlCoords,
+    Vector{this->leftDown.x, this->rightUp.y} + relativeToSdlCoords,
+    this->rightUp + relativeToSdlCoords,
+    Vector{this->rightUp.x, this->leftDown.y} + relativeToSdlCoords
   };
 }

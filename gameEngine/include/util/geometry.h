@@ -42,7 +42,7 @@ public:
 
   static Vector getClosestIntersectionToPoint(std::array<Vector, 2> intersections, Vector point);
 
-  static OverlapResult anyCornerOfRect1InsideRect2(RectangleCorners rect1Corners, RectangleCorners rect2Corners);
+  static OverlapResult anyCornerOfRect1InsideRect2(const RectangleCorners& rect1Corners, const RectangleCorners& rect2Corners);
 };
 
 #endif //GEOMETRY_H

@@ -5,12 +5,8 @@
 #include "component/render/rectangle_render_component.h"
 
 void RectangleRenderComponent::render(SDL_Renderer* renderer) {
-  // TODO: make a way to get components in other components without user or engine.cpp
-  // having to pass as arguments. If enough take out similar logic from renderers and colliders:
+  // TODO: If enough take out similar logic from renderers and colliders:
   // transformed position ...
-  if (transform == NULL) {
-    int a;
-  }
   Vector transLD = leftDown * Vector{1.0f, -1.0f} + CoordinatesConverter::toSdlCoordinates(transform->position);
   Vector transRU = rightUp * Vector{1.0f, -1.0f} + CoordinatesConverter::toSdlCoordinates(transform->position);
 

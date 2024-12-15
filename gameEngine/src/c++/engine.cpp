@@ -72,7 +72,7 @@ bool Engine::initialize() {
 
     auto collider = entity->getComponent<ColliderComponent>();
     if (collider) {
-      // TODO: Quite confusing, this is duplicating logic in addComponent in Entity
+      // TODO: Quite confusing, this is duplicating logic from addComponent in Entity
       collider->colliderBoundsRenderComponent->entity = entity;
       collider->colliderBoundsRenderComponent->initialize(renderer);
     }

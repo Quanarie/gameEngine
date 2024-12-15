@@ -17,6 +17,8 @@ public:
     transform = addComponent<TransformComponent>(Vector{10.0f, 0.0f});
     collider = addComponent<RectangleColliderComponent>(
       Vector{5.0f, -5.0f}, Vector{30.0f, 30.0f});
+    // collider = addComponent<EllipseColliderComponent>(
+    //   Vector{0.0f, 0.0f}, EllipseAxes{50.0f, 50.0f});
   }
 
   void update() override {
@@ -47,6 +49,8 @@ public:
     transform = addComponent<TransformComponent>(Vector{100.0f, 0.0f});
     collider = addComponent<EllipseColliderComponent>(
       Vector{0.0f, 0.0f}, EllipseAxes{50.0f, 50.0f});
+    // collider = addComponent<RectangleColliderComponent>(
+    //   Vector{5.0f, -5.0f}, Vector{30.0f, 30.0f});
   }
 
   void update() override {}

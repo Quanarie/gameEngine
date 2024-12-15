@@ -10,7 +10,7 @@
 
 #define RECTANGLE_CORNERS_COUNT 4
 #define MAX_SIDES_CONTAINING_SAME_POINT 2
-#define TREAT_AS_GOING_THROUGH_ELLIPSE_CENTER 0.1f
+#define TREAT_AS_GOING_THROUGH_ELLIPSE_CENTER 0.25f
 
 // std::optional<Point> findLineIntersectionPoint(Point a1, Point b1, Point a2, Point b2) {
 //   float s1_x, s1_y, s2_x, s2_y;
@@ -68,13 +68,13 @@
 bool doRectanglesIntersect(RectangleCorners rect1, RectangleCorners rect2) {
   float rect1MinX = rect1[0].x;
   float rect1MaxX = rect1[3].x;
-  float rect1MinY = rect1[2].y;
-  float rect1MaxY = rect1[0].y;
+  float rect1MinY = rect1[0].y;
+  float rect1MaxY = rect1[2].y;
 
   float rect2MinX = rect2[0].x;
   float rect2MaxX = rect2[3].x;
-  float rect2MinY = rect2[2].y;
-  float rect2MaxY = rect2[0].y;
+  float rect2MinY = rect2[0].y;
+  float rect2MaxY = rect2[2].y;
 
   bool xOverlap = rect1MaxX > rect2MinX && rect2MaxX > rect1MinX;
   bool yOverlap = rect1MaxY > rect2MinY && rect2MaxY > rect1MinY;
@@ -85,8 +85,8 @@ bool doRectanglesIntersect(RectangleCorners rect1, RectangleCorners rect2) {
 OverlapResult Geometry::doesRectCornerOverlapOtherRect(RectangleCorners rect1Corners, int cornerIndex,
                                                        RectangleCorners rect2Corners) {
   Vector corner = rect1Corners[cornerIndex];
-
   Vector shortestResolutionVector = {std::numeric_limits<float>::max(), 0};
+
   for (int i = 0; i < RECTANGLE_CORNERS_COUNT; i++) {
     Vector segmentStart = rect2Corners[i];
     Vector segmentEnd = rect2Corners[(i + 1) % 4];
@@ -115,11 +115,13 @@ OverlapResult Geometry::doesRectCornerOverlapOtherRect(RectangleCorners rect1Cor
   return {true, shortestResolutionVector};
 }
 
-OverlapResult Geometry::anyCornerOfRect1InsideRect2(RectangleCorners rect1Corners, RectangleCorners rect2Corners) {
+OverlapResult Geometry::anyCornerOfRect1InsideRect2(const RectangleCorners& rect1Corners,
+                                                    const RectangleCorners& rect2Corners) {
   OverlapResult minOverlapResult = doesRectCornerOverlapOtherRect(rect1Corners, 0, rect2Corners);
   for (int i = 1; i < RECTANGLE_CORNERS_COUNT; i++) {
     OverlapResult overlapResult = doesRectCornerOverlapOtherRect(rect1Corners, i, rect2Corners);
-    if (overlapResult.doesOverlap && overlapResult.resolutionVector.length() < minOverlapResult.resolutionVector.length()) {
+    if (overlapResult.doesOverlap &&
+      overlapResult.resolutionVector.length() < minOverlapResult.resolutionVector.length()) {
       minOverlapResult = overlapResult;
     }
   }
@@ -131,10 +133,10 @@ std::optional<Line> Geometry::getLineDefinedByTwoPoints(Vector p, Vector q) {
   if (p.x == q.x)
     return std::nullopt;
 
-  float angle = (q.y - p.y) / (p.x - q.x);
+  float angle = (q.y - p.y) / (q.x - p.x);
   return Line{
     angle,
-    p.x * angle + p.y
+    p.y - angle * p.x
   };
 }
 
@@ -142,9 +144,9 @@ std::vector<std::optional<Line>> Geometry::getLinesDefinedBySidesThatContainsPoi
   std::vector<std::optional<Line>> res{};
 
   if (cornerInfo.isCorner) {
-    res.push_back(Geometry::getLineDefinedByTwoPoints(cornerInfo.prevPoint, cornerInfo.point));
+    res.push_back(getLineDefinedByTwoPoints(cornerInfo.prevPoint, cornerInfo.point));
   }
-  res.push_back(Geometry::getLineDefinedByTwoPoints(cornerInfo.point, cornerInfo.nextPoint));
+  res.push_back(getLineDefinedByTwoPoints(cornerInfo.point, cornerInfo.nextPoint));
 
   return res;
 }
@@ -157,9 +159,7 @@ Geometry::getIntersectionsOfLineAndEllipse(std::optional<Line> lineOpt, Vector p
     Line line = lineOpt.value();
 
     float sl = line.slope;
-    // Dont even try to understand why the signs are as they are. Thats the consequence of different y direction in SDL
-    // And thats by itself is making line relative to ellipse
-    float yI = -(sl * ellipCenter.x - line.yIntercept) - ellipCenter.y;
+    float yI = sl * ellipCenter.x + line.yIntercept - ellipCenter.y;
     yI = std::abs(yI) < TREAT_AS_GOING_THROUGH_ELLIPSE_CENTER ? 0.0f : yI;
     float j = axes.sMajor;
     float m = axes.sMinor;
@@ -182,12 +182,11 @@ Geometry::getIntersectionsOfLineAndEllipse(std::optional<Line> lineOpt, Vector p
 
     intersect1 = Vector{
       x1,
-      // minus because different coordinate systems. Fucking math works in regular coordinates
-      -sl * x1 + yI
+      sl * x1 + yI
     } + ellipCenter;
 
     x2 = -x1;
-    intersect2 = Vector{x2, -sl * x2 + yI} + ellipCenter;
+    intersect2 = Vector{x2, sl * x2 + yI} + ellipCenter;
   }
   else {
     float y0 = axes.sMinor * sqrt(1 - pow(pointOnLine.x / axes.sMajor, 2));
