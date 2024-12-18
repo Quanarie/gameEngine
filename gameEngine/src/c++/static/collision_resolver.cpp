@@ -4,12 +4,29 @@
 
 #include "util/geometry.h"
 #include "static/collision_resolver.h"
-
 #include "static/coordinates_converter.h"
 #include "component/transform_component.h"
 #include "component/collider/rectangle/rectangle_corners.h"
 #include "component/collider/ellipse/ellipse_colider_component.h"
 #include "component/collider/rectangle/rectangle_colider_component.h"
+
+void doResolve(const ColliderComponent& coll1,
+               TransformComponent& trans1,
+               const ColliderComponent& coll2,
+               TransformComponent& trans2,
+               Vector resolutionVector) {
+  bool bothStatic = coll1.isStatic && coll2.isStatic;
+  bool bothNotStatic = !coll1.isStatic && !coll2.isStatic;
+  // TODO: for now if both static then they move each other normally
+  if (bothStatic || bothNotStatic) {
+    trans1.position = trans1.position + resolutionVector / 2;
+    trans2.position = trans2.position - resolutionVector / 2;
+  }
+  else {
+    trans1.position = trans1.position + resolutionVector * (coll1.isStatic && !coll2.isStatic ? 0 : 1);
+    trans2.position = trans2.position - resolutionVector * (coll2.isStatic && !coll1.isStatic ? 0 : 1);
+  }
+}
 
 bool CollisionResolver::resolve(const RectangleColliderComponent& rect1,
                                 TransformComponent& trans1,
@@ -28,8 +45,7 @@ bool CollisionResolver::resolve(const RectangleColliderComponent& rect1,
     return false;
   }
 
-  trans1.position = trans1.position + res.resolutionVector / 2;
-  trans2.position = trans2.position - res.resolutionVector / 2;
+  doResolve(rect1, trans1, rect2, trans2, res.resolutionVector);
   return true;
 }
 
@@ -82,9 +98,7 @@ bool CollisionResolver::resolve(const EllipseColliderComponent& ellip,
     resolutionVector = resolutionVector * (1.0f / weightSum);
   }
 
-  transEllip.position = transEllip.position + resolutionVector / 2;
-  transRect.position = transRect.position - resolutionVector / 2;
-
+  doResolve(ellip, transEllip, rect, transRect, resolutionVector);
   return true;
 }
 
@@ -112,7 +126,7 @@ bool CollisionResolver::resolve(const EllipseColliderComponent& ell1,
     center1RelatTo2.y * center1RelatTo2.y / (combinedAxes.sMinor * combinedAxes.sMinor) > 1)
     return false;
 
-  // Weird pseudo algorithm given to me by god
+  // Weird pseudo algorithm given to me by god that doesnt really work well with ellipses that are not circles
   std::array<Vector, 2> intersections = Geometry::getIntersectionsOfLineAndEllipse(
     Geometry::getLineDefinedByTwoPoints(ell1Center, ell2Center),
     ell1Center,
@@ -122,8 +136,7 @@ bool CollisionResolver::resolve(const EllipseColliderComponent& ell1,
 
   Vector closestIntersection = Geometry::getClosestIntersectionToPoint(intersections, ell1Center);
   Vector resolutionVector = closestIntersection - ell1Center;
-  trans1.position = trans1.position + resolutionVector / 2;
-  trans2.position = trans2.position - resolutionVector / 2;
 
+  doResolve(ell1, trans1, ell2, trans2, resolutionVector);
   return true;
 }

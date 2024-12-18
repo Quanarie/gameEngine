@@ -22,10 +22,10 @@ public:
   }
 
   void update() override {
-    if (Inputs::isKeyHeld(SDL_SCANCODE_W)) { transform->position.y += 1; }
-    if (Inputs::isKeyHeld(SDL_SCANCODE_S)) { transform->position.y -= 1; }
-    if (Inputs::isKeyHeld(SDL_SCANCODE_A)) { transform->position.x -= 1; }
-    if (Inputs::isKeyHeld(SDL_SCANCODE_D)) { transform->position.x += 1; }
+    if (Inputs::isKeyHeld(SDL_SCANCODE_W)) { transform->position.y += 3; }
+    if (Inputs::isKeyHeld(SDL_SCANCODE_S)) { transform->position.y -= 3; }
+    if (Inputs::isKeyHeld(SDL_SCANCODE_A)) { transform->position.x -= 3; }
+    if (Inputs::isKeyHeld(SDL_SCANCODE_D)) { transform->position.x += 3; }
 
     Vector toCenter = Vector{0.0f, 0.0f} - transform->position;
 
@@ -49,8 +49,7 @@ public:
     transform = addComponent<TransformComponent>(Vector{100.0f, 0.0f});
     collider = addComponent<EllipseColliderComponent>(
       Vector{0.0f, 0.0f}, EllipseAxes{50.0f, 50.0f});
-    // collider = addComponent<RectangleColliderComponent>(
-    //   Vector{5.0f, -5.0f}, Vector{30.0f, 30.0f});
+    collider->isStatic = true;
   }
 
   void update() override {}

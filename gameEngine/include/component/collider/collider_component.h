@@ -14,6 +14,7 @@ class ColliderComponent : public Component {
 public:
   virtual ~ColliderComponent() = default;
 
+  bool isStatic = false;
   RenderComponent* colliderBoundsRenderComponent = nullptr;
 
   // Double dispatch. Nice !!
