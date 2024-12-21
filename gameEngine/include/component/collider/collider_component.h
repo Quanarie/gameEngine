@@ -12,6 +12,7 @@ class EllipseColliderComponent;
 
 class ColliderComponent : public Component {
 public:
+  void initialize() override;
   virtual ~ColliderComponent() = default;
 
   bool isStatic = false;
@@ -31,6 +32,9 @@ public:
                            TransformComponent& transformOther) const = 0;
 
   void render(SDL_Renderer* renderer) const;
+
+protected:
+  TransformComponent* transform;
 };
 
 

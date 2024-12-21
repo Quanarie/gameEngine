@@ -7,10 +7,10 @@
 class TransformComponent : public Component {
 public:
   TransformComponent(Vector p, float rot = 0.0f, Vector s = {1.0f, 1.0f})
-    : position(p), rotation(rot), scale(s) {}
+    : pos(p), rot(rot), scale(s) {}
 
-  Vector position;
-  float rotation;
+  Vector pos;
+  float rot;
   Vector scale;
 };
 

@@ -3,13 +3,13 @@
 #include "component/render/ellipse_render_component.h"
 
 void EllipseRenderComponent::render(SDL_Renderer* renderer) {
-  Vector center = CoordinatesConverter::toSdlCoordinates(transform->position);
+  Vector center = CoordinatesConverter::toSdlCoordinates(transform->pos);
 
   SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
   for (float angle = 0; angle < 360; angle += 1) {
     float rad = angle * M_PI / 180.0f;
-    float x = center.x + axes.sMajor * cos(rad);
-    float y = center.y + axes.sMinor * sin(rad);
+    float x = center.x + axes.sMajor*transform->scale.x * cos(rad);
+    float y = center.y + axes.sMinor*transform->scale.y * sin(rad);
     SDL_RenderDrawPoint(renderer, static_cast<int>(x), static_cast<int>(y));
   }
 }

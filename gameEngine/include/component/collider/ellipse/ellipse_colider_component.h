@@ -8,9 +8,6 @@
 
 class EllipseColliderComponent : public ColliderComponent {
 public:
-  Vector center;
-  EllipseAxes axes;
-
   EllipseColliderComponent(Vector c, EllipseAxes r)
     : center(c), axes(r) {
     colliderBoundsRenderComponent = new EllipseRenderComponent(c, r);
@@ -33,6 +30,11 @@ public:
                   TransformComponent& transformOther) const override;
 
   Vector getTransformedCenter(Vector relativeTo) const;
+  EllipseAxes getScaledAxes() const;
+
+private:
+  Vector center;
+  EllipseAxes axes;
 };
 
 #endif // ELLIPSE_COLLIDER_COMPONENT_H

@@ -19,12 +19,12 @@ void doResolve(const ColliderComponent& coll1,
   bool bothNotStatic = !coll1.isStatic && !coll2.isStatic;
   // TODO: for now if both static then they move each other normally
   if (bothStatic || bothNotStatic) {
-    trans1.position = trans1.position + resolutionVector / 2;
-    trans2.position = trans2.position - resolutionVector / 2;
+    trans1.pos = trans1.pos + resolutionVector / 2;
+    trans2.pos = trans2.pos - resolutionVector / 2;
   }
   else {
-    trans1.position = trans1.position + resolutionVector * (coll1.isStatic && !coll2.isStatic ? 0 : 1);
-    trans2.position = trans2.position - resolutionVector * (coll2.isStatic && !coll1.isStatic ? 0 : 1);
+    trans1.pos = trans1.pos + resolutionVector * (coll1.isStatic && !coll2.isStatic ? 0 : 1);
+    trans2.pos = trans2.pos - resolutionVector * (coll2.isStatic && !coll1.isStatic ? 0 : 1);
   }
 }
 
@@ -32,8 +32,8 @@ bool CollisionResolver::resolve(const RectangleColliderComponent& rect1,
                                 TransformComponent& trans1,
                                 const RectangleColliderComponent& rect2,
                                 TransformComponent& trans2) {
-  auto rect1Corners = rect1.getTransformedCorners(trans1.position);
-  auto rect2Corners = rect2.getTransformedCorners(trans2.position);
+  auto rect1Corners = rect1.getTransformedCorners(trans1.pos);
+  auto rect2Corners = rect2.getTransformedCorners(trans2.pos);
 
   OverlapResult res = Geometry::anyCornerOfRect1InsideRect2(rect1Corners, rect2Corners);
   // We need to check if any corner of rect1 is in rect2 or vice versa, cuz rectangles can be rotated (in future)
@@ -53,8 +53,8 @@ bool CollisionResolver::resolve(const EllipseColliderComponent& ellip,
                                 TransformComponent& transEllip,
                                 const RectangleColliderComponent& rect,
                                 TransformComponent& transRect) {
-  Vector ellipCenter = ellip.getTransformedCenter(transEllip.position);
-  auto rectCorners = rect.getTransformedCorners(transRect.position);
+  Vector ellipCenter = ellip.getTransformedCenter(transEllip.pos);
+  auto rectCorners = rect.getTransformedCorners(transRect.pos);
 
   auto closestPointToEllipInRect = Vector{
     std::clamp(ellipCenter.x, rectCorners.ld.x, rectCorners.ru.x),
@@ -63,8 +63,8 @@ bool CollisionResolver::resolve(const EllipseColliderComponent& ellip,
 
   auto relativeToEllip = closestPointToEllipInRect - ellipCenter;
 
-  if (relativeToEllip.x * relativeToEllip.x / (ellip.axes.sMajor * ellip.axes.sMajor) +
-    relativeToEllip.y * relativeToEllip.y / (ellip.axes.sMinor * ellip.axes.sMinor) >= 1)
+  if (relativeToEllip.x * relativeToEllip.x / (ellip.getScaledAxes().sMajor * ellip.getScaledAxes().sMajor) +
+    relativeToEllip.y * relativeToEllip.y / (ellip.getScaledAxes().sMinor * ellip.getScaledAxes().sMinor) >= 1)
     return false;
 
   std::vector<std::optional<Line>> linesContainingClosestPoint = Geometry::getLinesDefinedBySidesThatContainsPoint(
@@ -83,7 +83,7 @@ bool CollisionResolver::resolve(const EllipseColliderComponent& ellip,
       perperndicularToLineContClosestPoint,
       relativeToEllip,
       ellipCenter,
-      ellip.axes
+      ellip.getScaledAxes()
     );
 
     Vector closestIntersection = Geometry::getClosestIntersectionToPoint(intersections, closestPointToEllipInRect);
@@ -106,8 +106,8 @@ bool CollisionResolver::resolve(const EllipseColliderComponent& ell1,
                                 TransformComponent& trans1,
                                 const EllipseColliderComponent& ell2,
                                 TransformComponent& trans2) {
-  Vector ell1Center = ell1.center + trans1.position;
-  Vector ell2Center = ell2.center + trans2.position;
+  Vector ell1Center = ell1.getTransformedCenter(trans1.pos);
+  Vector ell2Center = ell2.getTransformedCenter(trans2.pos);
 
   // Treating 1 center as a point we should check to lie within a "combined" ellipse
   // Intuitively: we can shrink first ellipse and expand second as much till second becomes just a point
@@ -118,8 +118,8 @@ bool CollisionResolver::resolve(const EllipseColliderComponent& ell1,
   };
 
   EllipseAxes combinedAxes = EllipseAxes{
-    ell1.axes.sMajor + ell2.axes.sMajor,
-    ell1.axes.sMinor + ell2.axes.sMinor
+    ell1.getScaledAxes().sMajor + ell2.getScaledAxes().sMajor,
+    ell1.getScaledAxes().sMinor + ell2.getScaledAxes().sMinor
   };
 
   if (center1RelatTo2.x * center1RelatTo2.x / (combinedAxes.sMajor * combinedAxes.sMajor) +

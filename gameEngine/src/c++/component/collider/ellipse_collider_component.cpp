@@ -1,3 +1,5 @@
+#include <component/transform_component.h>
+
 #include "static/collision_resolver.h"
 #include "component/collider/ellipse/ellipse_colider_component.h"
 
@@ -21,4 +23,11 @@ bool EllipseColliderComponent::detectWith(const EllipseColliderComponent& ellips
 
 Vector EllipseColliderComponent::getTransformedCenter(Vector relativeTo) const {
   return this->center + relativeTo;
+}
+
+EllipseAxes EllipseColliderComponent::getScaledAxes() const {
+  return EllipseAxes{
+    this->axes.sMajor * this->transform->scale.x,
+    this->axes.sMinor * this->transform->scale.y
+  };
 }

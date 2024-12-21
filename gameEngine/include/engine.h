@@ -12,6 +12,7 @@ typedef struct GameParams {
   int resolutionY;
 } GameParams;
 
+// TODO: singleton?
 class Engine {
 public:
   Engine(GameParams params);
@@ -21,9 +22,10 @@ public:
 
   // Arguments go to entities constructor
   template <typename T, typename... Args>
-  void createEntity(Args&&... args) {
+  T* createEntity(Args&&... args) {
     T* entity = new T(std::forward<Args>(args)...);
     entities.push_back(entity);
+    return entity;
   }
 
 private:

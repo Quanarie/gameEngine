@@ -67,14 +67,18 @@ bool Engine::initialize() {
 
     auto render = entity->getComponent<RenderComponent>();
     if (render) {
-      render->initialize(renderer);
+      render->initializeWithSdlRenderer(renderer);
     }
 
+    // TODO: maybe change to getAllComponents and init all of them
     auto collider = entity->getComponent<ColliderComponent>();
     if (collider) {
       // TODO: Quite confusing, this is duplicating logic from addComponent in Entity
       collider->colliderBoundsRenderComponent->entity = entity;
-      collider->colliderBoundsRenderComponent->initialize(renderer);
+      // Passing renderer here is actually not needed,
+      // but it is required for SpriteRenderComponent, TODO: think about it
+      collider->colliderBoundsRenderComponent->initializeWithSdlRenderer(renderer);
+      collider->initialize();
     }
   }
 

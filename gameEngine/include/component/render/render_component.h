@@ -9,7 +9,7 @@ class TransformComponent;
 
 class RenderComponent : public Component {
 public:
-  virtual void initialize(SDL_Renderer* renderer);
+  virtual void initializeWithSdlRenderer(SDL_Renderer* renderer);
   virtual void render(SDL_Renderer* renderer) {}
 protected:
   TransformComponent* transform;

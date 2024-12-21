@@ -1,10 +1,13 @@
 #ifndef COMPONENT_H
 #define COMPONENT_H
 
+#include "initializable.h"
+
 class Entity;
 
-class Component {
+class Component : public Initializable {
 public:
+  void initialize() override {}
   // Virtual destructor so that children can eventually delete any allocated resources properly
   virtual ~Component() = default;
 

@@ -7,8 +7,9 @@
 void RectangleRenderComponent::render(SDL_Renderer* renderer) {
   // TODO: If enough take out similar logic from renderers and colliders:
   // transformed position ...
-  Vector transLD = leftDown * Vector{1.0f, -1.0f} + CoordinatesConverter::toSdlCoordinates(transform->position);
-  Vector transRU = rightUp * Vector{1.0f, -1.0f} + CoordinatesConverter::toSdlCoordinates(transform->position);
+  Vector convertedCoords = CoordinatesConverter::toSdlCoordinates(transform->pos);
+  Vector transLD = leftDown * Vector{1.0f, -1.0f} * transform->scale + convertedCoords;
+  Vector transRU = rightUp * Vector{1.0f, -1.0f} * transform->scale + convertedCoords;
 
   int left = static_cast<int>(transLD.x);
   int top = static_cast<int>(transLD.y);

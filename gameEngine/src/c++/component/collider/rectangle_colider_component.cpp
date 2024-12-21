@@ -2,6 +2,8 @@
 #include "component/collider/rectangle/rectangle_corners.h"
 #include "component/collider/rectangle/rectangle_colider_component.h"
 
+#include <component/transform_component.h>
+
 bool RectangleColliderComponent::detect(const ColliderComponent& other,
                                         TransformComponent& transformThis,
                                         TransformComponent& transformOther) const {
@@ -21,10 +23,12 @@ bool RectangleColliderComponent::detectWith(const EllipseColliderComponent& elli
 }
 
 RectangleCorners RectangleColliderComponent::getTransformedCorners(Vector relativeToSdlCoords) const {
+  Vector scaledLD = this->leftDown * this->transform->scale;
+  Vector scaledRU = this->rightUp * this->transform->scale;
   return RectangleCorners{
-    this->leftDown + relativeToSdlCoords,
-    Vector{this->leftDown.x, this->rightUp.y} + relativeToSdlCoords,
-    this->rightUp + relativeToSdlCoords,
-    Vector{this->rightUp.x, this->leftDown.y} + relativeToSdlCoords
+    scaledLD + relativeToSdlCoords,
+    Vector{scaledLD.x, scaledRU.y} + relativeToSdlCoords,
+    scaledRU + relativeToSdlCoords,
+    Vector{scaledRU.x, scaledLD.y} + relativeToSdlCoords
   };
 }

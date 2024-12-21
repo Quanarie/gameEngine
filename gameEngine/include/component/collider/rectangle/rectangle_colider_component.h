@@ -1,6 +1,8 @@
 #ifndef RECTANGLE_COLLIDER_COMPONENT_H
 #define RECTANGLE_COLLIDER_COMPONENT_H
 
+#include <entity.h>
+
 #include "component/collider/collider_component.h"
 #include "component/render/rectangle_render_component.h"
 #include "util/vector.h"

@@ -43,6 +43,8 @@ public:
   static Vector getClosestIntersectionToPoint(std::array<Vector, 2> intersections, Vector point);
 
   static OverlapResult anyCornerOfRect1InsideRect2(const RectangleCorners& rect1Corners, const RectangleCorners& rect2Corners);
+
+  // TODO: methods for developers, fe: getClosestPointFromArrayToPassedAsArgumentPoint fuck yeahhhhh
 };
 
-#endif //GEOMETRY_H
+#endif // GEOMETRY_H
