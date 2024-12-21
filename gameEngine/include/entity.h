@@ -4,6 +4,7 @@
 #include <typeindex>
 #include <unordered_map>
 
+class ColliderComponent;
 class Component;
 
 class Entity {
@@ -12,6 +13,8 @@ public:
 
   virtual void initialize() = 0;
   virtual void update() = 0;
+
+  virtual void onCollision(ColliderComponent* col) {}
 
   template <typename T, typename... Args>
   T* addComponent(Args&&... args) {

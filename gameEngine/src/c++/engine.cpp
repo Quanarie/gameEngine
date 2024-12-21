@@ -111,16 +111,15 @@ void Engine::loop() {
 void Engine::update() {
   Inputs::update();
   for (const auto& entity : entities) { entity->update(); }
-  detectCollisions();
+  resolveCollisions();
 }
 
-void Engine::detectCollisions() {
+void Engine::resolveCollisions() {
   for (size_t i = 0; i < entities.size(); ++i) {
     auto colliderA = entities[i]->getComponent<ColliderComponent>();
     auto transformA = entities[i]->getComponent<TransformComponent>();
     if (!colliderA || !transformA)
       continue;
-
     // TODO: change checking every pair
     for (size_t j = i + 1; j < entities.size(); ++j) {
       auto colliderB =
@@ -128,9 +127,9 @@ void Engine::detectCollisions() {
       auto transformB = entities[j]->getComponent<TransformComponent>();
       if (!colliderB || !transformB)
         continue;
-      if (colliderA->detect(*colliderB, *transformA, *transformB)) {
-        std::cout << colliderA << " is colliding with " << colliderB << " " <<
-          rand() << std::endl;
+      if (colliderA->resolve(*colliderB, *transformA, *transformB)) {
+        entities[i]->onCollision(colliderB);
+        entities[j]->onCollision(colliderA);
       }
     }
   }

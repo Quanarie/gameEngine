@@ -6,4 +6,11 @@
   <component name="CMakeWorkspace" PROJECT_DIR="$PROJECT_DIR$/game">
     <contentRoot DIR="$PROJECT_DIR$" />
   </component>
+  <component name="CidrRootsConfiguration">
+    <excludeRoots>
+      <file path="$PROJECT_DIR$/game/build" />
+      <file path="$PROJECT_DIR$/game/cmake-build-debug" />
+      <file path="$PROJECT_DIR$/gameEngine/build" />
+    </excludeRoots>
+  </component>
 </project>

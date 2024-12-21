@@ -32,7 +32,7 @@ private:
   bool initialize();
   void loop();
   void update();
-  void detectCollisions();
+  void resolveCollisions();
   void render();
 
   static constexpr int TICKS_PER_SECOND = 60;

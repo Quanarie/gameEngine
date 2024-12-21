@@ -4,19 +4,19 @@
 
 #include <component/transform_component.h>
 
-bool RectangleColliderComponent::detect(const ColliderComponent& other,
+bool RectangleColliderComponent::resolve(const ColliderComponent& other,
                                         TransformComponent& transformThis,
                                         TransformComponent& transformOther) const {
-  return other.detectWith(*this, transformOther, transformThis);
+  return other.resolveWith(*this, transformOther, transformThis);
 }
 
-bool RectangleColliderComponent::detectWith(const RectangleColliderComponent& rect,
+bool RectangleColliderComponent::resolveWith(const RectangleColliderComponent& rect,
                                             TransformComponent& transformThis,
                                             TransformComponent& transformOther) const {
   return CollisionResolver::resolve(rect, transformOther, *this, transformThis);
 }
 
-bool RectangleColliderComponent::detectWith(const EllipseColliderComponent& ellipse,
+bool RectangleColliderComponent::resolveWith(const EllipseColliderComponent& ellipse,
                                             TransformComponent& transformThis,
                                             TransformComponent& transformOther) const {
   return CollisionResolver::resolve(ellipse, transformOther, *this, transformThis);

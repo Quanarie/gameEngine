@@ -17,15 +17,15 @@ public:
     delete colliderBoundsRenderComponent;
   }
 
-  bool detect(const ColliderComponent& other,
+  bool resolve(const ColliderComponent& other,
               TransformComponent& transformThis,
               TransformComponent& transformOther) const override;
 
-  bool detectWith(const EllipseColliderComponent& ellipse,
+  bool resolveWith(const EllipseColliderComponent& ellipse,
                   TransformComponent& transformThis,
                   TransformComponent& transformOther) const override;
 
-  bool detectWith(const RectangleColliderComponent& rect,
+  bool resolveWith(const RectangleColliderComponent& rect,
                   TransformComponent& transformThis,
                   TransformComponent& transformOther) const override;
 

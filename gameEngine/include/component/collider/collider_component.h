@@ -19,15 +19,15 @@ public:
   RenderComponent* colliderBoundsRenderComponent = nullptr;
 
   // Double dispatch. Nice !!
-  virtual bool detect(const ColliderComponent& other,
+  virtual bool resolve(const ColliderComponent& other,
                        TransformComponent& transformThis,
                        TransformComponent& transformOther) const = 0;
 
-  virtual bool detectWith(const RectangleColliderComponent& rect,
+  virtual bool resolveWith(const RectangleColliderComponent& rect,
                            TransformComponent& transformThis,
                            TransformComponent& transformOther) const = 0;
 
-  virtual bool detectWith(const EllipseColliderComponent& ellipse,
+  virtual bool resolveWith(const EllipseColliderComponent& ellipse,
                            TransformComponent& transformThis,
                            TransformComponent& transformOther) const = 0;
 
