@@ -174,6 +174,7 @@ Geometry::getIntersectionsOfLineAndEllipse(std::optional<Line> lineOpt, Vector p
       float c = j * j * b * b - j * j * m * m;
       float delta = b * b - 4 * a * c;
       if (delta <= 0) {
+        // TODO: Sometimes is thrown wtffff
         throw std::runtime_error("Expected a solution but none was found.");
       }
 
@@ -189,7 +190,13 @@ Geometry::getIntersectionsOfLineAndEllipse(std::optional<Line> lineOpt, Vector p
     intersect2 = Vector{x2, sl * x2 + yI} + ellipCenter;
   }
   else {
-    float y0 = axes.sMinor * sqrt(1 - pow(pointOnLine.x / axes.sMajor, 2));
+    float y0;
+    if (pointOnLine == ellipCenter) {
+      y0 = ellipCenter.y + axes.sMinor;
+    }
+    else {
+      y0 = axes.sMinor * sqrt(1 - pow(pointOnLine.x / axes.sMajor, 2));
+    }
     intersect1 = Vector{pointOnLine.x, y0} + ellipCenter;
     intersect2 = Vector{pointOnLine.x, -y0} + ellipCenter;
   }

@@ -1,8 +1,8 @@
 #ifndef TRANSFORM_COMPONENT_H
 #define TRANSFORM_COMPONENT_H
 
-#include "component/component.h"
 #include "util/vector.h"
+#include "component/component.h"
 
 class TransformComponent : public Component {
 public:

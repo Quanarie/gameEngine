@@ -1,6 +1,5 @@
 #ifndef POINT_H
 #define POINT_H
-#include <component/transform_component.h>
 
 struct Vector {
   float x, y;
