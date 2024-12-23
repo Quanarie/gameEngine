@@ -3,29 +3,33 @@
 
 #include <optional>
 
-#include "vector.h"
+#include "util/vector.h"
 
 struct EllipseAxes;
 struct RectangleCorners;
 
-struct OverlapResult {
+struct OverlapResult
+{
   bool doesOverlap;
   Vector resolutionVector;
 };
 
-struct Line {
+struct Line
+{
   float slope;
   float yIntercept;
 };
 
-struct CornerInfo {
+struct CornerInfo
+{
   bool isCorner = false;
   Vector prevPoint;
   Vector point;
   Vector nextPoint;
 };
 
-class Geometry {
+class Geometry
+{
 public:
   static OverlapResult doesRectCornerOverlapOtherRect(RectangleCorners rect1Corners, int cornerIndex,
                                                       RectangleCorners rect2Corners);
@@ -42,7 +46,8 @@ public:
 
   static Vector getClosestIntersectionToPoint(std::array<Vector, 2> intersections, Vector point);
 
-  static OverlapResult anyCornerOfRect1InsideRect2(const RectangleCorners& rect1Corners, const RectangleCorners& rect2Corners);
+  static OverlapResult anyCornerOfRect1InsideRect2(const RectangleCorners& rect1Corners,
+                                                   const RectangleCorners& rect2Corners);
 
   // TODO: methods for developers, fe: getClosestPointFromArrayToPassedAsArgumentPoint fuck yeahhhhh
 };

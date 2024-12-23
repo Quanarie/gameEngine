@@ -1,12 +1,12 @@
-#include "util/geometry.h"
+#include "static/geometry.h"
 
 #include <limits>
 #include <optional>
 #include <vector>
 
+#include "util/vector.h"
 #include "component/collider/ellipse/ellipse_axes.h"
 #include "component/collider/rectangle/rectangle_corners.h"
-#include "util/vector.h"
 
 #define RECTANGLE_CORNERS_COUNT 4
 #define MAX_SIDES_CONTAINING_SAME_POINT 2
@@ -65,7 +65,8 @@
 // }
 
 // Only axis aligned rectangles
-bool doRectanglesIntersect(RectangleCorners rect1, RectangleCorners rect2) {
+bool doRectanglesIntersect(RectangleCorners rect1, RectangleCorners rect2)
+{
   float rect1MinX = rect1[0].x;
   float rect1MaxX = rect1[3].x;
   float rect1MinY = rect1[0].y;
@@ -83,11 +84,13 @@ bool doRectanglesIntersect(RectangleCorners rect1, RectangleCorners rect2) {
 }
 
 OverlapResult Geometry::doesRectCornerOverlapOtherRect(RectangleCorners rect1Corners, int cornerIndex,
-                                                       RectangleCorners rect2Corners) {
+                                                       RectangleCorners rect2Corners)
+{
   Vector corner = rect1Corners[cornerIndex];
   Vector shortestResolutionVector = {std::numeric_limits<float>::max(), 0};
 
-  for (int i = 0; i < RECTANGLE_CORNERS_COUNT; i++) {
+  for (int i = 0; i < RECTANGLE_CORNERS_COUNT; i++)
+  {
     Vector segmentStart = rect2Corners[i];
     Vector segmentEnd = rect2Corners[(i + 1) % 4];
 
@@ -100,12 +103,14 @@ OverlapResult Geometry::doesRectCornerOverlapOtherRect(RectangleCorners rect1Cor
     // This prevents jiggling bugs where one side of rect is close another, and they go inside each other
     RectangleCorners rect1CornersResolved = {};
     RectangleCorners rect2CornersResolved = {};
-    for (int j = 0; j < RECTANGLE_CORNERS_COUNT; j++) {
+    for (int j = 0; j < RECTANGLE_CORNERS_COUNT; j++)
+    {
       rect1CornersResolved[j] = rect1Corners[j] + resolutionVector / 2;
       rect2CornersResolved[j] = rect2Corners[j] - resolutionVector / 2;
     }
 
-    if (resolutionVector.length() < shortestResolutionVector.length()) {
+    if (resolutionVector.length() < shortestResolutionVector.length())
+    {
       if (doRectanglesIntersect(rect1CornersResolved, rect2CornersResolved))
         continue;
       shortestResolutionVector = resolutionVector;
@@ -116,12 +121,15 @@ OverlapResult Geometry::doesRectCornerOverlapOtherRect(RectangleCorners rect1Cor
 }
 
 OverlapResult Geometry::anyCornerOfRect1InsideRect2(const RectangleCorners& rect1Corners,
-                                                    const RectangleCorners& rect2Corners) {
+                                                    const RectangleCorners& rect2Corners)
+{
   OverlapResult minOverlapResult = doesRectCornerOverlapOtherRect(rect1Corners, 0, rect2Corners);
-  for (int i = 1; i < RECTANGLE_CORNERS_COUNT; i++) {
+  for (int i = 1; i < RECTANGLE_CORNERS_COUNT; i++)
+  {
     OverlapResult overlapResult = doesRectCornerOverlapOtherRect(rect1Corners, i, rect2Corners);
     if (overlapResult.doesOverlap &&
-      overlapResult.resolutionVector.length() < minOverlapResult.resolutionVector.length()) {
+      overlapResult.resolutionVector.length() < minOverlapResult.resolutionVector.length())
+    {
       minOverlapResult = overlapResult;
     }
   }
@@ -129,7 +137,8 @@ OverlapResult Geometry::anyCornerOfRect1InsideRect2(const RectangleCorners& rect
   return minOverlapResult;
 }
 
-std::optional<Line> Geometry::getLineDefinedByTwoPoints(Vector p, Vector q) {
+std::optional<Line> Geometry::getLineDefinedByTwoPoints(Vector p, Vector q)
+{
   if (p.x == q.x)
     return std::nullopt;
 
@@ -140,10 +149,12 @@ std::optional<Line> Geometry::getLineDefinedByTwoPoints(Vector p, Vector q) {
   };
 }
 
-std::vector<std::optional<Line>> Geometry::getLinesDefinedBySidesThatContainsPoint(CornerInfo cornerInfo) {
+std::vector<std::optional<Line>> Geometry::getLinesDefinedBySidesThatContainsPoint(CornerInfo cornerInfo)
+{
   std::vector<std::optional<Line>> res{};
 
-  if (cornerInfo.isCorner) {
+  if (cornerInfo.isCorner)
+  {
     res.push_back(getLineDefinedByTwoPoints(cornerInfo.prevPoint, cornerInfo.point));
   }
   res.push_back(getLineDefinedByTwoPoints(cornerInfo.point, cornerInfo.nextPoint));
@@ -153,9 +164,11 @@ std::vector<std::optional<Line>> Geometry::getLinesDefinedBySidesThatContainsPoi
 
 std::array<Vector, 2>
 Geometry::getIntersectionsOfLineAndEllipse(std::optional<Line> lineOpt, Vector pointOnLine,
-                                           Vector ellipCenter, EllipseAxes axes) {
+                                           Vector ellipCenter, EllipseAxes axes)
+{
   Vector intersect1, intersect2;
-  if (lineOpt.has_value()) {
+  if (lineOpt.has_value())
+  {
     Line line = lineOpt.value();
 
     float sl = line.slope;
@@ -165,15 +178,18 @@ Geometry::getIntersectionsOfLineAndEllipse(std::optional<Line> lineOpt, Vector p
     float m = axes.sMinor;
 
     float x1, x2;
-    if (sl == 0.0f) {
+    if (sl == 0.0f)
+    {
       x1 = j / m * sqrt(m * m - yI * yI);
     }
-    else {
+    else
+    {
       float a = m * m + sl * sl * j * j;
       float b = 2 * j * j * sl * yI;
       float c = j * j * b * b - j * j * m * m;
       float delta = b * b - 4 * a * c;
-      if (delta <= 0) {
+      if (delta <= 0)
+      {
         // TODO: Sometimes is thrown wtffff
         throw std::runtime_error("Expected a solution but none was found.");
       }
@@ -189,12 +205,15 @@ Geometry::getIntersectionsOfLineAndEllipse(std::optional<Line> lineOpt, Vector p
     x2 = -x1;
     intersect2 = Vector{x2, sl * x2 + yI} + ellipCenter;
   }
-  else {
+  else
+  {
     float y0;
-    if (pointOnLine == ellipCenter) {
+    if (pointOnLine == ellipCenter)
+    {
       y0 = ellipCenter.y + axes.sMinor;
     }
-    else {
+    else
+    {
       y0 = axes.sMinor * sqrt(1 - pow(pointOnLine.x / axes.sMajor, 2));
     }
     intersect1 = Vector{pointOnLine.x, y0} + ellipCenter;
@@ -204,7 +223,8 @@ Geometry::getIntersectionsOfLineAndEllipse(std::optional<Line> lineOpt, Vector p
   return std::array{intersect1, intersect2};
 }
 
-std::optional<Line> Geometry::getPerpendicularLineAtPoint(Vector point, std::optional<Line> lineOpt) {
+std::optional<Line> Geometry::getPerpendicularLineAtPoint(Vector point, std::optional<Line> lineOpt)
+{
   if (!lineOpt.has_value())
     return Line{0.0f, point.y};
 
@@ -215,24 +235,29 @@ std::optional<Line> Geometry::getPerpendicularLineAtPoint(Vector point, std::opt
   return Line{-line.slope, point.y + line.slope * point.x};
 }
 
-Vector Geometry::getClosestIntersectionToPoint(std::array<Vector, 2> intersections, Vector point) {
+Vector Geometry::getClosestIntersectionToPoint(std::array<Vector, 2> intersections, Vector point)
+{
   if ((intersections[0] - point).length() < (intersections[1] - point).length())
     return intersections[0];
 
   return intersections[1];
 }
 
-CornerInfo Geometry::isCorner(Vector point, RectangleCorners rect) {
+CornerInfo Geometry::isCorner(Vector point, RectangleCorners rect)
+{
   int howManySidesContainPoint = 0;
   CornerInfo res{};
-  for (int i = 0; i < RECTANGLE_CORNERS_COUNT; i++) {
+  for (int i = 0; i < RECTANGLE_CORNERS_COUNT; i++)
+  {
     Vector sideStart = rect[i];
     Vector sideEnd = rect[(i + 1) % 4];
 
-    if (point.isOnSegment(sideStart, sideEnd)) {
+    if (point.isOnSegment(sideStart, sideEnd))
+    {
       howManySidesContainPoint++;
       res = CornerInfo{false, sideStart, sideStart, sideEnd};
-      if (howManySidesContainPoint == 2) {
+      if (howManySidesContainPoint == 2)
+      {
         res = CornerInfo{true, rect[(i - 1) % 4], sideStart, sideEnd};
         return res;
       }

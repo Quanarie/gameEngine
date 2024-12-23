@@ -2,7 +2,7 @@
 #include <vector>
 #include <__algorithm/clamp.h>
 
-#include "util/geometry.h"
+#include "static/geometry.h"
 #include "static/collision_resolver.h"
 #include "static/coordinates_converter.h"
 #include "component/transform_component.h"
