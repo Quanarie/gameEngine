@@ -16,10 +16,7 @@
 #define WAIT(prev, reload) if ((prev) + (reload) > now()) return; prev = now();
 #define PLATFORM_TOO_CLOSE_DISTANCE 25.0f
 
-long long now()
-{
-  return std::chrono::system_clock::now().time_since_epoch().count();
-}
+long long now() { return std::chrono::system_clock::now().time_since_epoch().count(); }
 
 class Platform : public Entity
 {
@@ -35,9 +32,7 @@ public:
       Vector{0.0f, 0.0f}, EllipseAxes{20.0f, 20.0f});
   }
 
-  void update() override
-  {
-  }
+  void update() override {}
 
   TransformComponent* transform = nullptr;
   RenderComponent* render = nullptr;
@@ -67,16 +62,13 @@ bool negativeYContraint(const Vector& myPos, const Vector& constrainedPos)
 class Player : public Entity
 {
 public:
-  Player(std::vector<Platform*> platforms)
-  {
-    this->platforms = platforms;
-  }
+  Player(std::vector<Platform*> platforms) { this->platforms = platforms; }
 
   void initialize() override
   {
     transform = addComponent<TransformComponent>(Vector{0.0f, 0.0f}, 0.0f, Vector{1.25f, 1.25f});
     collider = addComponent<RectangleColliderComponent>(
-      Vector{-20.0f, -20.0f}, Vector{20.0f, 20.0f});
+      Vector{-30.0f, -20.0f}, Vector{30.0f, 20.0f});
     render = addComponent<SpriteRenderComponent>(
       35.0f, 40.0f, "../assets/player.bmp", Vector{-16.0f, -18.0f});
   }
@@ -182,16 +174,13 @@ private:
 class Enemy : public Entity
 {
 public:
-  Enemy(Player* player)
-  {
-    this->player = player;
-  }
+  Enemy(Player* player) { this->player = player; }
 
   void initialize() override
   {
     transform = addComponent<TransformComponent>(Vector{100.0f, 0.0f}, 0.0f, Vector{1.25f, 1.25f});
-    collider = addComponent<EllipseColliderComponent>(
-      Vector{0.0f, 0.0f}, EllipseAxes{25.0f, 25.0f});
+    collider = addComponent<RectangleColliderComponent>(
+      Vector{-15.0f, -20.0f}, Vector{15.0f, 25.0f});
     render = addComponent<SpriteRenderComponent>(
       40.0f, 40.0f, "../assets/enemy.bmp", Vector{-19.0f, -19.0f});
   }
@@ -223,21 +212,16 @@ private:
 class Point : public Entity
 {
 public:
-  Point(Vector p)
-  {
-    this->pos = p;
-  }
+  Point(Vector p) { this->pos = p; }
 
   void initialize() override
   {
-    transform = addComponent<TransformComponent>(this->pos);
+    transform = addComponent<TransformComponent>(this->pos, 45.0f);
     render = addComponent<EllipseRenderComponent>(
       Vector{0.0f, 0.0f}, EllipseAxes{0.5f, 0.5f});
   }
 
-  void update() override
-  {
-  }
+  void update() override {}
 
 private:
   Vector pos;
@@ -262,16 +246,10 @@ int main(int argc, char* argv[])
 
   std::vector<Platform*> platforms;
   platforms.reserve(10);
-  for (int i = 0; i < 10; i++)
-  {
-    platforms.push_back(engine.createEntity<Platform>());
-  }
+  for (int i = 0; i < 10; i++) { platforms.push_back(engine.createEntity<Platform>()); }
   Player* player = engine.createEntity<Player>(platforms);
 
-  for (int i = 0; i < 5; i++)
-  {
-    engine.createEntity<Enemy>(player);
-  }
+  for (int i = 0; i < 5; i++) { engine.createEntity<Enemy>(player); }
 
   return engine.start();
 }

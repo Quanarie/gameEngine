@@ -4,21 +4,38 @@
 #include "component/transform_component.h"
 #include "component/render/rectangle_render_component.h"
 
-void RectangleRenderComponent::render(SDL_Renderer* renderer) {
+#include <algorithm>
+
+Vector rotatePointRadAroundOrigin(Vector LD, float rot)
+{
+  return Vector{
+    LD.x * cos(rot) - LD.y * sin(rot),
+    LD.x * sin(rot) + LD.y * cos(rot)
+  };
+}
+
+void RectangleRenderComponent::render(SDL_Renderer* renderer)
+{
   // TODO: If enough take out similar logic from renderers and colliders:
   // transformed position ...
-  Vector convertedCoords = CoordinatesConverter::toSdlCoordinates(transform->pos);
-  Vector transLD = leftDown * Vector{1.0f, -1.0f} * transform->scale + convertedCoords;
-  Vector transRU = rightUp * Vector{1.0f, -1.0f} * transform->scale + convertedCoords;
+  Vector LD = leftDown, RU = rightUp;
+  Vector LU = {LD.x, RU.y}, RD = {RU.x, LD.y};
 
-  int left = static_cast<int>(transLD.x);
-  int top = static_cast<int>(transLD.y);
-  int right = static_cast<int>(transRU.x);
-  int bottom = static_cast<int>(transRU.y);
+  float rot = this->transform->getRotationRad();
+  Vector LDRot = rotatePointRadAroundOrigin(LD, rot);
+  Vector LURot = rotatePointRadAroundOrigin(LU, rot);
+  Vector RURot = rotatePointRadAroundOrigin(RU, rot);
+  Vector RDRot = rotatePointRadAroundOrigin(RD, rot);
+
+  Vector convertedCoords = CoordinatesConverter::toSdlCoordinates(transform->pos);
+  LD = LDRot * Vector{1.0f, -1.0f} * transform->scale + convertedCoords;
+  RU = RURot * Vector{1.0f, -1.0f} * transform->scale + convertedCoords;
+  LU = LURot * Vector{1.0f, -1.0f} * transform->scale + convertedCoords;
+  RD = RDRot * Vector{1.0f, -1.0f} * transform->scale + convertedCoords;
 
   SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-  SDL_RenderDrawLine(renderer, left, top, right, top);
-  SDL_RenderDrawLine(renderer, right, top, right, bottom);
-  SDL_RenderDrawLine(renderer, right, bottom, left, bottom);
-  SDL_RenderDrawLine(renderer, left, bottom, left, top);
+  SDL_RenderDrawLine(renderer, LD.x, LD.y, LU.x, LU.y);
+  SDL_RenderDrawLine(renderer, LU.x, LU.y, RU.x, RU.y);
+  SDL_RenderDrawLine(renderer, RU.x, RU.y, RD.x, RD.y);
+  SDL_RenderDrawLine(renderer, RD.x, RD.y, LD.x, LD.y);
 }
