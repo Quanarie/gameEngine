@@ -54,3 +54,11 @@ bool Vector::operator==(const Vector& point) const {
 bool Vector::isOnSegment(Vector segmentStart, Vector segmentEnd) {
   return (segmentStart - *this).length() + (segmentEnd - *this).length() == (segmentStart - segmentEnd).length();
 }
+
+Vector Vector::rotateAroundPointRad(Vector p, float rot)
+{
+  return Vector{
+    p.x + (this->x - p.x) * cos(rot) - (this->y - p.y) * sin(rot),
+    p.y + (this->x - p.x) * sin(rot) + (this->y - p.y) * cos(rot)
+};
+}

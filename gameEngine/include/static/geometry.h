@@ -49,6 +49,8 @@ public:
   static OverlapResult anyCornerOfRect1InsideRect2(const RectangleCorners& rect1Corners,
                                                    const RectangleCorners& rect2Corners);
 
+  static std::optional<Vector> findLineIntersectionPoint(Vector a1, Vector b1, Vector a2, Vector b2);
+
   // TODO: methods for developers, fe: getClosestPointFromArrayToPassedAsArgumentPoint fuck yeahhhhh
 };
 

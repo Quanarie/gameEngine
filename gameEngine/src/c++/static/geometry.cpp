@@ -12,75 +12,55 @@
 #define MAX_SIDES_CONTAINING_SAME_POINT 2
 #define TREAT_AS_GOING_THROUGH_ELLIPSE_CENTER 0.25f
 
-// std::optional<Point> findLineIntersectionPoint(Point a1, Point b1, Point a2, Point b2) {
-//   float s1_x, s1_y, s2_x, s2_y;
-//   s1_x = b1.x - a1.x;
-//   s1_y = b1.y - a1.y;
-//   s2_x = b2.x - a2.x;
-//   s2_y = b2.y - a2.y;
-//
-//   float s, t;
-//   s = (-s1_y * (a1.x - a2.x) + s1_x * (a1.y - a2.y)) / (-s2_x * s1_y + s1_x * s2_y);
-//   t = (s2_x * (a1.y - a2.y) - s2_y * (a1.x - a2.x)) / (-s2_x * s1_y + s1_x * s2_y);
-//
-//   if (s >= 0 && s <= 1 && t >= 0 && t <= 1) {
-//     return Point{a1.x + (t * s1_x), a1.y + (t * s1_y)};
-//   }
-//
-//   return std::nullopt;
-// }
-//
-// bool doSegmentsIntersect(Point a1, Point b1, Point a2, Point b2) {
-//   // Find point where lines intersect and check if its in bounds of each segment
-//   std::optional<Point> lineIntersect = findLineIntersectionPoint(a1, b1, a2, b2);
-//   if (!lineIntersect.has_value())
-//     return false;
-//
-//   return lineIntersect->isInsideSegment(a1, a2);
-// }
-//
-// bool doesSegmentIntersectRectangle(Point a, Point b, std::array<Point, 4> rect) {
-//   for (int i = 0; i < rect.size(); i++) {
-//     Point segmentStart = rect[i];
-//     Point segmentEnd = rect[(i + 1) % 4];
-//
-//     if (doSegmentsIntersect(a, b, segmentStart, segmentEnd))
-//       return true;
-//   }
-//
-//   return false;
-// }
-//
-// TODO: implement for rotated rectangles
-// bool doRectanglesIntersect(std::array<Point, 4> rect1, std::array<Point, 4> rect2) {
-//   for (int i = 0; i < rect1.size(); i++) {
-//     Point segmentStart = rect1[i];
-//     Point segmentEnd = rect1[(i + 1) % 4];
-//
-//     if (doesSegmentIntersectRectangle(segmentStart, segmentEnd, rect2))
-//       return true;
-//   }
-//
-//   return false;
-// }
+std::optional<Vector> Geometry::findLineIntersectionPoint(Vector a1, Vector b1, Vector a2, Vector b2) {
+  float s1_x, s1_y, s2_x, s2_y;
+  s1_x = b1.x - a1.x;
+  s1_y = b1.y - a1.y;
+  s2_x = b2.x - a2.x;
+  s2_y = b2.y - a2.y;
 
-// Only axis aligned rectangles
-bool doRectanglesIntersect(RectangleCorners rect1, RectangleCorners rect2)
-{
-  float rect1MinX = rect1[0].x;
-  float rect1MaxX = rect1[3].x;
-  float rect1MinY = rect1[0].y;
-  float rect1MaxY = rect1[2].y;
+  float s, t;
+  s = (-s1_y * (a1.x - a2.x) + s1_x * (a1.y - a2.y)) / (-s2_x * s1_y + s1_x * s2_y);
+  t = (s2_x * (a1.y - a2.y) - s2_y * (a1.x - a2.x)) / (-s2_x * s1_y + s1_x * s2_y);
 
-  float rect2MinX = rect2[0].x;
-  float rect2MaxX = rect2[3].x;
-  float rect2MinY = rect2[0].y;
-  float rect2MaxY = rect2[2].y;
+  if (s >= 0 && s <= 1 && t >= 0 && t <= 1) {
+    return Vector{a1.x + (t * s1_x), a1.y + (t * s1_y)};
+  }
 
-  bool xOverlap = rect1MaxX > rect2MinX && rect2MaxX > rect1MinX;
-  bool yOverlap = rect1MaxY > rect2MinY && rect2MaxY > rect1MinY;
+  return std::nullopt;
+}
 
-  return xOverlap && yOverlap;
+static bool doSegmentsIntersect(Vector a1, Vector b1, Vector a2, Vector b2) {
+  // Find point where lines intersect and check if its in bounds of each segment
+  std::optional<Vector> lineIntersect = Geometry::findLineIntersectionPoint(a1, b1, a2, b2);
+  if (!lineIntersect.has_value())
+    return false;
+
+  return lineIntersect->isOnSegment(a1, a2);
+}
+
+static bool doesSegmentIntersectRectangle(Vector a, Vector b, RectangleCorners rect) {
+  for (int i = 0; i < RECTANGLE_CORNERS_COUNT; i++) {
+    Vector segmentStart = rect[i];
+    Vector segmentEnd = rect[(i + 1) % 4];
+
+    if (doSegmentsIntersect(a, b, segmentStart, segmentEnd))
+      return true;
+  }
+
+  return false;
+}
+
+static bool doRectanglesIntersect(RectangleCorners rect1, RectangleCorners rect2) {
+  for (int i = 0; i < RECTANGLE_CORNERS_COUNT; i++) {
+    Vector segmentStart = rect1[i];
+    Vector segmentEnd = rect1[(i + 1) % 4];
+
+    if (doesSegmentIntersectRectangle(segmentStart, segmentEnd, rect2))
+      return true;
+  }
+
+  return false;
 }
 
 OverlapResult Geometry::doesRectCornerOverlapOtherRect(RectangleCorners rect1Corners, int cornerIndex,

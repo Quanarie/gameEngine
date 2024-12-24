@@ -19,6 +19,7 @@ struct Vector {
   Vector operator*(float number) const;
 
   bool isOnSegment(Vector segmentStart, Vector segmentEnd);
+  Vector rotateAroundPointRad(Vector p, float rot);
 };
 
 #endif // POINT_H
