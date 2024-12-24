@@ -36,8 +36,8 @@ bool CollisionResolver::resolve(const RectangleColliderComponent& rect1,
                                 const RectangleColliderComponent& rect2,
                                 TransformComponent& trans2)
 {
-  auto rect1Corners = rect1.getTransformedCorners(trans1.pos);
-  auto rect2Corners = rect2.getTransformedCorners(trans2.pos);
+  auto rect1Corners = rect1.getTransformedCorners();
+  auto rect2Corners = rect2.getTransformedCorners();
 
   OverlapResult res = Geometry::anyCornerOfRect1InsideRect2(rect1Corners, rect2Corners);
   // We need to check if any corner of rect1 is in rect2 or vice versa, cuz rectangles can be rotated (in future)
@@ -59,7 +59,7 @@ bool CollisionResolver::resolve(const EllipseColliderComponent& ellip,
                                 TransformComponent& transRect)
 {
   Vector ellipCenter = ellip.getTransformedCenter(transEllip.pos);
-  auto rectCorners = rect.getTransformedCorners(transRect.pos);
+  auto rectCorners = rect.getTransformedCorners();
 
   auto closestPointToEllipInRect = Vector{
     std::clamp(ellipCenter.x, rectCorners.ld.x, rectCorners.ru.x),

@@ -1,25 +1,27 @@
+#include <algorithm>
 #include <SDL_render.h>
+#include <static/geometry.h>
 
 #include "static/coordinates_converter.h"
 #include "component/transform_component.h"
 #include "component/render/rectangle_render_component.h"
 
-#include <algorithm>
-#include <static/geometry.h>
-
 void RectangleRenderComponent::render(SDL_Renderer* renderer)
 {
-  // TODO: If enough take out similar logic from renderers and colliders:
-  // transformed position ...
+  // TODO: Take out similar logic from renderers and colliders:
   Vector LD = leftDown, RU = rightUp;
   Vector LU = {LD.x, RU.y}, RD = {RU.x, LD.y};
 
-  Vector rp = Geometry::g
+  std::optional<Vector> rp = Geometry::findLinesIntersectionPoint(LD, RU, LU, RD);
+  if (!rp.has_value())
+    throw std::runtime_error(
+      "Could not find intersection point of diagonals in rectangle. Something is wrong i guess...");
+  Vector rpVal = rp.value();
   float rot = this->transform->getRotationRad();
-  Vector LURot = LU.rotateAroundPointRad(rp, rot);
-  Vector RURot = RU.rotateAroundPointRad(rp, rot);
-  Vector LDRot = LD.rotateAroundPointRad(rp, rot);
-  Vector RDRot = RD.rotateAroundPointRad(rp, rot);
+  Vector LURot = LU.rotateAroundPointRad(rpVal, rot);
+  Vector RURot = RU.rotateAroundPointRad(rpVal, rot);
+  Vector LDRot = LD.rotateAroundPointRad(rpVal, rot);
+  Vector RDRot = RD.rotateAroundPointRad(rpVal, rot);
 
   Vector convertedCoords = CoordinatesConverter::toSdlCoordinates(transform->pos);
   LD = LDRot * Vector{1.0f, -1.0f} * transform->scale + convertedCoords;

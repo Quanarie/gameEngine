@@ -12,7 +12,7 @@
 #define MAX_SIDES_CONTAINING_SAME_POINT 2
 #define TREAT_AS_GOING_THROUGH_ELLIPSE_CENTER 0.25f
 
-std::optional<Vector> Geometry::findLineIntersectionPoint(Vector a1, Vector b1, Vector a2, Vector b2) {
+std::optional<Vector> Geometry::findLinesIntersectionPoint(Vector a1, Vector b1, Vector a2, Vector b2) {
   float s1_x, s1_y, s2_x, s2_y;
   s1_x = b1.x - a1.x;
   s1_y = b1.y - a1.y;
@@ -30,16 +30,16 @@ std::optional<Vector> Geometry::findLineIntersectionPoint(Vector a1, Vector b1, 
   return std::nullopt;
 }
 
-static bool doSegmentsIntersect(Vector a1, Vector b1, Vector a2, Vector b2) {
+bool doSegmentsIntersect(Vector a1, Vector b1, Vector a2, Vector b2) {
   // Find point where lines intersect and check if its in bounds of each segment
-  std::optional<Vector> lineIntersect = Geometry::findLineIntersectionPoint(a1, b1, a2, b2);
+  std::optional<Vector> lineIntersect = Geometry::findLinesIntersectionPoint(a1, b1, a2, b2);
   if (!lineIntersect.has_value())
     return false;
 
   return lineIntersect->isOnSegment(a1, a2);
 }
 
-static bool doesSegmentIntersectRectangle(Vector a, Vector b, RectangleCorners rect) {
+bool doesSegmentIntersectRectangle(Vector a, Vector b, RectangleCorners rect) {
   for (int i = 0; i < RECTANGLE_CORNERS_COUNT; i++) {
     Vector segmentStart = rect[i];
     Vector segmentEnd = rect[(i + 1) % 4];
@@ -51,7 +51,7 @@ static bool doesSegmentIntersectRectangle(Vector a, Vector b, RectangleCorners r
   return false;
 }
 
-static bool doRectanglesIntersect(RectangleCorners rect1, RectangleCorners rect2) {
+bool doRectanglesIntersect(RectangleCorners rect1, RectangleCorners rect2) {
   for (int i = 0; i < RECTANGLE_CORNERS_COUNT; i++) {
     Vector segmentStart = rect1[i];
     Vector segmentEnd = rect1[(i + 1) % 4];

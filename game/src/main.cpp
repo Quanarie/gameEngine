@@ -66,7 +66,7 @@ public:
 
   void initialize() override
   {
-    transform = addComponent<TransformComponent>(Vector{0.0f, 0.0f}, 60.0f, Vector{1.25f, 1.25f});
+    transform = addComponent<TransformComponent>(Vector{0.0f, 0.0f}, 0.0f, Vector{1.25f, 1.25f});
     collider = addComponent<RectangleColliderComponent>(
       Vector{-30.0f, -20.0f}, Vector{30.0f, 20.0f});
     render = addComponent<SpriteRenderComponent>(
@@ -178,7 +178,7 @@ public:
 
   void initialize() override
   {
-    transform = addComponent<TransformComponent>(Vector{100.0f, 0.0f}, 22.0f, Vector{1.25f, 1.25f});
+    transform = addComponent<TransformComponent>(Vector{100.0f, 0.0f}, 0.0f, Vector{1.25f, 1.25f});
     collider = addComponent<RectangleColliderComponent>(
       Vector{-15.0f, -20.0f}, Vector{15.0f, 25.0f});
     render = addComponent<SpriteRenderComponent>(
