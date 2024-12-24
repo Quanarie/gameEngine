@@ -2,6 +2,10 @@
 
 #include "util/vector.h"
 #include "static/collision_resolver.h"
+
+#include <component/collider/rectangle/rectangle_corners.h>
+#include <static/geometry.h>
+
 #include "static/coordinates_converter.h"
 #include "component/transform_component.h"
 #include "component/collider/ellipse/ellipse_colider_component.h"

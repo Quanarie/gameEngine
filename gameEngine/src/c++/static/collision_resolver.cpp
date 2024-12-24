@@ -14,15 +14,18 @@ void doResolve(const ColliderComponent& coll1,
                TransformComponent& trans1,
                const ColliderComponent& coll2,
                TransformComponent& trans2,
-               Vector resolutionVector) {
+               Vector resolutionVector)
+{
   bool bothStatic = coll1.isStatic && coll2.isStatic;
   bool bothNotStatic = !coll1.isStatic && !coll2.isStatic;
   // TODO: for now if both static then they move each other normally
-  if (bothStatic || bothNotStatic) {
+  if (bothStatic || bothNotStatic)
+  {
     trans1.pos = trans1.pos + resolutionVector / 2;
     trans2.pos = trans2.pos - resolutionVector / 2;
   }
-  else {
+  else
+  {
     trans1.pos = trans1.pos + resolutionVector * (coll1.isStatic && !coll2.isStatic ? 0 : 1);
     trans2.pos = trans2.pos - resolutionVector * (coll2.isStatic && !coll1.isStatic ? 0 : 1);
   }
@@ -31,19 +34,20 @@ void doResolve(const ColliderComponent& coll1,
 bool CollisionResolver::resolve(const RectangleColliderComponent& rect1,
                                 TransformComponent& trans1,
                                 const RectangleColliderComponent& rect2,
-                                TransformComponent& trans2) {
+                                TransformComponent& trans2)
+{
   auto rect1Corners = rect1.getTransformedCorners(trans1.pos);
   auto rect2Corners = rect2.getTransformedCorners(trans2.pos);
 
   OverlapResult res = Geometry::anyCornerOfRect1InsideRect2(rect1Corners, rect2Corners);
   // We need to check if any corner of rect1 is in rect2 or vice versa, cuz rectangles can be rotated (in future)
-  if (!res.doesOverlap) {
+  if (!res.doesOverlap)
+  {
     res = Geometry::anyCornerOfRect1InsideRect2(rect2Corners, rect1Corners);
+    if (res.doesOverlap) { res.resolutionVector = Vector{0.0f, 0.0f} - res.resolutionVector; }
   }
 
-  if (!res.doesOverlap || res.resolutionVector == Vector{0.0f, 0.0f}) {
-    return false;
-  }
+  if (!res.doesOverlap || res.resolutionVector == Vector{0.0f, 0.0f}) { return false; }
 
   doResolve(rect1, trans1, rect2, trans2, res.resolutionVector);
   return true;
@@ -52,7 +56,8 @@ bool CollisionResolver::resolve(const RectangleColliderComponent& rect1,
 bool CollisionResolver::resolve(const EllipseColliderComponent& ellip,
                                 TransformComponent& transEllip,
                                 const RectangleColliderComponent& rect,
-                                TransformComponent& transRect) {
+                                TransformComponent& transRect)
+{
   Vector ellipCenter = ellip.getTransformedCenter(transEllip.pos);
   auto rectCorners = rect.getTransformedCorners(transRect.pos);
 
@@ -75,7 +80,8 @@ bool CollisionResolver::resolve(const EllipseColliderComponent& ellip,
 
   // TODO: Try to take two point of intersection, get perpen in middle of it as resolutionVector
   // That would eliminate the need for this cycle and weights
-  for (auto line : linesContainingClosestPoint) {
+  for (auto line : linesContainingClosestPoint)
+  {
     std::optional<Line> perperndicularToLineContClosestPoint = Geometry::getPerpendicularLineAtPoint(
       closestPointToEllipInRect, line);
 
@@ -94,9 +100,7 @@ bool CollisionResolver::resolve(const EllipseColliderComponent& ellip,
     weightSum += weight;
   }
 
-  if (weightSum > 0.0f) {
-    resolutionVector = resolutionVector * (1.0f / weightSum);
-  }
+  if (weightSum > 0.0f) { resolutionVector = resolutionVector * (1.0f / weightSum); }
 
   doResolve(ellip, transEllip, rect, transRect, resolutionVector);
   return true;
@@ -105,7 +109,8 @@ bool CollisionResolver::resolve(const EllipseColliderComponent& ellip,
 bool CollisionResolver::resolve(const EllipseColliderComponent& ell1,
                                 TransformComponent& trans1,
                                 const EllipseColliderComponent& ell2,
-                                TransformComponent& trans2) {
+                                TransformComponent& trans2)
+{
   Vector ell1Center = ell1.getTransformedCenter(trans1.pos);
   Vector ell2Center = ell2.getTransformedCenter(trans2.pos);
 
