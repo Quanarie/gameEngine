@@ -1,9 +1,7 @@
 #include "static/collision_resolver.h"
+#include "component/transform_component.h"
 #include "component/collider/rectangle/rectangle_corners.h"
 #include "component/collider/rectangle/rectangle_colider_component.h"
-
-#include <component/transform_component.h>
-#include <static/coordinates_converter.h>
 
 bool RectangleColliderComponent::resolve(const ColliderComponent& other,
                                          TransformComponent& transformThis,

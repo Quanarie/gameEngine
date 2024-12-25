@@ -7,7 +7,7 @@ struct Vector {
   float length();
   Vector normalized();
   Vector inverted();
-  Vector projectPointOntoLine(Vector a, Vector b);
+  Vector projectOntoLine(Vector a, Vector b);
 
   // TODO: add += and change + occurrences
   Vector operator+(const Vector& point) const;

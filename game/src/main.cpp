@@ -66,9 +66,9 @@ public:
 
   void initialize() override
   {
-    transform = addComponent<TransformComponent>(Vector{0.0f, 0.0f}, 0.0f, Vector{1.25f, 1.25f});
+    transform = addComponent<TransformComponent>(Vector{0.0f, 0.0f}, 45.0f, Vector{1.25f, 1.25f});
     collider = addComponent<RectangleColliderComponent>(
-      Vector{-30.0f, -20.0f}, Vector{30.0f, 20.0f});
+      Vector{-30.0f, -30.0f}, Vector{30.0f, 30.0f});
     render = addComponent<SpriteRenderComponent>(
       35.0f, 40.0f, "../assets/player.bmp", Vector{-16.0f, -18.0f});
   }
@@ -168,7 +168,7 @@ private:
   ColliderComponent* collider = nullptr;
   std::vector<Platform*> platforms;
 
-  int hp = 10;
+  int hp = 100000000;
 };
 
 class Enemy : public Entity
@@ -178,16 +178,16 @@ public:
 
   void initialize() override
   {
-    transform = addComponent<TransformComponent>(Vector{100.0f, 0.0f}, 0.0f, Vector{1.25f, 1.25f});
+    transform = addComponent<TransformComponent>(Vector{100.0f, 0.0f}, 22.0f, Vector{1.25f, 1.25f});
     collider = addComponent<RectangleColliderComponent>(
       Vector{-15.0f, -20.0f}, Vector{15.0f, 25.0f});
-    render = addComponent<SpriteRenderComponent>(
-      40.0f, 40.0f, "../assets/enemy.bmp", Vector{-19.0f, -19.0f});
+    // render = addComponent<SpriteRenderComponent>(
+    //   40.0f, 40.0f, "../assets/enemy.bmp", Vector{-19.0f, -19.0f});
   }
 
   void update() override
   {
-    // transform->pos = transform->pos + (player->getTransform()->pos - transform->pos).normalized() / 2;
+    transform->pos = transform->pos + (player->getTransform()->pos - transform->pos).normalized() / 2;
   }
 
   void onCollision(ColliderComponent* col) override
@@ -245,8 +245,8 @@ int main(int argc, char* argv[])
   }
 
   std::vector<Platform*> platforms;
-  platforms.reserve(10);
-  for (int i = 0; i < 10; i++) { platforms.push_back(engine.createEntity<Platform>()); }
+  // platforms.reserve(10);
+  // for (int i = 0; i < 10; i++) { platforms.push_back(engine.createEntity<Platform>()); }
   Player* player = engine.createEntity<Player>(platforms);
 
   for (int i = 0; i < 1; i++) { engine.createEntity<Enemy>(player); }

@@ -4,6 +4,9 @@
 
 #include "static/geometry.h"
 #include "static/collision_resolver.h"
+
+#include <iostream>
+
 #include "static/coordinates_converter.h"
 #include "component/transform_component.h"
 #include "component/collider/rectangle/rectangle_corners.h"
@@ -39,17 +42,13 @@ bool CollisionResolver::resolve(const RectangleColliderComponent& rect1,
   auto rect1Corners = rect1.getTransformedCorners();
   auto rect2Corners = rect2.getTransformedCorners();
 
-  OverlapResult res = Geometry::anyCornerOfRect1InsideRect2(rect1Corners, rect2Corners);
-  // We need to check if any corner of rect1 is in rect2 or vice versa, cuz rectangles can be rotated (in future)
-  if (!res.doesOverlap)
-  {
-    res = Geometry::anyCornerOfRect1InsideRect2(rect2Corners, rect1Corners);
-    if (res.doesOverlap) { res.resolutionVector = Vector{0.0f, 0.0f} - res.resolutionVector; }
-  }
+  if (!Geometry::doRectanglesIntersect(rect1Corners, rect2Corners))
+    return false;
 
-  if (!res.doesOverlap || res.resolutionVector == Vector{0.0f, 0.0f}) { return false; }
+  // TODO: Causes stickiness, also doesnt account that second collider can be fucking moving as well
+  Vector resolutionVector = rect1.prevPos - trans1.pos;
+  doResolve(rect1, trans1, rect2, trans2, resolutionVector);
 
-  doResolve(rect1, trans1, rect2, trans2, res.resolutionVector);
   return true;
 }
 

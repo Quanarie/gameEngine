@@ -16,6 +16,7 @@ public:
   virtual ~ColliderComponent() = default;
 
   bool isStatic = false;
+  Vector prevPos{};
   RenderComponent* colliderBoundsRenderComponent = nullptr;
 
   // Double dispatch. Nice !!
@@ -34,7 +35,7 @@ public:
   void render(SDL_Renderer* renderer) const;
 
 protected:
-  TransformComponent* transform;
+  TransformComponent* transform = nullptr;
 };
 
 

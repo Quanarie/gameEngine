@@ -9,11 +9,11 @@
 #include "component/collider/rectangle/rectangle_colider_component.h"
 
 // TODO: rewrite using functions that dont have any engine related abstractions
-// struct SetupResolutionFixture {
-//   SetupResolutionFixture() {
-//     CoordinatesConverter::setResolution(800, 600);
-//   }
-// };
+struct SetupResolutionFixture {
+  SetupResolutionFixture() {
+    CoordinatesConverter::setResolution(800, 600);
+  }
+};
 //
 // TEST_CASE_METHOD(SetupResolutionFixture, "Rectangles intersect") {
 //   auto rect1 = new RectangleColliderComponent(Vector{0.0f, 0.0f}, Vector{30.0f, 30.0f});
