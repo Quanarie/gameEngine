@@ -31,7 +31,6 @@ struct CornerInfo
 class Geometry
 {
 public:
-  static bool doRectanglesIntersect(RectangleCorners rect1, RectangleCorners rect2);
   static OverlapResult doesRectCornerOverlapOtherRect(RectangleCorners rect1Corners, int cornerIndex,
                                                       RectangleCorners rect2Corners);
   static std::optional<Line> getLineDefinedByTwoPoints(Vector p, Vector q);

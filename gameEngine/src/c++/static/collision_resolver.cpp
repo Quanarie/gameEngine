@@ -4,9 +4,6 @@
 
 #include "static/geometry.h"
 #include "static/collision_resolver.h"
-
-#include <iostream>
-
 #include "static/coordinates_converter.h"
 #include "component/transform_component.h"
 #include "component/collider/rectangle/rectangle_corners.h"
@@ -34,6 +31,65 @@ void doResolve(const ColliderComponent& coll1,
   }
 }
 
+void projectRectangleOntoAxis(RectangleCorners& rect,
+                              Vector& axis,
+                              float& min,
+                              float& max)
+{
+  float projections[4] = {
+    rect.ld.dot(axis),
+    rect.lu.dot(axis),
+    rect.ru.dot(axis),
+    rect.rd.dot(axis)
+  };
+
+  min = *std::min_element(projections, projections + 4);
+  max = *std::max_element(projections, projections + 4);
+}
+
+float calculatePenetration(RectangleCorners& rect1,
+                           RectangleCorners& rect2,
+                           Vector& collisionNormal)
+{
+  float minPenetration = std::numeric_limits<float>::max();
+  Vector bestAxis;
+
+  std::vector axes = {
+    (rect1.lu - rect1.ld).normalized(),
+    (rect1.ru - rect1.lu).normalized(),
+    (rect2.lu - rect2.ld).normalized(),
+    (rect2.ru - rect2.lu).normalized()
+  };
+
+  for (auto& axis : axes)
+  {
+    float min1, max1, min2, max2;
+
+    projectRectangleOntoAxis(rect1, axis, min1, max1);
+    projectRectangleOntoAxis(rect2, axis, min2, max2);
+
+    float overlap = std::min(max1, max2) - std::max(min1, min2);
+
+    if (overlap <= 0) { return 0.0f; }
+
+    if (overlap < minPenetration)
+    {
+      minPenetration = overlap;
+      bestAxis = axis;
+    }
+  }
+
+  Vector center1 = (rect1.ld + rect1.ru) * 0.5f;
+  Vector center2 = (rect2.ld + rect2.ru) * 0.5f;
+  Vector centerToCenter = center1 - center2;
+
+  if (centerToCenter.dot(bestAxis) < 0) { bestAxis = Vector{0.0f, 0.0f} - bestAxis; }
+
+  collisionNormal = bestAxis;
+  return minPenetration;
+}
+
+
 bool CollisionResolver::resolve(const RectangleColliderComponent& rect1,
                                 TransformComponent& trans1,
                                 const RectangleColliderComponent& rect2,
@@ -42,11 +98,13 @@ bool CollisionResolver::resolve(const RectangleColliderComponent& rect1,
   auto rect1Corners = rect1.getTransformedCorners();
   auto rect2Corners = rect2.getTransformedCorners();
 
-  if (!Geometry::doRectanglesIntersect(rect1Corners, rect2Corners))
+  Vector collisionNormal;
+  float penetrationDepth = calculatePenetration(rect1Corners, rect2Corners, collisionNormal);
+
+  if (penetrationDepth == 0.0f)
     return false;
 
-  // TODO: Causes stickiness, also doesnt account that second collider can be fucking moving as well
-  Vector resolutionVector = rect1.prevPos - trans1.pos;
+  Vector resolutionVector = collisionNormal * penetrationDepth;
   doResolve(rect1, trans1, rect2, trans2, resolutionVector);
 
   return true;

@@ -13,7 +13,6 @@
 #define MAX_SIDES_CONTAINING_SAME_POINT 2
 #define TREAT_AS_GOING_THROUGH_ELLIPSE_CENTER 0.25f
 
-// Copied somewhere
 std::optional<Vector> Geometry::findLinesIntersectionPoint(Vector a1, Vector b1, Vector a2, Vector b2)
 {
   float s1_x, s1_y, s2_x, s2_y;
@@ -29,47 +28,6 @@ std::optional<Vector> Geometry::findLinesIntersectionPoint(Vector a1, Vector b1,
   if (s >= 0 && s <= 1 && t >= 0 && t <= 1) { return Vector{a1.x + (t * s1_x), a1.y + (t * s1_y)}; }
 
   return std::nullopt;
-}
-
-bool doSegmentsIntersect(Vector a1, Vector b1, Vector a2, Vector b2)
-{
-  std::optional<Vector> lineIntersect = Geometry::findLinesIntersectionPoint(a1, b1, a2, b2);
-  if (!lineIntersect.has_value())
-    return false;
-
-  Vector intersect = lineIntersect.value();
-
-  return intersect.isOnSegment(a1, b1) && !(intersect == a1) && !(intersect == b1) &&
-    intersect.isOnSegment(a2, b2) && !(intersect == a2) && !(intersect == b2);
-}
-
-bool doesSegmentIntersectRectangle(Vector a, Vector b, RectangleCorners rect)
-{
-  for (int i = 0; i < RECTANGLE_CORNERS_COUNT; i++)
-  {
-    Vector segmentStart = rect[i];
-    Vector segmentEnd = rect[(i + 1) % RECTANGLE_CORNERS_COUNT];
-
-    if (doSegmentsIntersect(a, b, segmentStart, segmentEnd))
-      return true;
-  }
-
-  return false;
-}
-
-// Works well for rotated rectangles
-bool Geometry::doRectanglesIntersect(RectangleCorners rect1, RectangleCorners rect2)
-{
-  for (int i = 0; i < RECTANGLE_CORNERS_COUNT; i++)
-  {
-    Vector segmentStart = rect1[i];
-    Vector segmentEnd = rect1[(i + 1) % RECTANGLE_CORNERS_COUNT];
-
-    if (doesSegmentIntersectRectangle(segmentStart, segmentEnd, rect2))
-      return true;
-  }
-
-  return false;
 }
 
 std::optional<Line> Geometry::getLineDefinedByTwoPoints(Vector p, Vector q)

@@ -43,6 +43,11 @@ bool Vector::isOnSegment(Vector segmentStart, Vector segmentEnd)
     IS_ON_SEGMENT_EPSILON;
 }
 
+float Vector::dot(Vector v)
+{
+  return this->x * v.x + this->y * v.y;
+}
+
 Vector Vector::rotateAroundPointRad(Vector p, float rot)
 {
   return Vector{
