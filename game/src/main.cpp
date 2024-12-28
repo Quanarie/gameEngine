@@ -66,7 +66,7 @@ public:
 
   void initialize() override
   {
-    transform = addComponent<TransformComponent>(Vector{0.0f, 0.0f}, 150.0f, Vector{1.25f, 1.25f});
+    transform = addComponent<TransformComponent>(Vector{0.0f, 0.0f}, 30.0f, Vector{1.25f, 1.25f});
     collider = addComponent<RectangleColliderComponent>(
       Vector{-30.0f, -30.0f}, Vector{30.0f, 30.0f});
     render = addComponent<SpriteRenderComponent>(
@@ -178,9 +178,9 @@ public:
 
   void initialize() override
   {
-    transform = addComponent<TransformComponent>(Vector{0.0f, 0.0f}, 22.0f, Vector{1.25f, 1.25f});
-    collider = addComponent<RectangleColliderComponent>(
-      Vector{-15.0f, -20.0f}, Vector{15.0f, 25.0f});
+    transform = addComponent<TransformComponent>(Vector{100.0f, 0.0f}, 0.0f, Vector{1.25f, 1.25f});
+    collider = addComponent<EllipseColliderComponent>(
+      Vector{0.0f, 0.0f}, EllipseAxes{15.0f, 25.0f});
     // render = addComponent<SpriteRenderComponent>(
     //   40.0f, 40.0f, "../assets/enemy.bmp", Vector{-19.0f, -19.0f});
   }
