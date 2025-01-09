@@ -13,42 +13,48 @@
 #define MAX_SIDES_CONTAINING_SAME_POINT 2
 #define TREAT_AS_GOING_THROUGH_ELLIPSE_CENTER 0.25f
 
-void projectRectangleOntoAxis(RectangleCorners& rect,
+void projectPolygonOntoAxis(std::vector<Vector>& pol,
                               Vector& axis,
                               float& min,
                               float& max)
 {
-  float projections[4] = {
-    rect.ld.dot(axis),
-    rect.lu.dot(axis),
-    rect.ru.dot(axis),
-    rect.rd.dot(axis)
-  };
-
-  min = *std::min_element(projections, projections + 4);
-  max = *std::max_element(projections, projections + 4);
+  min = max = pol[0].dot(axis);
+  for (auto& vertex : pol) {
+    float projection = vertex.dot(axis);
+    if (projection < min) min = projection;
+    if (projection > max) max = projection;
+  }
 }
 
-float Geometry::calculatePenetration(RectangleCorners& rect1,
-                           RectangleCorners& rect2,
+float Geometry::calculatePenetration(std::vector<Vector>& pol1,
+                           Vector pol1Center,
+                           std::vector<Vector>& pol2,
+                           Vector pol2Center,
                            Vector& collisionNormal)
 {
   float minPenetration = std::numeric_limits<float>::max();
   Vector bestAxis;
 
-  std::vector axes = {
-    (rect1.lu - rect1.ld).normalized(),
-    (rect1.ru - rect1.lu).normalized(),
-    (rect2.lu - rect2.ld).normalized(),
-    (rect2.ru - rect2.lu).normalized()
-  };
+  std::vector<Vector> axes;
+
+  for (size_t i = 0; i < pol1.size(); ++i) {
+    Vector edge = pol1[(i + 1) % pol1.size()] - pol1[i];
+    Vector axis = Vector{-edge.y, edge.x}.normalized();
+    axes.push_back(axis);
+  }
+
+  for (size_t i = 0; i < pol2.size(); ++i) {
+    Vector edge = pol2[(i + 1) % pol2.size()] - pol2[i];
+    Vector axis = Vector{-edge.y, edge.x}.normalized();
+    axes.push_back(axis);
+  }
 
   for (auto& axis : axes)
   {
     float min1, max1, min2, max2;
 
-    projectRectangleOntoAxis(rect1, axis, min1, max1);
-    projectRectangleOntoAxis(rect2, axis, min2, max2);
+    projectPolygonOntoAxis(pol1, axis, min1, max1);
+    projectPolygonOntoAxis(pol2, axis, min2, max2);
 
     float overlap = std::min(max1, max2) - std::max(min1, min2);
 
@@ -61,10 +67,7 @@ float Geometry::calculatePenetration(RectangleCorners& rect1,
     }
   }
 
-  Vector center1 = (rect1.ld + rect1.ru) * 0.5f;
-  Vector center2 = (rect2.ld + rect2.ru) * 0.5f;
-  Vector centerToCenter = center1 - center2;
-
+  Vector centerToCenter = pol1Center - pol2Center;
   if (centerToCenter.dot(bestAxis) < 0) { bestAxis = Vector{0.0f, 0.0f} - bestAxis; }
 
   collisionNormal = bestAxis;

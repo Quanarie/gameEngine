@@ -31,7 +31,8 @@ struct CornerInfo
 class Geometry
 {
 public:
-  static float calculatePenetration(RectangleCorners& rect1, RectangleCorners& rect2, Vector& collisionNormal);
+  static float calculatePenetration(std::vector<Vector>& pol1, Vector pol1Center, std::vector<Vector>& pol2,
+                                    Vector pol2Center, Vector& collisionNormal);
   static std::optional<Line> getLineDefinedByTwoPoints(Vector p, Vector q);
 
   static std::array<Vector, 2>

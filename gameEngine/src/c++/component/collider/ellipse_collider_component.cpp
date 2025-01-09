@@ -21,8 +21,8 @@ bool EllipseColliderComponent::resolveWith(const EllipseColliderComponent& ellip
   return CollisionResolver::resolve(ellipse, transformOther, *this, transformThis);
 }
 
-Vector EllipseColliderComponent::getTransformedCenter(Vector relativeTo) const {
-  return this->center + relativeTo;
+Vector EllipseColliderComponent::getTransformedCenter(Vector pos) const {
+  return this->center + pos;
 }
 
 EllipseAxes EllipseColliderComponent::getScaledAxes() const {

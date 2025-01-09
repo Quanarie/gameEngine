@@ -12,16 +12,12 @@ void RectangleRenderComponent::render(SDL_Renderer* renderer)
   Vector LD = leftDown, RU = rightUp;
   Vector LU = {LD.x, RU.y}, RD = {RU.x, LD.y};
 
-  std::optional<Vector> rp = Geometry::findLinesIntersectionPoint(LD, RU, LU, RD);
-  if (!rp.has_value())
-    throw std::runtime_error(
-      "Could not find intersection point of diagonals in rectangle. Something is wrong i guess...");
-  Vector rpVal = rp.value();
+  Vector rp = (LD + RU)/2;
   float rot = this->transform->getRotationRad();
-  Vector LURot = LU.rotateAroundPointRad(rpVal, rot);
-  Vector RURot = RU.rotateAroundPointRad(rpVal, rot);
-  Vector LDRot = LD.rotateAroundPointRad(rpVal, rot);
-  Vector RDRot = RD.rotateAroundPointRad(rpVal, rot);
+  Vector LURot = LU.rotateAroundPointRad(rp, rot);
+  Vector RURot = RU.rotateAroundPointRad(rp, rot);
+  Vector LDRot = LD.rotateAroundPointRad(rp, rot);
+  Vector RDRot = RD.rotateAroundPointRad(rp, rot);
 
   Vector convertedCoords = CoordinatesConverter::toSdlCoordinates(transform->pos);
   LD = LDRot * Vector{1.0f, -1.0f} * transform->scale + convertedCoords;

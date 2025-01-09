@@ -29,7 +29,7 @@ public:
                   TransformComponent& transformThis,
                   TransformComponent& transformOther) const override;
 
-  Vector getTransformedCenter(Vector relativeTo) const;
+  Vector getTransformedCenter(Vector pos) const;
   EllipseAxes getScaledAxes() const;
 
 private:
