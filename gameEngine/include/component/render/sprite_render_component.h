@@ -8,6 +8,7 @@
 #include "component/render/render_component.h"
 #include "component/render/texture_manager.h"
 
+// TODO if there is animatorCompoennt then the value of path parameter here doesnt matter
 class SpriteRenderComponent : public RenderComponent {
 public:
   Uint8 r = 255, g = 255, b = 255;

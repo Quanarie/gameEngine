@@ -70,9 +70,11 @@ public:
     transform = addComponent<TransformComponent>(Vector{0.0f, 0.0f}, 30.0f, Vector{1.25f, 1.25f});
     collider = addComponent<RectangleColliderComponent>(
       Vector{-30.0f, -30.0f}, Vector{30.0f, 30.0f});
-    render = addComponent<SpriteRenderComponent>(35.0f, 40.0f, "", Vector{-16.0f, -18.0f});
-    animator = addComponent<AnimatorComponent>(std::vector{
-      std::string("../assets/player_1.bmp"), std::string("../assets/player_2.bmp")});
+    render = addComponent<SpriteRenderComponent>(35.0f, 40.0f, "whatever", Vector{-16.0f, -18.0f});
+    animator = addComponent<AnimatorComponent>(
+      std::vector{std::string("../assets/player_1.bmp"), std::string("../assets/player_2.bmp")},
+      std::vector{100, 100}
+    );
   }
 
   void update() override

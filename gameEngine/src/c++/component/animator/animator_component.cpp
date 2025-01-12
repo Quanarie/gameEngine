@@ -1,32 +1,28 @@
-#include "component/animator/animator_component.h"
-
-#include <entity.h>
 #include <iostream>
 #include <thread>
-#include <component/render/sprite_render_component.h>
+
+#include "entity.h"
+#include "component/animator/animator_component.h"
+#include "component/render/sprite_render_component.h"
 
 void AnimatorComponent::run()
 {
-  while (this->keepRunning)
+  while (keepRunning)
   {
     std::cout << "Animator does its thingy" << std::endl;
-    if (this->spriteRenderComponent)
-      this->spriteRenderComponent->changeImage(imagePaths[++currentImage % imagePaths.size()]);
-    std::this_thread::sleep_for(std::chrono::seconds(1));
+    currentImage = (currentImage + 1) % imagePaths.size();
+    spriteRenderComponent->changeImage(imagePaths[currentImage]);
+    std::this_thread::sleep_for(std::chrono::milliseconds(timesBetweenMs[currentImage]));
   }
-}
-
-AnimatorComponent::AnimatorComponent(
-  const std::vector<std::string>& imgs/*, std::vector<int> tmsBetweenMs*/) : imagePaths(imgs) /*,
-  timesBetweenMc(tmsBetweenMs)*/
-{
-  worker = std::thread(&AnimatorComponent::run, this);
-  keepRunning = true;
 }
 
 void AnimatorComponent::initialize()
 {
-  this->spriteRenderComponent = this->entity->getComponent<SpriteRenderComponent>();
+  spriteRenderComponent = entity->getComponent<SpriteRenderComponent>();
+  if (!spriteRenderComponent)
+    throw std::runtime_error("SpriteRenderComponent not found. It is needed for AnimatorComponent to work");
+  keepRunning = true;
+  worker = std::thread(&AnimatorComponent::run, this);
 }
 
 AnimatorComponent::~AnimatorComponent()
