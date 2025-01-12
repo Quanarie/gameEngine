@@ -17,6 +17,7 @@ public:
 
   virtual void onCollision(ColliderComponent* col) {}
 
+  // WARNING use in initialize method of Entity, other case behavior is undefined by me
   template <typename T, typename... Args>
   T* addComponent(Args&&... args) {
     T* component = new T(std::forward<Args>(args)...);

@@ -3,25 +3,19 @@
 #include "component/collider/rectangle/rectangle_corners.h"
 #include "component/collider/rectangle/rectangle_colider_component.h"
 
-bool RectangleColliderComponent::resolve(const ColliderComponent& other,
-                                         TransformComponent& transformThis,
-                                         TransformComponent& transformOther) const
+bool RectangleColliderComponent::resolve(const ColliderComponent& other) const
 {
-  return other.resolveWith(*this, transformOther, transformThis);
+  return other.resolveWith(*this);
 }
 
-bool RectangleColliderComponent::resolveWith(const RectangleColliderComponent& rect,
-                                             TransformComponent& transformThis,
-                                             TransformComponent& transformOther) const
+bool RectangleColliderComponent::resolveWith(const RectangleColliderComponent& rect) const
 {
-  return CollisionResolver::resolve(rect, transformOther, *this, transformThis);
+  return CollisionResolver::resolve(rect, *this);
 }
 
-bool RectangleColliderComponent::resolveWith(const EllipseColliderComponent& ellipse,
-                                             TransformComponent& transformThis,
-                                             TransformComponent& transformOther) const
+bool RectangleColliderComponent::resolveWith(const EllipseColliderComponent& ellipse) const
 {
-  return CollisionResolver::resolve(ellipse, transformOther, *this, transformThis);
+  return CollisionResolver::resolve(ellipse, *this);
 }
 
 RectangleCorners RectangleColliderComponent::getTransformedCorners() const

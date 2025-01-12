@@ -28,6 +28,7 @@ void TextureManager::create(const std::string& path)
 
 SDL_Texture* TextureManager::get(const std::string& path)
 {
+  // TODO thrown randomly sometimes
   if (!has(path)) { throw std::runtime_error("Texture not found: " + path); }
   return textures[path];
 }

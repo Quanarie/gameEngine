@@ -1,11 +1,7 @@
 #include <SDL.h>
 #include <iostream>
-#include <SDL_timer.h>
 
 #include "engine.h"
-
-#include <component/animator/animator_component.h>
-
 #include "entity.h"
 #include "static/inputs.h"
 #include "static/options.h"
@@ -123,18 +119,16 @@ void Engine::resolveCollisions()
   for (size_t i = 0; i < entities.size(); ++i)
   {
     auto colliderA = entities[i]->getComponent<ColliderComponent>();
-    auto transformA = entities[i]->getComponent<TransformComponent>();
-    if (!colliderA || !transformA)
+    if (!colliderA)
       continue;
     // TODO: change checking every pair
     for (size_t j = i + 1; j < entities.size(); ++j)
     {
       auto colliderB =
         entities[j]->getComponent<ColliderComponent>();
-      auto transformB = entities[j]->getComponent<TransformComponent>();
-      if (!colliderB || !transformB)
+      if (!colliderB)
         continue;
-      if (colliderA->resolve(*colliderB, *transformA, *transformB))
+      if (colliderA->resolve(*colliderB))
       {
         entities[i]->onCollision(colliderB);
         entities[j]->onCollision(colliderA);

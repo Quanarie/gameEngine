@@ -19,7 +19,6 @@ void SpriteRenderComponent::render(SDL_Renderer* renderer)
   Vector positionInSdlCoords = CoordinatesConverter::toSdlCoordinates(transform->pos);
 
   SDL_Rect dstRect{
-    // TODO: Offset is only scaled here. I think i dont need to scale center in ellipse?
     static_cast<int>(positionInSdlCoords.x + offset.x * transform->scale.x),
     static_cast<int>(positionInSdlCoords.y + offset.y * transform->scale.y),
     static_cast<int>(width * transform->scale.x),

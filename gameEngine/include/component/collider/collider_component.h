@@ -18,24 +18,14 @@ public:
   bool isStatic = false;
   Vector prevPos{};
   RenderComponent* colliderBoundsRenderComponent = nullptr;
+  TransformComponent* transform = nullptr;
 
   // Double dispatch. Nice !!
-  virtual bool resolve(const ColliderComponent& other,
-                       TransformComponent& transformThis,
-                       TransformComponent& transformOther) const = 0;
-
-  virtual bool resolveWith(const RectangleColliderComponent& rect,
-                           TransformComponent& transformThis,
-                           TransformComponent& transformOther) const = 0;
-
-  virtual bool resolveWith(const EllipseColliderComponent& ellipse,
-                           TransformComponent& transformThis,
-                           TransformComponent& transformOther) const = 0;
+  virtual bool resolve(const ColliderComponent& other) const = 0;
+  virtual bool resolveWith(const RectangleColliderComponent& rect) const = 0;
+  virtual bool resolveWith(const EllipseColliderComponent& ellipse) const = 0;
 
   void render(SDL_Renderer* renderer) const;
-
-protected:
-  TransformComponent* transform = nullptr;
 };
 
 

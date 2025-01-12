@@ -24,17 +24,9 @@ public:
     delete colliderBoundsRenderComponent;
   }
 
-  bool resolve(const ColliderComponent& other,
-              TransformComponent& transformThis,
-              TransformComponent& transformOther) const override;
-
-  bool resolveWith(const RectangleColliderComponent& rect,
-                  TransformComponent& transformThis,
-                  TransformComponent& transformOther) const override;
-
-  bool resolveWith(const EllipseColliderComponent& ellipse,
-                  TransformComponent& transformThis,
-                  TransformComponent& transformOther) const override;
+  bool resolve(const ColliderComponent& other) const override;
+  bool resolveWith(const RectangleColliderComponent& rect) const override;
+  bool resolveWith(const EllipseColliderComponent& ellipse) const override;
 
   RectangleCorners getTransformedCorners() const;
 };
