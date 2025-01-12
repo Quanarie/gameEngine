@@ -3,16 +3,15 @@
 
 void SpriteRenderComponent::changeImage(std::string newPath)
 {
-  this->path = newPath;
-  if (!TextureManager::has(path)) { TextureManager::create(path, renderer); }
+  path = newPath;
+  if (!TextureManager::has(path)) { TextureManager::create(path); }
 }
 
-void SpriteRenderComponent::initializeWithSdlRenderer(SDL_Renderer* renderer)
+void SpriteRenderComponent::initialize()
 {
-  RenderComponent::initializeWithSdlRenderer(renderer);
-  this->renderer = renderer;
+  RenderComponent::initialize();
   if (path.empty()) { return; }
-  if (!TextureManager::has(path)) { TextureManager::create(path, this->renderer); }
+  if (!TextureManager::has(path)) { TextureManager::create(path); }
 }
 
 void SpriteRenderComponent::render(SDL_Renderer* renderer)

@@ -25,9 +25,9 @@ Vector EllipseColliderComponent::getTransformedCenter(Vector pos) const {
   return this->center + pos;
 }
 
-EllipseAxes EllipseColliderComponent::getScaledAxes() const {
-  return EllipseAxes{
-    this->axes.sMajor * this->transform->scale.x,
-    this->axes.sMinor * this->transform->scale.y
+Vector EllipseColliderComponent::getScaledAxes() const {
+  return Vector{
+    this->axes.x * this->transform->scale.x,
+    this->axes.y * this->transform->scale.y
   };
 }

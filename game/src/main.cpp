@@ -10,7 +10,6 @@
 #include "static/inputs.h"
 #include "static/options.h"
 #include "component/transform_component.h"
-#include "component/collider/ellipse/ellipse_axes.h"
 #include "component/collider/ellipse/ellipse_colider_component.h"
 #include "component/collider/rectangle/rectangle_colider_component.h"
 
@@ -30,7 +29,7 @@ public:
       }
     );
     render = addComponent<EllipseRenderComponent>(
-      Vector{0.0f, 0.0f}, EllipseAxes{20.0f, 20.0f});
+      Vector{0.0f, 0.0f}, Vector{20.0f, 20.0f});
   }
 
   void update() override {}
@@ -185,7 +184,7 @@ public:
   {
     transform = addComponent<TransformComponent>(Vector{100.0f, 0.0f}, 45.0f, Vector{1.25f, 1.25f});
     collider = addComponent<EllipseColliderComponent>(
-      Vector{0.0f, 0.0f}, EllipseAxes{25.0f, 40.0f});
+      Vector{0.0f, 0.0f}, Vector{25.0f, 40.0f});
     // render = addComponent<SpriteRenderComponent>(
     //   40.0f, 40.0f, "../assets/enemy.bmp", Vector{-19.0f, -19.0f});
   }
@@ -225,7 +224,7 @@ public:
   {
     transform = addComponent<TransformComponent>(this->pos, 45.0f);
     render = addComponent<EllipseRenderComponent>(
-      Vector{0.0f, 0.0f}, EllipseAxes{0.5f, 0.5f});
+      Vector{0.0f, 0.0f}, Vector{0.5f, 0.5f});
   }
 
   void update() override {}

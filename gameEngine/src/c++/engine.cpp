@@ -71,15 +71,14 @@ bool Engine::initialize()
     return false;
   }
 
+  TextureManager::initialize(renderer);
+
   for (const auto& entity : entities)
   {
     entity->initialize();
 
-    auto render = entity->getComponent<RenderComponent>();
-    if (render) { render->initializeWithSdlRenderer(renderer); }
-
-    auto animator = entity->getComponent<AnimatorComponent>();
-    if (animator) { animator->initialize(); }
+    auto components = entity->getAllComponents();
+    for (const auto& component : components) { component->initialize(); }
 
     // TODO: maybe change to getAllComponents and init all of them
     auto collider = entity->getComponent<ColliderComponent>();
@@ -89,8 +88,7 @@ bool Engine::initialize()
       collider->colliderBoundsRenderComponent->entity = entity;
       // Passing renderer here is actually not needed,
       // but it is required for SpriteRenderComponent, TODO: think about it
-      collider->colliderBoundsRenderComponent->initializeWithSdlRenderer(renderer);
-      collider->initialize();
+      collider->colliderBoundsRenderComponent->initialize();
     }
   }
 

@@ -3,6 +3,7 @@
 
 #include <typeindex>
 #include <unordered_map>
+#include <vector>
 
 class ColliderComponent;
 class Component;
@@ -33,6 +34,15 @@ public:
       }
     }
     return nullptr;
+  }
+
+  std::vector<Component*> getAllComponents() {
+    std::vector<Component*> result;
+    result.reserve(components.size());
+    for (const auto& pair : components) {
+      result.emplace_back(pair.second);
+    }
+    return result;
   }
 
 protected:

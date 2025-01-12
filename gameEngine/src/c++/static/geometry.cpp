@@ -6,7 +6,6 @@
 #include <static/inputs.h>
 
 #include "util/vector.h"
-#include "component/collider/ellipse/ellipse_axes.h"
 #include "component/collider/rectangle/rectangle_corners.h"
 
 #define RECTANGLE_CORNERS_COUNT 4
@@ -115,7 +114,7 @@ std::vector<std::optional<Line>> Geometry::getLinesDefinedBySidesThatContainsPoi
 
 std::array<Vector, 2>
 Geometry::getIntersectionsOfLineAndEllipse(std::optional<Line> lineOpt, Vector pointOnLine,
-                                           Vector ellipCenter, EllipseAxes axes)
+                                           Vector ellipCenter, Vector axes)
 {
   Vector intersect1, intersect2;
   if (lineOpt.has_value())
@@ -125,8 +124,8 @@ Geometry::getIntersectionsOfLineAndEllipse(std::optional<Line> lineOpt, Vector p
     float sl = line.slope;
     float yI = sl * ellipCenter.x + line.yIntercept - ellipCenter.y;
     yI = std::abs(yI) < TREAT_AS_GOING_THROUGH_ELLIPSE_CENTER ? 0.0f : yI;
-    float j = axes.sMajor;
-    float m = axes.sMinor;
+    float j = axes.x;
+    float m = axes.y;
 
     float x1, x2;
     if (sl == 0.0f) { x1 = j / m * sqrt(m * m - yI * yI); }
@@ -156,8 +155,8 @@ Geometry::getIntersectionsOfLineAndEllipse(std::optional<Line> lineOpt, Vector p
   else
   {
     float y0;
-    if (pointOnLine == ellipCenter) { y0 = ellipCenter.y + axes.sMinor; }
-    else { y0 = axes.sMinor * sqrt(1 - pow(pointOnLine.x / axes.sMajor, 2)); }
+    if (pointOnLine == ellipCenter) { y0 = ellipCenter.y + axes.y; }
+    else { y0 = axes.y * sqrt(1 - pow(pointOnLine.x / axes.x, 2)); }
     intersect1 = Vector{pointOnLine.x, y0} + ellipCenter;
     intersect2 = Vector{pointOnLine.x, -y0} + ellipCenter;
   }

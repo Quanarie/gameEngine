@@ -63,7 +63,7 @@ bool CollisionResolver::resolve(const RectangleColliderComponent& rect1,
   return true;
 }
 
-std::vector<Vector> getEllipApproxAsPolygon(Vector ellipCenter, EllipseAxes scaledAxes, int numVertices,
+std::vector<Vector> getEllipApproxAsPolygon(Vector ellipCenter, Vector scaledAxes, int numVertices,
                                             TransformComponent& trans)
 {
   std::vector<Vector> vertices;
@@ -75,8 +75,8 @@ std::vector<Vector> getEllipApproxAsPolygon(Vector ellipCenter, EllipseAxes scal
   for (int i = 0; i < numVertices; ++i) {
     float angle = i * angleIncrement;
 
-    float x = scaledAxes.sMajor * std::cos(angle);
-    float y = scaledAxes.sMinor * std::sin(angle);
+    float x = scaledAxes.x * std::cos(angle);
+    float y = scaledAxes.y * std::sin(angle);
 
     float xRotated = x * cos(rotation) - y * sin(rotation) + ellipCenter.x;
     float yRotated = x * sin(rotation) + y * cos(rotation) + ellipCenter.y;

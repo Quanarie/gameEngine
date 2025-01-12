@@ -9,7 +9,7 @@ void AnimatorComponent::run()
 {
   while (keepRunning)
   {
-    std::cout << "Animator does its thingy" << std::endl;
+    // std::cout << "Animator does its thingy" << std::endl;
     currentImage = (currentImage + 1) % imagePaths.size();
     spriteRenderComponent->changeImage(imagePaths[currentImage]);
     std::this_thread::sleep_for(std::chrono::milliseconds(timesBetweenMs[currentImage]));

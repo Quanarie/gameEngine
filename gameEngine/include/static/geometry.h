@@ -5,7 +5,7 @@
 
 #include "util/vector.h"
 
-struct EllipseAxes;
+struct Vector;
 struct RectangleCorners;
 
 struct OverlapResult
@@ -37,7 +37,7 @@ public:
 
   static std::array<Vector, 2>
   getIntersectionsOfLineAndEllipse(std::optional<Line> lineOpt, Vector pointOnLine, Vector ellipCenter,
-                                   EllipseAxes axes);
+                                   Vector axes);
   static std::optional<Line> getPerpendicularLineAtPoint(Vector point, std::optional<Line> lineOpt);
 
   static std::vector<std::optional<Line>> getLinesDefinedBySidesThatContainsPoint(CornerInfo cornerInfo);

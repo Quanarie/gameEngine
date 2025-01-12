@@ -8,10 +8,16 @@
 #include "component/render/texture_manager.h"
 
 std::unordered_map<std::string, SDL_Texture*> TextureManager::textures;
+SDL_Renderer* TextureManager::renderer = nullptr;
+
+void TextureManager::initialize(SDL_Renderer* renderer)
+{
+  TextureManager::renderer = renderer;
+}
 
 bool TextureManager::has(const std::string& path) { return textures.contains(path); }
 
-void TextureManager::create(const std::string& path, SDL_Renderer* renderer)
+void TextureManager::create(const std::string& path)
 {
   if (has(path) || path.empty()) { return; }
 

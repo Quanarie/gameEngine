@@ -10,8 +10,8 @@ void EllipseRenderComponent::render(SDL_Renderer* renderer) {
   for (float angle = 0; angle < 360; angle += 1) {
     float rad = angle * M_PI / 180.0f;
     Vector c = center;
-    float x = c.x + axes.sMajor*transform->scale.x * cos(rad);
-    float y = c.y + axes.sMinor*transform->scale.y * sin(rad);
+    float x = c.x + axes.x*transform->scale.x * cos(rad);
+    float y = c.y + axes.y*transform->scale.y * sin(rad);
 
     float xRotated = c.x + (x - c.x) * cos(rot) - (y - c.y) * sin(rot);
     float yRotated = c.y + (x - c.x) * sin(rot) + (y - c.y) * cos(rot);

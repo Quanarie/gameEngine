@@ -1,14 +1,13 @@
 #ifndef ELLIPSE_COLLIDER_COMPONENT_H
 #define ELLIPSE_COLLIDER_COMPONENT_H
 
-#include "ellipse_axes.h"
 #include "component/collider/collider_component.h"
 #include "component/render/ellipse_render_component.h"
 #include "util/vector.h"
 
 class EllipseColliderComponent : public ColliderComponent {
 public:
-  EllipseColliderComponent(Vector c, EllipseAxes r)
+  EllipseColliderComponent(Vector c, Vector r)
     : center(c), axes(r) {
     colliderBoundsRenderComponent = new EllipseRenderComponent(c, r);
   }
@@ -30,11 +29,11 @@ public:
                   TransformComponent& transformOther) const override;
 
   Vector getTransformedCenter(Vector pos) const;
-  EllipseAxes getScaledAxes() const;
+  Vector getScaledAxes() const;
 
 private:
   Vector center;
-  EllipseAxes axes;
+  Vector axes;
 };
 
 #endif // ELLIPSE_COLLIDER_COMPONENT_H

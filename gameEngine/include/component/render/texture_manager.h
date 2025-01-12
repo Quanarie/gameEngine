@@ -8,8 +8,9 @@
 // TODO set the renderer somewhere in engine.cpp as field here
 class TextureManager {
 public:
+  static void initialize(SDL_Renderer* renderer);
   static bool has(const std::string& path);
-  static void create(const std::string& path, SDL_Renderer* renderer);
+  static void create(const std::string& path);
   static SDL_Texture* get(const std::string& path);
   static void clear();
 
@@ -19,6 +20,7 @@ private:
   static SDL_Texture* loadTexture(const std::string& path, SDL_Renderer* renderer);
 
   static std::unordered_map<std::string, SDL_Texture*> textures;
+  static SDL_Renderer* renderer;
 };
 
 #endif // TEXTURE_MANAGER_H
