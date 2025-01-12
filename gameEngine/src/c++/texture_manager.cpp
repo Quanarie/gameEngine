@@ -16,7 +16,7 @@ void TextureManager::create(const std::string& path, SDL_Renderer* renderer)
   if (has(path) || path.empty()) { return; }
 
   SDL_Texture* texture = loadTexture(path, renderer);
-  if (!texture) { std::cout << "Failed to load texture: " + path << std::endl; }
+  if (!texture) { std::cerr << "Failed to load texture: " + path << std::endl; }
   else { textures[path] = texture; }
 }
 

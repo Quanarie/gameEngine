@@ -12,9 +12,7 @@ class SpriteRenderComponent : public RenderComponent {
 public:
   Uint8 r = 255, g = 255, b = 255;
 
-  SpriteRenderComponent() {}
-
-  SpriteRenderComponent(float w, float h, std::string p, Vector os = {0, 0})
+  SpriteRenderComponent(float w, float h, std::string p = "", Vector os = {0, 0})
     : width(w), height(h), path(std::move(p)), offset(os) {}
 
   void initializeWithSdlRenderer(SDL_Renderer* renderer) override;
