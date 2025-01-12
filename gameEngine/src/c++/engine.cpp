@@ -80,14 +80,11 @@ bool Engine::initialize()
     auto components = entity->getAllComponents();
     for (const auto& component : components) { component->initialize(); }
 
-    // TODO: maybe change to getAllComponents and init all of them
     auto collider = entity->getComponent<ColliderComponent>();
     if (collider)
     {
       // TODO: Quite confusing, this is duplicating logic from addComponent in Entity
       collider->colliderBoundsRenderComponent->entity = entity;
-      // Passing renderer here is actually not needed,
-      // but it is required for SpriteRenderComponent, TODO: think about it
       collider->colliderBoundsRenderComponent->initialize();
     }
   }
@@ -97,24 +94,13 @@ bool Engine::initialize()
 
 void Engine::loop()
 {
-  Uint32 next_game_tick = SDL_GetTicks();
-  int loops;
-
   game_is_running = true;
   while (game_is_running)
   {
-    loops = 0;
     SDL_Event event;
     while (SDL_PollEvent(&event)) { if (event.type == SDL_QUIT) { game_is_running = false; } }
 
-    while (SDL_GetTicks() > next_game_tick && loops < MAX_FRAMESKIP)
-    {
-      update();
-
-      next_game_tick += SKIP_TICKS;
-      loops++;
-    }
-
+    update();
     render();
   }
 }

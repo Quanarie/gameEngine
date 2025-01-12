@@ -35,9 +35,9 @@ private:
   void resolveCollisions();
   void render();
 
-  static constexpr int TICKS_PER_SECOND = 60;
-  static constexpr int SKIP_TICKS = 1000 / TICKS_PER_SECOND;
-  static constexpr int MAX_FRAMESKIP = 10;
+  // static constexpr int TICKS_PER_SECOND = 60;
+  // static constexpr int SKIP_TICKS = 1000 / TICKS_PER_SECOND;
+  // static constexpr int MAX_FRAMESKIP = 10;
 
   GameParams params;
 
