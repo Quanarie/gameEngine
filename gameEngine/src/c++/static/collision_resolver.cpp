@@ -9,6 +9,8 @@
 #include "component/collider/ellipse/ellipse_colider_component.h"
 #include "component/collider/rectangle/rectangle_colider_component.h"
 
+#define ELLIPSE_APPROX_VERTICES_AMOUNT 100
+
 void doResolve(const ColliderComponent& coll1,
                TransformComponent& trans1,
                const ColliderComponent& coll2,
@@ -94,7 +96,7 @@ bool CollisionResolver::resolve(const EllipseColliderComponent& ellip,
   Vector ellipCenter = ellip.getTransformedCenter(transEllip.pos);
 
   std::vector<Vector> rect1Vertices = getRectCornersAsVector(rectCorners);
-  std::vector<Vector> ellipVertices = getEllipApproxAsPolygon(ellipCenter, ellip.getScaledAxes(), 100, transEllip);
+  std::vector<Vector> ellipVertices = getEllipApproxAsPolygon(ellipCenter, ellip.getScaledAxes(), ELLIPSE_APPROX_VERTICES_AMOUNT, transEllip);
 
   Vector collisionNormal;
   float penetrationDepth = Geometry::calculatePenetration(
@@ -122,8 +124,8 @@ bool CollisionResolver::resolve(const EllipseColliderComponent& ell1,
   Vector ell1Center = ell1.getTransformedCenter(trans1.pos);
   Vector ell2Center = ell2.getTransformedCenter(trans2.pos);
 
-  std::vector<Vector> ell1Vertices = getEllipApproxAsPolygon(ell1Center, ell1.getScaledAxes(), 100, trans1);
-  std::vector<Vector> ell2Vertices = getEllipApproxAsPolygon(ell2Center, ell2.getScaledAxes(), 100, trans2);
+  std::vector<Vector> ell1Vertices = getEllipApproxAsPolygon(ell1Center, ell1.getScaledAxes(), ELLIPSE_APPROX_VERTICES_AMOUNT, trans1);
+  std::vector<Vector> ell2Vertices = getEllipApproxAsPolygon(ell2Center, ell2.getScaledAxes(), ELLIPSE_APPROX_VERTICES_AMOUNT, trans2);
 
   Vector collisionNormal;
   float penetrationDepth = Geometry::calculatePenetration(

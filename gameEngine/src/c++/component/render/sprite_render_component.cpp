@@ -1,14 +1,22 @@
 #include "static/coordinates_converter.h"
 #include "component/render/sprite_render_component.h"
 
-void SpriteRenderComponent::initializeWithSdlRenderer(SDL_Renderer* renderer) {
-  RenderComponent::initializeWithSdlRenderer(renderer);
-  if (!TextureManager::has(path)) {
-    TextureManager::create(path, renderer);
-  }
+void SpriteRenderComponent::changeImage(std::string newPath)
+{
+  this->path = newPath;
+  if (!TextureManager::has(path)) { TextureManager::create(path, renderer); }
 }
 
-void SpriteRenderComponent::render(SDL_Renderer* renderer) {
+void SpriteRenderComponent::initializeWithSdlRenderer(SDL_Renderer* renderer)
+{
+  RenderComponent::initializeWithSdlRenderer(renderer);
+  this->renderer = renderer;
+  if (path.empty()) { return; }
+  if (!TextureManager::has(path)) { TextureManager::create(path, this->renderer); }
+}
+
+void SpriteRenderComponent::render(SDL_Renderer* renderer)
+{
   Vector positionInSdlCoords = CoordinatesConverter::toSdlCoordinates(transform->pos);
 
   SDL_Rect dstRect{
@@ -18,6 +26,9 @@ void SpriteRenderComponent::render(SDL_Renderer* renderer) {
     static_cast<int>(width * transform->scale.x),
     static_cast<int>(height * transform->scale.y)
   };
+
+  if (path.empty())
+    return;
 
   SDL_Texture* texture = TextureManager::get(path);
   SDL_SetTextureColorMod(texture, r, g, b);

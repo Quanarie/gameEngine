@@ -1,6 +1,7 @@
 #include <list>
 #include <chrono>
 #include <SDL_scancode.h>
+#include <component/animator/animator_component.h>
 #include <component/render/sprite_render_component.h>
 
 #include "engine.h"
@@ -69,8 +70,9 @@ public:
     transform = addComponent<TransformComponent>(Vector{0.0f, 0.0f}, 30.0f, Vector{1.25f, 1.25f});
     collider = addComponent<RectangleColliderComponent>(
       Vector{-30.0f, -30.0f}, Vector{30.0f, 30.0f});
-    render = addComponent<SpriteRenderComponent>(
-      35.0f, 40.0f, "../assets/player.bmp", Vector{-16.0f, -18.0f});
+    render = addComponent<SpriteRenderComponent>();
+    animator = addComponent<AnimatorComponent>(std::vector{
+      std::string("../assets/player.bmp"), std::string("../assets/player.bmp")});
   }
 
   void update() override
@@ -166,6 +168,7 @@ private:
   TransformComponent* transform = nullptr;
   SpriteRenderComponent* render = nullptr;
   ColliderComponent* collider = nullptr;
+  AnimatorComponent* animator = nullptr;
   std::vector<Platform*> platforms;
 
   int hp = 100000000;
@@ -180,9 +183,9 @@ public:
   {
     transform = addComponent<TransformComponent>(Vector{100.0f, 0.0f}, 45.0f, Vector{1.25f, 1.25f});
     collider = addComponent<EllipseColliderComponent>(
-      Vector{0.0f, 0.0f}, EllipseAxes{15.0f, 25.0f});
-    render = addComponent<SpriteRenderComponent>(
-      40.0f, 40.0f, "../assets/enemy.bmp", Vector{-19.0f, -19.0f});
+      Vector{0.0f, 0.0f}, EllipseAxes{25.0f, 40.0f});
+    // render = addComponent<SpriteRenderComponent>(
+    //   40.0f, 40.0f, "../assets/enemy.bmp", Vector{-19.0f, -19.0f});
   }
 
   void update() override
@@ -251,7 +254,7 @@ int main(int argc, char* argv[])
   for (int i = 0; i < 10; i++) { platforms.push_back(engine.createEntity<Platform>()); }
   Player* player = engine.createEntity<Player>(platforms);
 
-  for (int i = 0; i < 5; i++) { engine.createEntity<Enemy>(player); }
+  for (int i = 0; i < 10; i++) { engine.createEntity<Enemy>(player); }
 
   return engine.start();
 }

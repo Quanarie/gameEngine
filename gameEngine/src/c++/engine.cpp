@@ -3,6 +3,9 @@
 #include <SDL_timer.h>
 
 #include "engine.h"
+
+#include <component/animator/animator_component.h>
+
 #include "entity.h"
 #include "static/inputs.h"
 #include "static/options.h"
@@ -74,6 +77,9 @@ bool Engine::initialize()
 
     auto render = entity->getComponent<RenderComponent>();
     if (render) { render->initializeWithSdlRenderer(renderer); }
+
+    auto animator = entity->getComponent<AnimatorComponent>();
+    if (animator) { animator->initialize(); }
 
     // TODO: maybe change to getAllComponents and init all of them
     auto collider = entity->getComponent<ColliderComponent>();

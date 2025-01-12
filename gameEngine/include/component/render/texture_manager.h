@@ -5,6 +5,7 @@
 #include <string>
 #include <unordered_map>
 
+// TODO set the renderer somewhere in engine.cpp as field here
 class TextureManager {
 public:
   static bool has(const std::string& path);

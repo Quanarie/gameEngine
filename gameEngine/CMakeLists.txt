@@ -38,9 +38,10 @@ target_sources(${PROJECT_NAME} PRIVATE
         src/c++/component/render/ellipse_render_component.cpp
         src/c++/component/render/rectangle_render_component.cpp
         src/c++/component/render/sprite_render_component.cpp
-        src/c++/component/collider/collider.cpp
+        src/c++/component/collider/collider_component.cpp
         src/c++/util/vector.cpp
         src/c++/static/geometry.cpp
+        src/c++/component/animator/animator_component.cpp
 )
 target_include_directories(${PROJECT_NAME} PUBLIC
         include
