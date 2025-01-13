@@ -3,15 +3,15 @@
 
 void SpriteRenderComponent::changeImage(std::string newPath)
 {
-  path = newPath;
-  if (!TextureManager::has(path)) { TextureManager::create(path); }
+  currentlyPlayedFromPath = newPath;
+  if (!TextureManager::has(currentlyPlayedFromPath)) { TextureManager::create(currentlyPlayedFromPath); }
 }
 
 void SpriteRenderComponent::initialize()
 {
   RenderComponent::initialize();
-  if (path.empty()) { return; }
-  if (!TextureManager::has(path)) { TextureManager::create(path); }
+  if (currentlyPlayedFromPath.empty()) { return; }
+  if (!TextureManager::has(currentlyPlayedFromPath)) { TextureManager::create(currentlyPlayedFromPath); }
 }
 
 void SpriteRenderComponent::render(SDL_Renderer* renderer)
@@ -25,10 +25,10 @@ void SpriteRenderComponent::render(SDL_Renderer* renderer)
     static_cast<int>(height * transform->scale.y)
   };
 
-  if (path.empty())
+  if (currentlyPlayedFromPath.empty())
     return;
 
-  SDL_Texture* texture = TextureManager::get(path);
+  SDL_Texture* texture = TextureManager::get(currentlyPlayedFromPath);
   SDL_SetTextureColorMod(texture, r, g, b);
   SDL_RenderCopy(renderer, texture, nullptr, &dstRect);
   SDL_SetTextureColorMod(texture, 255, 255, 255);

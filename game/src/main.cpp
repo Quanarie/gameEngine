@@ -69,10 +69,17 @@ public:
     transform = addComponent<TransformComponent>(Vector{0.0f, 0.0f}, 30.0f, Vector{1.25f, 1.25f});
     collider = addComponent<RectangleColliderComponent>(
       Vector{-30.0f, -30.0f}, Vector{30.0f, 30.0f});
-    render = addComponent<SpriteRenderComponent>(35.0f, 40.0f, "", Vector{-16.0f, -18.0f});
+    render = addComponent<SpriteRenderComponent>(35.0f, 40.0f, "../assets/player_1.bmp", Vector{-16.0f, -18.0f});
     animator = addComponent<AnimatorComponent>(
-      std::vector{std::string("../assets/player_1.bmp"), std::string("../assets/player_2.bmp")},
-      std::vector{1000, 500}
+      std::vector{
+        Animation{
+          "run",
+          std::vector{std::string("../assets/player_1.bmp"), std::string("../assets/player_2.bmp")},
+          std::vector{
+            100, 100
+          }
+        }
+      }
     );
   }
 
@@ -80,10 +87,23 @@ public:
   {
     tiltToNormal();
 
+    auto prevPos = transform->pos;
+
     if (Inputs::isKeyHeld(SDL_SCANCODE_W)) { transform->pos.y += 3; }
     if (Inputs::isKeyHeld(SDL_SCANCODE_S)) { transform->pos.y -= 3; }
     if (Inputs::isKeyHeld(SDL_SCANCODE_A)) { transform->pos.x -= 3; }
     if (Inputs::isKeyHeld(SDL_SCANCODE_D)) { transform->pos.x += 3; }
+
+    if (prevPos == transform->pos)
+    {
+      if (animator->isPlaying())
+        animator->stopPlaying();
+    }
+    else
+    {
+      if (!animator->isPlaying())
+        animator->startPlaying("run");
+    }
 
     int wM = Inputs::isKeyPressed(SDL_SCANCODE_UP),
         sM = Inputs::isKeyPressed(SDL_SCANCODE_DOWN),
@@ -185,8 +205,8 @@ public:
     transform = addComponent<TransformComponent>(Vector{100.0f, 0.0f}, 45.0f, Vector{1.25f, 1.25f});
     collider = addComponent<EllipseColliderComponent>(
       Vector{0.0f, 0.0f}, Vector{25.0f, 40.0f});
-    // render = addComponent<SpriteRenderComponent>(
-    //   40.0f, 40.0f, "../assets/enemy.bmp", Vector{-19.0f, -19.0f});
+    render = addComponent<SpriteRenderComponent>(
+      40.0f, 40.0f, "../assets/enemy.bmp", Vector{-19.0f, -19.0f});
   }
 
   void update() override
