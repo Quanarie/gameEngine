@@ -264,18 +264,20 @@ int main(int argc, char* argv[])
   Engine engine(params);
 
   // Coord system
-  for (int i = 0; i <= 20; i++)
-  {
-    engine.createEntity<Point>(Vector{-500.0f + 50.0f * i, 0.0f});
-    engine.createEntity<Point>(Vector{0.0f, -500.0f + 50.0f * i});
-  }
+  // for (int i = 0; i <= 20; i++)
+  // {
+  //   engine.createEntity<Point>(DEFAULT_SCENE_NAME, Vector{-500.0f + 50.0f * i, 0.0f});
+  //   engine.createEntity<Point>(DEFAULT_SCENE_NAME, Vector{0.0f, -500.0f + 50.0f * i});
+  // }
 
   std::vector<Platform*> platforms;
   platforms.reserve(10);
-  for (int i = 0; i < 10; i++) { platforms.push_back(engine.createEntity<Platform>()); }
-  Player* player = engine.createEntity<Player>(platforms);
+  for (int i = 0; i < 10; i++) { platforms.push_back(engine.createEntity<Platform>("2")); }
+  Player* player = engine.createEntity<Player>(DEFAULT_SCENE_NAME, platforms);
 
-  for (int i = 0; i < 10; i++) { engine.createEntity<Enemy>(player); }
+  for (int i = 0; i < 10; i++) { engine.createEntity<Enemy>(DEFAULT_SCENE_NAME, player); }
+
+  engine.changeScene("2", {player});
 
   return engine.start();
 }

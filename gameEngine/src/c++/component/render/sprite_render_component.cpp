@@ -3,8 +3,9 @@
 
 void SpriteRenderComponent::changeImage(std::string newPath)
 {
+  // The order of these calls is very important, this function is called by worker thread
+  if (!TextureManager::has(newPath)) { TextureManager::create(newPath); }
   currentlyPlayedFromPath = newPath;
-  if (!TextureManager::has(currentlyPlayedFromPath)) { TextureManager::create(currentlyPlayedFromPath); }
 }
 
 void SpriteRenderComponent::initialize()

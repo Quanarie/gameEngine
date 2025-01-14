@@ -7,13 +7,17 @@
 
 #include "component/render/texture_manager.h"
 
+// Debugging
+void TextureManager::printInfo()
+{
+  std::cout << "Printing info: " << std::endl;
+  for (auto texture : textures) { std::cout << texture.first << std::endl; }
+}
+
 std::unordered_map<std::string, SDL_Texture*> TextureManager::textures;
 SDL_Renderer* TextureManager::renderer = nullptr;
 
-void TextureManager::initialize(SDL_Renderer* renderer)
-{
-  TextureManager::renderer = renderer;
-}
+void TextureManager::initialize(SDL_Renderer* renderer) { TextureManager::renderer = renderer; }
 
 bool TextureManager::has(const std::string& path) { return textures.contains(path); }
 

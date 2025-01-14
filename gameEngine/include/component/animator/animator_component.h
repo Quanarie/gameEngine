@@ -17,9 +17,6 @@ struct Animation
 
 class SpriteRenderComponent;
 
-// TODO uses spriterender component directly. Maybe spawn a little spriteRenderCOmponent for itself
-// And then no need for user to create spriterendercomponent with empty path, more logical.
-// but also maybe animatorRenderComponent? Or AnimatorController, AnimationController? AnimationControllerComponent
 class AnimatorComponent : public Component
 {
 public:
@@ -35,7 +32,7 @@ public:
 
 private:
   std::vector<Animation> animations;
-  std::atomic<bool> keepRunning;
+  std::atomic<bool> keepRunning = false;
   std::thread worker;
 
   SpriteRenderComponent* spriteRenderComponent;

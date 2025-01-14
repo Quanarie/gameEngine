@@ -38,7 +38,7 @@ void AnimatorComponent::stopPlaying()
 
 void AnimatorComponent::run(Animation anim)
 {
-  anim.currentImage = 0; // TODO? play from start for now
+  // anim.currentImage = 0; // TODO? play from start
   while (keepRunning)
   {
     // std::cout << "Animator does its thingy" << std::endl;

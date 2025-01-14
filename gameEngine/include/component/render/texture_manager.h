@@ -7,6 +7,7 @@
 
 class TextureManager {
 public:
+  static void printInfo();
   static void initialize(SDL_Renderer* renderer);
   static bool has(const std::string& path);
   static void create(const std::string& path);

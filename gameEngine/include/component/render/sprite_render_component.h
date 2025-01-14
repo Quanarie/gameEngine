@@ -1,14 +1,13 @@
-#ifndef SPRITE_H
-#define SPRITE_H
+#ifndef SPRITE_RENDER_COMPONENT_H
+#define SPRITE_RENDER_COMPONENT_H
 
-#include <SDL_render.h>
 #include <iostream>
+#include <SDL_render.h>
 
 #include "component/transform_component.h"
 #include "component/render/render_component.h"
 #include "component/render/texture_manager.h"
 
-// TODO if there is animatorCompoennt then the value of path parameter here doesnt matter
 class SpriteRenderComponent : public RenderComponent
 {
 public:
@@ -30,4 +29,4 @@ private:
   Vector offset;
 };
 
-#endif // SPRITE_H
+#endif // SPRITE_RENDER_COMPONENT_H
