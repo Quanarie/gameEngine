@@ -5,7 +5,7 @@
 #include <string>
 #include <unordered_map>
 
-#include "component/render/texture_manager.h"
+#include "static/texture_manager.h"
 
 // Debugging
 void TextureManager::printInfo()
@@ -33,7 +33,11 @@ void TextureManager::create(const std::string& path)
 SDL_Texture* TextureManager::get(const std::string& path)
 {
   // TODO thrown randomly sometimes
-  if (!has(path)) { throw std::runtime_error("Texture not found: " + path); }
+  if (!has(path))
+  {
+    printInfo();
+    throw std::runtime_error("Texture not found: " + path);
+  }
   return textures[path];
 }
 

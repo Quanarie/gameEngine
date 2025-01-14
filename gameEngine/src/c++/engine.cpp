@@ -10,7 +10,7 @@
 #include "static/options.h"
 #include "static/coordinates_converter.h"
 #include "component/transform_component.h"
-#include "component/render/texture_manager.h"
+#include "static/texture_manager.h"
 #include "component/render/render_component.h"
 #include "component/collider/collider_component.h"
 
@@ -117,7 +117,7 @@ bool Engine::initialize()
     auto collider = entity->getComponent<ColliderComponent>();
     if (collider)
     {
-      // TODO: Quite confusing, this is duplicating logic from addComponent in Entity
+      // TODO: This is duplicated logic from addComponent in Entity
       collider->colliderBoundsRenderComponent->entity = entity;
       collider->colliderBoundsRenderComponent->initialize();
     }
@@ -148,6 +148,7 @@ void Engine::loop()
 
     TimePoint frameEnd = Clock::now();
     auto frameTime = std::chrono::duration_cast<Milliseconds>(frameEnd - frameStart);
+    std::cout << frameTime.count() << " frameLength" << std::endl;
 
     // Delay if the frame finished early, it's an upper bound for fps, TODO: add lower bound
     if (frameTime < frameDuration) { std::this_thread::sleep_for(frameDuration - frameTime); }

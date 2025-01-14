@@ -204,7 +204,7 @@ public:
   {
     transform = addComponent<TransformComponent>(Vector{100.0f, 0.0f}, 45.0f, Vector{1.25f, 1.25f});
     collider = addComponent<EllipseColliderComponent>(
-      Vector{0.0f, 0.0f}, Vector{25.0f, 40.0f});
+      Vector{0.0f, 0.0f}, Vector{100.0f, 5.0f});
     render = addComponent<SpriteRenderComponent>(
       40.0f, 40.0f, "../assets/enemy.bmp", Vector{-19.0f, -19.0f});
   }
@@ -272,12 +272,12 @@ int main(int argc, char* argv[])
 
   std::vector<Platform*> platforms;
   platforms.reserve(10);
-  for (int i = 0; i < 10; i++) { platforms.push_back(engine.createEntity<Platform>("2")); }
+  for (int i = 0; i < 10; i++) { platforms.push_back(engine.createEntity<Platform>(DEFAULT_SCENE_NAME)); }
   Player* player = engine.createEntity<Player>(DEFAULT_SCENE_NAME, platforms);
 
-  for (int i = 0; i < 10; i++) { engine.createEntity<Enemy>(DEFAULT_SCENE_NAME, player); }
+  for (int i = 0; i < 1; i++) { engine.createEntity<Enemy>(DEFAULT_SCENE_NAME, player); }
 
-  engine.changeScene("2", {player});
+  engine.changeScene(DEFAULT_SCENE_NAME, {player});
 
   return engine.start();
 }

@@ -6,7 +6,7 @@
 
 #include "component/transform_component.h"
 #include "component/render/render_component.h"
-#include "component/render/texture_manager.h"
+#include "static/texture_manager.h"
 
 class SpriteRenderComponent : public RenderComponent
 {

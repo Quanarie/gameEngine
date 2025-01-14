@@ -30,7 +30,7 @@ target_sources(${PROJECT_NAME} PRIVATE
         src/c++/static/inputs.cpp
         src/c++/static/options.cpp
         src/c++/static/coordinates_converter.cpp
-        src/c++/texture_manager.cpp
+        src/c++/static/texture_manager.cpp
         src/c++/component/collider/rectangle_colider_component.cpp
         src/c++/static/collision_resolver.cpp
         src/c++/component/collider/ellipse_collider_component.cpp
