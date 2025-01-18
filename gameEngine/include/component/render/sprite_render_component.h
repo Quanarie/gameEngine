@@ -4,9 +4,9 @@
 #include <iostream>
 #include <SDL_render.h>
 
+#include "static/texture_manager.h"
 #include "component/transform_component.h"
 #include "component/render/render_component.h"
-#include "static/texture_manager.h"
 
 class SpriteRenderComponent : public RenderComponent
 {

@@ -1,8 +1,8 @@
 #ifndef ELLIPSE_RENDER_COMPONENT_H
 #define ELLIPSE_RENDER_COMPONENT_H
 
-#include "component/render/render_component.h"
 #include "util/vector.h"
+#include "component/render/render_component.h"
 
 class TransformComponent;
 

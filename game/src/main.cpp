@@ -1,8 +1,6 @@
 #include <list>
 #include <chrono>
 #include <SDL_scancode.h>
-#include <component/animator/animator_component.h>
-#include <component/render/sprite_render_component.h>
 
 #include "engine.h"
 #include "entity.h"
@@ -10,6 +8,8 @@
 #include "static/inputs.h"
 #include "static/options.h"
 #include "component/transform_component.h"
+#include "component/animator/animator_component.h"
+#include "component/render/sprite_render_component.h"
 #include "component/collider/ellipse/ellipse_colider_component.h"
 #include "component/collider/rectangle/rectangle_colider_component.h"
 
@@ -66,7 +66,7 @@ public:
 
   void initialize() override
   {
-    transform = addComponent<TransformComponent>(Vector{0.0f, 0.0f}, 30.0f, Vector{1.25f, 1.25f});
+    transform = addComponent<TransformComponent>(Vector{0.0f, 0.0f}, 30.0f, Vector{1.0f, 1.0f});
     collider = addComponent<RectangleColliderComponent>(
       Vector{-30.0f, -30.0f}, Vector{30.0f, 30.0f});
     render = addComponent<SpriteRenderComponent>(35.0f, 40.0f, "../assets/player_1.bmp", Vector{-16.0f, -18.0f});
@@ -202,9 +202,9 @@ public:
 
   void initialize() override
   {
-    transform = addComponent<TransformComponent>(Vector{100.0f, 0.0f}, 45.0f, Vector{1.25f, 1.25f});
-    collider = addComponent<EllipseColliderComponent>(
-      Vector{0.0f, 0.0f}, Vector{100.0f, 5.0f});
+    transform = addComponent<TransformComponent>(Vector{100.0f, 0.0f}, 0.0f, Vector{1.0f, 1.0f});
+    collider = addComponent<RectangleColliderComponent>(
+      Vector{-20.0f, -20.0f}, Vector{20.0f, 20.0f});
     render = addComponent<SpriteRenderComponent>(
       40.0f, 40.0f, "../assets/enemy.bmp", Vector{-19.0f, -19.0f});
   }
@@ -264,18 +264,18 @@ int main(int argc, char* argv[])
   Engine engine(params);
 
   // Coord system
-  // for (int i = 0; i <= 20; i++)
-  // {
-  //   engine.createEntity<Point>(DEFAULT_SCENE_NAME, Vector{-500.0f + 50.0f * i, 0.0f});
-  //   engine.createEntity<Point>(DEFAULT_SCENE_NAME, Vector{0.0f, -500.0f + 50.0f * i});
-  // }
+  for (int i = 0; i <= 20; i++)
+  {
+    engine.createEntity<Point>(DEFAULT_SCENE_NAME, Vector{-500.0f + 50.0f * i, 0.0f});
+    engine.createEntity<Point>(DEFAULT_SCENE_NAME, Vector{0.0f, -500.0f + 50.0f * i});
+  }
 
   std::vector<Platform*> platforms;
   platforms.reserve(10);
   for (int i = 0; i < 10; i++) { platforms.push_back(engine.createEntity<Platform>(DEFAULT_SCENE_NAME)); }
   Player* player = engine.createEntity<Player>(DEFAULT_SCENE_NAME, platforms);
 
-  for (int i = 0; i < 1; i++) { engine.createEntity<Enemy>(DEFAULT_SCENE_NAME, player); }
+  for (int i = 0; i < 10; i++) { engine.createEntity<Enemy>(DEFAULT_SCENE_NAME, player); }
 
   engine.changeScene(DEFAULT_SCENE_NAME, {player});
 

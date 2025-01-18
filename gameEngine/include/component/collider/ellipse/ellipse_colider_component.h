@@ -1,9 +1,9 @@
 #ifndef ELLIPSE_COLLIDER_COMPONENT_H
 #define ELLIPSE_COLLIDER_COMPONENT_H
 
+#include "util/vector.h"
 #include "component/collider/collider_component.h"
 #include "component/render/ellipse_render_component.h"
-#include "util/vector.h"
 
 class EllipseColliderComponent : public ColliderComponent {
 public:
